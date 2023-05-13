@@ -1,20 +1,15 @@
 import { BookIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType, SlugValue } from 'sanity'
 
 import authorType from './author'
 
-/**
- * This file is the schema definition for a post.
- *
- * Here you'll be able to edit the different fields that appear when you
- * create or edit a post in the studio.
- *
- * Here you can see the different schema types that are available:
-
- https://www.sanity.io/docs/schema-types
-
- */
+// TODO:
+//  1. Fix TS errors.
+//  2. Extract duplicated validation and other functions.
+//  3. Add a way to clear fields (like you can for images, but for e.g., string/radio fields etc.
+//     In particular when you clear a parent object's value, like an image, its associated
+//     fields stick around in the data.
 
 export default defineType({
   name: 'post',
@@ -37,14 +32,14 @@ export default defineType({
         maxLength: 110,
         isUnique: (value, context) => context.defaultIsUnique(value, context)
       },
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required().custom((value: SlugValue) => {
+        return /^[a-z]+(?:-[a-z]+)*$/.test(value.current) ? true : 'Slug value must match the RegExp "^[a-z]+(?:-[a-z]+)*$".'
+      })
     }),
     defineField({
-      name: 'summary',
-      title: 'Summary',
-      type: 'text',
-      description: 'Used both in the post summaries list, as well as for the SEO description of a post.',
-      validation: (rule) => rule.required().min(50).max(500)
+      name: 'isPinned',
+      title: 'Pin article',
+      type: 'boolean'
     }),
     defineField({
       name: 'coverImage',
@@ -57,42 +52,55 @@ export default defineType({
         {
           name: 'caption',
           type: 'string',
-          title: 'Caption'
+          title: 'Caption',
+          hidden: (document) => {
+            return document?.parent?.asset === undefined;
+          },
+          validation: (rule) => rule.custom((value: string, context) => {
+            if (value && value.length > 0 && !context.parent.asset) {
+              return 'An image must be added for this value to be accepted.'
+            }
+
+            return true
+          })
         },
         {
           name: 'attribution',
           type: 'string',
           title: 'Attribution',
+          hidden: (document) => {
+            return document?.parent?.asset === undefined;
+          },
+          validation: (rule) => rule.custom((value: string, context) => {
+            if (value && value.length > 0 && !context.parent.asset) {
+              return 'An image must be added for this value to be accepted.'
+            }
+
+            if ((!value || value.length < 5) && context.parent.asset) {
+              return 'Please attribute the image.'
+            }
+
+            return true
+          })
         },
         {
           name: 'alt',
           type: 'string',
           title: 'Alt',
-        }
-      ]
-    }),
-    defineField({
-      name: 'coverImageThumbnail',
-      title: 'Cover image thumbnail',
-      type: 'image',
-      options: {
-        hotspot: true
-      },
-      fields: [
-        {
-          name: 'caption',
-          type: 'string',
-          title: 'Caption'
-        },
-        {
-          name: 'attribution',
-          type: 'string',
-          title: 'Attribution',
-        },
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alt',
+          hidden: (document) => {
+            return document?.parent?.asset === undefined;
+          },
+          validation: (rule) => rule.custom((value: string, context) => {
+            if (value && value.length > 0 && !context.parent.asset) {
+              return 'An image must be added for this value to be accepted.'
+            }
+
+            if ((!value || value.length < 5) && context.parent.asset) {
+              return 'Please add an alt description for the image.'
+            }
+
+            return true
+          })
         }
       ]
     }),
@@ -103,12 +111,6 @@ export default defineType({
       of: [{
         type: 'object',
         fields: [
-          {
-            name: 'index',
-            title: 'Index',
-            type: 'number',
-            validation: (rule) => rule.required().integer().positive()
-          },
           {
             name: 'heading',
             title: 'Heading',
@@ -126,9 +128,19 @@ export default defineType({
                     .replace(/\s+/g, '-')
                     .slice(0, 110) : ''
               },
-              maxLength: 110
+              maxLength: 110,
+              isUnique: (value, context) => {
+                const documentContentSections =
+                  context.document.content as Array<{ anchor: string, _key: string }>
+                const slugParent = context.parent as { _key: string }
+
+                return documentContentSections.some((section) =>
+                  slugParent._key !== section._key && section.anchor === value) === false
+              }
             },
-            validation: (rule) => rule.required()
+            validation: (rule) => rule.required().custom((value: SlugValue) => {
+              return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current) ? true : 'Slug value must match the RegExp "^[a-z0-9]+(?:-[a-z0-9]+)*$".'
+            })
           },
           {
             name: 'body',
@@ -148,17 +160,55 @@ export default defineType({
               {
                 name: 'caption',
                 type: 'string',
-                title: 'Caption'
+                title: 'Caption',
+                hidden: (document) => {
+                  return document?.parent?.asset === undefined;
+                },
+                validation: (rule) => rule.custom((value: string, context) => {
+                  if (value && value.length > 0 && !context.parent.asset) {
+                    return 'An image must be added for this value to be accepted.'
+                  }
+
+                  return true
+                })
               },
               {
                 name: 'attribution',
                 type: 'string',
-                title: 'Attribution'
+                title: 'Attribution',
+                hidden: (document) => {
+                  return document?.parent?.asset === undefined;
+                },
+                validation: (rule) => rule.custom((value: string, context) => {
+                  if (value && value.length > 0 && !context.parent.asset) {
+                    return 'An image must be added for this value to be accepted.'
+                  }
+
+                  if ((!value || value.length < 5) && context.parent.asset) {
+                    return 'Please attribute the image.'
+                  }
+
+                  return true
+                })
               },
               {
                 name: 'alt',
                 type: 'string',
-                title: 'Alt'
+                title: 'Alt',
+                hidden: (document) => {
+                  return document?.parent?.asset === undefined;
+                },
+                validation: (rule) => rule.custom((value: string, context) => {
+                  if (value && value.length > 0 && !context.parent.asset) {
+                    return 'An image must be added for this value to be accepted.'
+                  }
+
+                  if ((!value || value.length < 5) && context.parent.asset) {
+                    return 'Please attribute the image.'
+                  }
+
+                  return true
+                })
               },
               {
                 name: 'placement',
@@ -173,28 +223,54 @@ export default defineType({
                   ],
                   layout: 'radio',
                   direction: 'horizontal'
-                }
+                },
+                hidden: (document) => {
+                  return document?.parent?.asset === undefined;
+                },
+                validation: (rule) => rule.custom((value: string, context) => {
+                  if (value && value.length > 0 && !context.parent.asset) {
+                    return 'An image must be added for this value to be accepted.'
+                  }
+
+                  if (context.parent.asset && !['top', 'right', 'bottom', 'left'].includes(value)) {
+                    return 'Please place the image.';
+                  }
+
+                  return true;
+                }),
               }
-            ],
-            initialValue: {
-              placement: 'top'
-            }
+            ]
           }
         ]
       }],
       validation: (rule) => rule.required().min(1).max(10)
     }),
+    defineField ({
+      title: 'Footnotes',
+      name: 'footnotes',
+      type: 'array',
+      of: [{type: 'block'}]
+    }),
+    defineField({
+      name: 'summary',
+      title: 'Summary',
+      type: 'text',
+      description: 'Used both in the post summaries list, as well as for the SEO description of a post.',
+      validation: (rule) => rule.required().min(50).max(500)
+    }),
     defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+      validation: (rule) => rule.required(),
       initialValue: () => new Date().toISOString()
     }),
     defineField({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{ type: 'string' }]
+      of: [{ type: 'string' }],
+      validation: (rule) => rule.max(5)
     }),
     defineField({
       name: 'author',
@@ -203,6 +279,22 @@ export default defineType({
       to: [{ type: authorType.name }],
       validation: (rule) => rule.required()
     })
+  ],
+  orderings: [
+    {
+      title: 'Published at, desc',
+      name: 'publishedAtDateDesc',
+      by: [
+        {field: 'publishedAt', direction: 'desc'}
+      ]
+    },
+    {
+      title: 'Published at, asc',
+      name: 'publishedAtDateAsc',
+      by: [
+        {field: 'publishedAt', direction: 'asc'}
+      ]
+    }
   ],
   preview: {
     select: {
