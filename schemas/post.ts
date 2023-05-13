@@ -21,7 +21,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (rule) => rule.required().min(10).max(100)
+      validation: (rule) => rule.required().min(5).max(100)
     }),
     defineField({
       name: 'slug',
@@ -115,7 +115,7 @@ export default defineType({
             name: 'heading',
             title: 'Heading',
             type: 'string',
-            validation: (rule) => rule.required().min(3).max(100)
+            validation: (rule) => rule.min(3).max(100)
           },
           {
             name: 'anchor',
@@ -138,7 +138,7 @@ export default defineType({
                   slugParent._key !== section._key && section.anchor === value) === false
               }
             },
-            validation: (rule) => rule.required().custom((value: SlugValue) => {
+            validation: (rule) => rule.custom((value: SlugValue) => {
               return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current) ? true : 'Slug value must match the RegExp "^[a-z0-9]+(?:-[a-z0-9]+)*$".'
             })
           },
