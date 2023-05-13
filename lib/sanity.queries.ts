@@ -1,58 +1,156 @@
 import { groq } from 'next-sanity'
+import { Slug } from 'sanity'
+import { Crop, Hotspot } from 'sanity/src/core/form/inputs/files/ImageToolInput/imagetool'
 
-const postFields = groq`
+// TODO: figure out how to type all the things and disallow "any"
+
+const postViewFields = groq`
   _id,
   title,
-  date,
-  excerpt,
-  coverImage,
   "slug": slug.current,
+  summary,
+  coverImage,
+  content,
+  footnotes,
+  tags,
   "author": author->{name, picture},
+  publishedAt,
+  "updatedAt": _updatedAt,
+`
+
+const postPinnedFields = groq`
+  _id,
+  title,
+  "slug": slug.current,
+  coverImage,
+  tags,
+`
+
+const postSummaryFields = groq`
+  _id,
+  title,
+  "slug": slug.current,
+  summary,
+  coverImage,
+  tags,
+  "author": author->{name, picture},
+  publishedAt,
 `
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
-
-export const indexQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc) {
-  ${postFields}
-}`
-
-export const postAndMoreStoriesQuery = groq`
-{
-  "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
-    content,
-    ${postFields}
-  },
-  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
-    content,
-    ${postFields}
-  }
-}`
 
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
 `
 
+export const postPinsListQuery = groq`
+*[_type == "post"] | order(date desc, publishedAt desc) {
+  ${postPinnedFields}
+}
+`
+
+export const postSummariesListQuery = groq`
+*[_type == "post"] | order(date desc, publishedAt desc) [0...10] {
+  ${postSummaryFields}
+}
+`
+
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug][0] {
-  ${postFields}
+  ${postViewFields}
 }
 `
 
 export interface Author {
-  name?: string
-  picture?: any
+  name: string
+  picture: {
+    name: string
+    picture: {
+      asset: {
+        _ref: string
+      },
+      crop?: Crop
+      hotspot?: Hotspot
+    }
+  }
+}
+
+export interface PostSection {
+  _id: string
+  heading?: string
+  anchor?: Slug
+  body: any // blocks
+  sectionImage?: {
+    caption?: string
+    attribution: string
+    alt: string
+    placement: 'top' | 'right' | 'bottom' | 'left'
+    asset?: {
+      _ref: string
+    }
+    crop?: Crop
+    hotspot?: Hotspot
+  }
 }
 
 export interface Post {
   _id: string
-  title?: string
-  coverImage?: any
-  date?: string
-  excerpt?: string
-  author?: Author
-  slug?: string
-  content?: any
+  title: string
+  slug: string
+  summary: string
+  coverImage?: {
+    caption?: string
+    attribution: string
+    alt: string
+    asset?: {
+      _ref: string
+    }
+    crop?: Crop
+    hotspot?: Hotspot
+  }
+  content: PostSection[]
+  footnotes: any // blocks
+  tags: string[]
+  author: Author
+  publishedAt: string
+  updatedAt: string
+}
+
+export interface PostPin {
+  _id: string
+  title: string
+  slug: string
+  coverImage?: {
+    caption?: string
+    attribution: string
+    alt: string
+    asset?: {
+      _ref: string
+    }
+    crop?: Crop
+    hotspot?: Hotspot
+  }
+  tags
+}
+
+export interface PostSummary {
+  _id: string
+  title: string
+  slug: string
+  summary: string
+  coverImage?: {
+    caption?: string
+    attribution: string
+    alt: string
+    asset?: {
+      _ref: string
+    }
+    crop?: Crop
+    hotspot?: Hotspot
+  }
+  tags: string[]
+  author: Author
+  publishedAt: string
 }
 
 export interface Settings {

@@ -7,10 +7,11 @@ import authorType from './author'
 // TODO:
 //  1. Fix TS errors.
 //  2. Extract duplicated validation and other functions.
-//  3. Add a way to clear fields (like you can for images, but for e.g., string/radio fields etc.
+//  3. Type things (use the types defined in the sanity.queries.ts file but consider moving them to another file.
+//  4. Add a way to clear fields (like you can for images, but for e.g., string/radio fields etc.
 //     In particular when you clear a parent object's value, like an image, its associated
 //     fields stick around in the data.
-//  4. Set an initial value for the post author.
+//  5. Set an initial value for the post author.
 
 export default defineType({
   name: 'post',
@@ -257,7 +258,7 @@ export default defineType({
       name: 'summary',
       title: 'Summary',
       type: 'text',
-      description: 'Used both in the post summaries list, as well as for the SEO description of a post.',
+      description: 'Used both in the post summaries list and for the <meta> SEO description of a post.',
       validation: (rule) => rule.required().min(50).max(500)
     }),
     defineField({

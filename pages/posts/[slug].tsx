@@ -1,9 +1,9 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import PostPage from 'components/PostPage'
 import {
-  getAllPostsSlugs,
-  getPostAndMoreStories,
-  getSettings,
+  getAllPostsSlugs, getPostBySlug,
+  getPostSummariesList,
+  getSettings
 } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
@@ -28,7 +28,7 @@ interface PreviewData {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { settings, post, morePosts, preview, token } = props
+  const { settings, post, preview, token } = props
 
   if (preview) {
     return (
@@ -38,7 +38,6 @@ export default function ProjectSlugRoute(props: PageProps) {
             loading
             preview
             post={post}
-            morePosts={morePosts}
             settings={settings}
           />
         }
@@ -46,14 +45,13 @@ export default function ProjectSlugRoute(props: PageProps) {
         <PreviewPostPage
           token={token}
           post={post}
-          morePosts={morePosts}
           settings={settings}
         />
       </PreviewSuspense>
     )
   }
 
-  return <PostPage post={post} morePosts={morePosts} settings={settings} />
+  return <PostPage post={post} settings={settings} />
 }
 
 export const getStaticProps: GetStaticProps<
@@ -65,9 +63,9 @@ export const getStaticProps: GetStaticProps<
 
   const token = previewData.token
 
-  const [settings, { post, morePosts }] = await Promise.all([
+  const [settings, post] = await Promise.all([
     getSettings(),
-    getPostAndMoreStories(params.slug, token),
+    getPostBySlug(params.slug),
   ])
 
   if (!post) {
@@ -79,7 +77,6 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       post,
-      morePosts,
       settings,
       preview,
       token: previewData.token ?? null,

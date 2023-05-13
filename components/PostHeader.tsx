@@ -5,9 +5,9 @@ import PostTitle from 'components/PostTitle'
 import type { Post } from 'lib/sanity.queries'
 
 export default function PostHeader(
-  props: Pick<Post, 'title' | 'coverImage' | 'date' | 'author' | 'slug'>
+  props: Pick<Post, 'title' | 'coverImage' | 'publishedAt' | 'author' | 'slug'>
 ) {
-  const { title, coverImage, date, author, slug } = props
+  const { title, coverImage, publishedAt, author, slug } = props
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -22,7 +22,7 @@ export default function PostHeader(
           {author && <Avatar name={author.name} picture={author.picture} />}
         </div>
         <div className="mb-6 text-lg">
-          <Date dateString={date} />
+          <Date dateString={publishedAt} />
         </div>
       </div>
     </>
