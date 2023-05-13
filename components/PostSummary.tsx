@@ -17,10 +17,10 @@ export default function PostSummary({
                                       publishedAt
                                     }: Omit<PostSummary & { index: number }, '_id'>) {
   return (
-    <div className={cn('flex md:gap-x-8 lg:gap-x-16')}>
+    <div className={cn('lg:flex md:gap-x-8 lg:gap-x-16')}>
       {
         coverImage &&
-        <div className='mb-5 flex-none'>
+        <div className='mb-5 md:shrink-0'>
           <BlogImage
             slug={slug}
             title={title}
