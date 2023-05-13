@@ -1,0 +1,11 @@
+.portableText a {
+  cursor: pointer;
+  @apply text-blue-500 underline;
+}
+.portableText a:hover {
+  @apply text-blue-800;
+}
+.portableText p {
+  @apply mt-0 !important;
+  @apply mb-0 !important;
+}

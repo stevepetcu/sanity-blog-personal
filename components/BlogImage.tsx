@@ -1,4 +1,3 @@
-import { PortableText } from '@portabletext/react'
 import cn from 'classnames'
 import { urlForImage } from 'lib/sanity.image'
 import Image from 'next/image'
@@ -7,6 +6,8 @@ import React from 'react'
 
 import { PixelRatioContext } from '../contexts/PixelRatioContext'
 import { BlogImage } from '../lib/sanity.queries'
+import styles from './BlogImage.module.css'
+import SanePortableText from './SanePortableText'
 
 interface BlogImageProps {
   title: string
@@ -15,48 +16,50 @@ interface BlogImageProps {
   priority?: boolean
   width: number
   height: number
+  alwaysShowCaption: boolean
 }
 
 export default function BlogImage(props: BlogImageProps) {
   const pixelRatio = React.useContext(PixelRatioContext)
 
-  const { title, slug, image, width, height, priority } = props
+  const { title, slug, image, width, height, priority, alwaysShowCaption } = props
   const scaledWidth = pixelRatio * width
   const scaledHeight = pixelRatio * height
 
-  const imageComponent = image?.asset?._ref ? (
-    <>
-      <div
-        className={cn('relative shadow-small', {
-          'transition-shadow duration-200 hover:shadow-medium': slug
-        })}
-      >
-        <Image
-          className='h-auto w-full'
-          width={scaledWidth}
-          height={scaledHeight}
-          alt={image.alt}
-          title={image.alt}
-          src={urlForImage(image).height(scaledHeight).width(scaledWidth).url()}
-          sizes='100vw'
-          priority={priority}
-        />
-      </div>
-      {image.caption && <PortableText value={image.caption} />}
-    </>
-  ) : null
+  const imageComponent =
+    <div
+      className={cn('relative')}
+    >
+      <Image
+        className={cn('h-auto w-full rounded-tr-lg')}
+        width={scaledWidth}
+        height={scaledHeight}
+        alt={image.alt}
+        title={image.alt}
+        src={urlForImage(image).height(scaledHeight).width(scaledWidth).url()}
+        sizes='100vw'
+        priority={priority}
+      />
+    </div>
+
+  const captionClassName = alwaysShowCaption ?
+    `text-xs absolute bottom-0 left-0 bg-white/75 p-1 ${styles.portableText}` :
+    `translate-y-10 transition-all ease-in-out group-hover:-translate-y-0 text-xs absolute bottom-0 left-0 bg-white/75 p-1 ${styles.portableText}`
+
 
   return (
-    imageComponent ?
-      <div className='sm:mx-0'>
-        {slug ? (
-          <Link href={`/posts/${slug}`} aria-label={title}>
-            {imageComponent}
-          </Link>
-        ) : (
-          imageComponent
-        )}
-      </div> :
-      <></>
+    <div className={cn('group relative overflow-clip drop-shadow-sm', { 'transition-all duration-200 hover:drop-shadow-lg': slug })}>
+      {slug ? (
+        <Link href={`/posts/${slug}`} aria-label={title}>
+          {imageComponent}
+        </Link>
+      ) : (
+        imageComponent
+      )}
+      <div
+        className={cn(captionClassName)}>
+        <SanePortableText content={image.caption} />
+      </div>
+    </div>
   )
 }

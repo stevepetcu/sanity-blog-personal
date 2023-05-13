@@ -1,6 +1,6 @@
 import { BookIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
-import { defineField, defineType, SlugValue } from 'sanity'
+import { defineArrayMember, defineField, defineType, SlugValue } from 'sanity'
 
 import authorType from './author'
 
@@ -54,7 +54,31 @@ export default defineType({
         {
           name: 'caption',
           type: 'array',
-          of: [{ type: 'block' }],
+          of: [defineArrayMember({
+            type: 'block',
+            marks: {
+              annotations: [
+                defineField({
+                  type: 'object',
+                  name: 'link',
+                  fields: [
+                    {
+                      type: 'string',
+                      name: 'href',
+                      title: 'URL',
+                      validation: (rule) => rule.required(),
+                    },
+                    {
+                      title: 'Open in a new tab',
+                      name: 'blank',
+                      type: 'boolean',
+                      initialValue: true
+                    }
+                  ],
+                }),
+              ],
+            },
+          })],
           title: 'Caption',
           hidden: (document) => {
             return document?.parent?.asset === undefined;
@@ -135,7 +159,31 @@ export default defineType({
             name: 'body',
             title: 'Body',
             type: 'array',
-            of: [{ type: 'block' }],
+            of: [defineArrayMember({
+              type: 'block',
+              marks: {
+                annotations: [
+                  defineField({
+                    type: 'object',
+                    name: 'link',
+                    fields: [
+                      {
+                        type: 'string',
+                        name: 'href',
+                        title: 'URL',
+                        validation: (rule) => rule.required(),
+                      },
+                      {
+                        title: 'Open in a new tab',
+                        name: 'blank',
+                        type: 'boolean',
+                        initialValue: true
+                      }
+                    ],
+                  }),
+                ],
+              },
+            })],
             validation: (rule) => rule.required().min(1)
           },
           {
@@ -149,7 +197,31 @@ export default defineType({
               {
                 name: 'caption',
                 type: 'array',
-                of: [{ type: 'block' }],
+                of: [defineArrayMember({
+                  type: 'block',
+                  marks: {
+                    annotations: [
+                      defineField({
+                        type: 'object',
+                        name: 'link',
+                        fields: [
+                          {
+                            type: 'string',
+                            name: 'href',
+                            title: 'URL',
+                            validation: (rule) => rule.required(),
+                          },
+                          {
+                            title: 'Open in a new tab',
+                            name: 'blank',
+                            type: 'boolean',
+                            initialValue: true
+                          }
+                        ],
+                      }),
+                    ],
+                  },
+                })],
                 title: 'Caption',
                 hidden: (document) => {
                   return document?.parent?.asset === undefined;

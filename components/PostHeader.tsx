@@ -12,9 +12,12 @@ export default function PostHeader(
   return (
     <>
       <PostTitle>{title}</PostTitle>
-      <div className='mb-8 sm:mx-0 md:mb-8'>
-        <BlogImage title={title} image={coverImage} width={1280} height={720} priority />
-      </div>
+      {
+        coverImage &&
+        <div className='mb-8 sm:mx-0 md:mb-8'>
+          <BlogImage title={title} image={coverImage} width={1280} height={720} priority alwaysShowCaption={true} />
+        </div>
+      }
       <div className={cn('flex items-center mx-auto max-w-2xl')}>
         <div className={cn('flex-none mr-2.5')}>
           {author && <Avatar name={author.name} picture={author.picture} />}

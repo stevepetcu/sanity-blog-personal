@@ -11,17 +11,21 @@ export default function PostPin({
                                   tags
                                 }: Omit<PostPin, '_id'>) {
   return (
-    <div className={cn('flex md:gap-x-8 lg:gap-x-16')}>
-      <div className='mb-5 flex-none'>
-        <BlogImage
-          slug={slug}
-          title={title}
-          image={coverImage}
-          priority={true}
-          width={128}
-          height={128}
-        />
-      </div>
+    <div className={cn('flex md:gap-x-4 lg:gap-x-8')}>
+      {
+        coverImage &&
+        < div className='mb-5 flex-none'>
+          <BlogImage
+            slug={slug}
+            title={title}
+            image={coverImage}
+            priority={true}
+            width={128}
+            height={128}
+            alwaysShowCaption={false}
+          />
+        </div>
+      }
       <div className={cn('flex-auto')}>
         <h2 className={cn('text-md leading-snug')}>
           <Link href={`/posts/${slug}`} className='hover:underline'>

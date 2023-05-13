@@ -7,14 +7,13 @@
  * https://portabletext.org/
  *
  */
-import { PortableText } from '@portabletext/react'
 import cn from 'classnames'
 import Image from 'next/image'
 
-import { urlForImage } from '../lib/sanity.image'
-import { Post, PostSection, Settings } from '../lib/sanity.queries'
+import { PostSection } from '../lib/sanity.queries'
+import BlogImage from './BlogImage'
 import styles from './PostBody.module.css'
-import { PostPageProps } from './PostPage'
+import SanePortableText from './SanePortableText'
 
 // TODO:
 //  1. Extract a reusable image component
@@ -29,18 +28,10 @@ export default function PostSection({
   return (
     <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
       {heading && <h2 id={anchor.current}>{heading}</h2>}
-      <PortableText value={body} />
+      <SanePortableText content={body} />
       {sectionImage &&
-        <Image
-          className='h-auto w-full'
-          width={480}
-          height={320}
-          alt={sectionImage.alt}
-          title={sectionImage.alt}
-          src={urlForImage(sectionImage.asset._ref).width(480 * 4).height(320 * 4).url()}
-          sizes='100vw'
-          priority={index <= 1}
-        />}
+        <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={320} priority={index <= 1} alwaysShowCaption={true} />
+      }
     </section>
   )
 }

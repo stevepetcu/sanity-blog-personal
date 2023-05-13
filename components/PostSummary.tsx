@@ -18,16 +18,20 @@ export default function PostSummary({
                                     }: Omit<PostSummary & { index: number }, '_id'>) {
   return (
     <div className={cn('flex md:gap-x-8 lg:gap-x-16')}>
-      <div className='mb-5 flex-none'>
-        <BlogImage
-          slug={slug}
-          title={title}
-          image={coverImage}
-          priority={index <= 1}
-          width={480}
-          height={360}
-        />
-      </div>
+      {
+        coverImage &&
+        <div className='mb-5 flex-none'>
+          <BlogImage
+            slug={slug}
+            title={title}
+            image={coverImage}
+            priority={index <= 1}
+            width={480}
+            height={360}
+            alwaysShowCaption={true}
+          />
+        </div>
+      }
       <div>
         <div className='mb-4 flex-auto'>
           {author && <Avatar name={author.name} picture={author.picture} />}

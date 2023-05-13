@@ -85,7 +85,7 @@ export interface Author {
 }
 
 export interface PostSection {
-  _id: string
+  _key: string
   heading?: string
   anchor?: Slug
   body: any // blocks
