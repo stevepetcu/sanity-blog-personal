@@ -11,7 +11,7 @@ export default function PostPin({
                                   tags
                                 }: Omit<PostPin, '_id'>) {
   return (
-    <div className={cn('flex md:gap-x-4 lg:gap-x-8')}>
+    <div className={cn('flex gap-x-3')}>
       {
         coverImage &&
         < div className='mb-5 flex-none'>
