@@ -62,7 +62,7 @@ export const postBySlugQuery = groq`
 `
 
 export interface BlogImage {
-  caption: string
+  caption: any // blocks
   alt: string
   placement: 'top' | 'right' | 'bottom' | 'left'
   asset?: {

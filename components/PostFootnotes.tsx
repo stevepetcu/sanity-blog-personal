@@ -9,9 +9,7 @@
  */
 import { PortableText } from '@portabletext/react'
 
-import { Post, PostSection, Settings } from '../lib/sanity.queries'
 import styles from './PostBody.module.css'
-import { PostPageProps } from './PostPage'
 import SectionSeparator from './SectionSeparator'
 
 export default function PostFootnotes({ content }) {

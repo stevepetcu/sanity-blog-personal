@@ -1,3 +1,4 @@
+import { PortableText } from '@portabletext/react'
 import cn from 'classnames'
 import { urlForImage } from 'lib/sanity.image'
 import Image from 'next/image'
@@ -41,7 +42,7 @@ export default function BlogImage(props: BlogImageProps) {
           priority={priority}
         />
       </div>
-      {image.caption && <span>{image.caption}</span>}
+      {image.caption && <PortableText value={image.caption} />}
     </>
   ) : null
 
