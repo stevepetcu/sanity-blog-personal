@@ -10,6 +10,7 @@ import authorType from './author'
 //  3. Add a way to clear fields (like you can for images, but for e.g., string/radio fields etc.
 //     In particular when you clear a parent object's value, like an image, its associated
 //     fields stick around in the data.
+//  4. Set an initial value for the post author.
 
 export default defineType({
   name: 'post',
@@ -129,13 +130,13 @@ export default defineType({
                     .slice(0, 110) : ''
               },
               maxLength: 110,
-              isUnique: (value, context) => {
+              isUnique: (value: string, context) => {
                 const documentContentSections =
-                  context.document.content as Array<{ anchor: string, _key: string }>
-                const slugParent = context.parent as { _key: string }
+                  context.document.content as Array<{ anchor: SlugValue, _key: string }>;
+                const slugParent = context.parent as { _key: string };
 
                 return documentContentSections.some((section) =>
-                  slugParent._key !== section._key && section.anchor === value) === false
+                  slugParent._key !== section._key && section.anchor && section.anchor.current === value) === false;
               }
             },
             validation: (rule) => rule.custom((value: SlugValue, context) => {
