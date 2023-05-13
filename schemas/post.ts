@@ -138,8 +138,9 @@ export default defineType({
                   slugParent._key !== section._key && section.anchor === value) === false
               }
             },
-            validation: (rule) => rule.custom((value: SlugValue) => {
-              return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current) ? true : 'Slug value must match the RegExp "^[a-z0-9]+(?:-[a-z0-9]+)*$".'
+            validation: (rule) => rule.custom((value: SlugValue, context) => {
+              return (!context.parent?.heading || context.parent?.heading.length === 0) ||
+              /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current) ? true : 'Slug value must match the RegExp "^[a-z0-9]+(?:-[a-z0-9]+)*$".'
             })
           },
           {
