@@ -147,9 +147,10 @@ export default defineType({
             },
             fields: [
               {
-                name: 'attribution',
-                type: 'string',
-                title: 'Attribution',
+                name: 'caption',
+                type: 'array',
+                of: [{ type: 'block' }],
+                title: 'Caption',
                 hidden: (document) => {
                   return document?.parent?.asset === undefined;
                 },
@@ -158,7 +159,7 @@ export default defineType({
                     return 'An image must be added for this value to be accepted.'
                   }
 
-                  if ((!value || value.length < 5) && context.parent.asset) {
+                  if ((!value || value.length < 1) && context.parent.asset) {
                     return 'Please attribute the image.'
                   }
 
