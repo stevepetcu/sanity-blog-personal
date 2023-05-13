@@ -48,11 +48,10 @@ export default function PostPage(props: PostPageProps) {
                   author={post.author}
                 />
                 {
-                  post.content.map((section) =>
-                    <PostSection key={section._id} heading={section.heading} anchor={section.anchor}
+                  post.content.map((section, index) =>
+                    <PostSection key={section._id} index={index} heading={section.heading} anchor={section.anchor}
                                  body={section.body} sectionImage={section.sectionImage}/>)
                 }
-                <SectionSeparator />
                 {post.footnotes && <PostFootnotes content={post.footnotes} />}
               </article>
             </>

@@ -2,7 +2,6 @@ import { PreviewSuspense } from '@sanity/preview-kit'
 import PostPage from 'components/PostPage'
 import {
   getAllPostsSlugs, getPostBySlug,
-  getPostSummariesList,
   getSettings
 } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
@@ -13,7 +12,6 @@ const PreviewPostPage = lazy(() => import('components/PreviewPostPage'))
 
 interface PageProps {
   post: Post
-  morePosts: Post[]
   settings?: Settings
   preview: boolean
   token: string | null
@@ -65,12 +63,12 @@ export const getStaticProps: GetStaticProps<
 
   const [settings, post] = await Promise.all([
     getSettings(),
-    getPostBySlug(params.slug),
+    getPostBySlug(params.slug)
   ])
 
   if (!post) {
     return {
-      notFound: true,
+      notFound: true
     }
   }
 
@@ -79,8 +77,8 @@ export const getStaticProps: GetStaticProps<
       post,
       settings,
       preview,
-      token: previewData.token ?? null,
-    },
+      token: previewData.token ?? null
+    }
   }
 }
 
@@ -89,6 +87,6 @@ export const getStaticPaths = async () => {
 
   return {
     paths: slugs?.map(({ slug }) => `/posts/${slug}`) || [],
-    fallback: 'blocking',
+    fallback: 'blocking'
   }
 }

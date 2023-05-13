@@ -53,7 +53,8 @@ export default defineType({
       fields: [
         {
           name: 'caption',
-          type: 'string',
+          type: 'array',
+          of: [{ type: 'block' }],
           title: 'Caption',
           hidden: (document) => {
             return document?.parent?.asset === undefined;
@@ -63,22 +64,7 @@ export default defineType({
               return 'An image must be added for this value to be accepted.'
             }
 
-            return true
-          })
-        },
-        {
-          name: 'attribution',
-          type: 'string',
-          title: 'Attribution',
-          hidden: (document) => {
-            return document?.parent?.asset === undefined;
-          },
-          validation: (rule) => rule.custom((value: string, context) => {
-            if (value && value.length > 0 && !context.parent.asset) {
-              return 'An image must be added for this value to be accepted.'
-            }
-
-            if ((!value || value.length < 5) && context.parent.asset) {
+            if ((!value || value.length < 1) && context.parent.asset) {
               return 'Please attribute the image.'
             }
 
@@ -160,21 +146,6 @@ export default defineType({
               hotspot: true
             },
             fields: [
-              {
-                name: 'caption',
-                type: 'string',
-                title: 'Caption',
-                hidden: (document) => {
-                  return document?.parent?.asset === undefined;
-                },
-                validation: (rule) => rule.custom((value: string, context) => {
-                  if (value && value.length > 0 && !context.parent.asset) {
-                    return 'An image must be added for this value to be accepted.'
-                  }
-
-                  return true
-                })
-              },
               {
                 name: 'attribution',
                 type: 'string',

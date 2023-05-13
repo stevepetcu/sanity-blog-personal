@@ -1,10 +1,14 @@
+import cn from 'classnames'
 import PostPinComponent from 'components/PostPin'
 import type { PostPin } from 'lib/sanity.queries'
+
+import SectionSeparator from './SectionSeparator'
 
 export default function PostPins({ pins }: { pins: PostPin[] }) {
   return (
     <section>
-      <div className='mb-32 grid grid-cols-2 gap-y-20 md:grid-cols-3 md:gap-x-8 md:gap-y-16 lg:gap-x-16'>
+      <h2 className={cn('text-xl antialiased mb-5')}>Pinned posts</h2>
+      <div className={cn('grid grid-cols-2 gap-y-10 md:grid-cols-3 md:gap-x-8 lg:gap-x-16')}>
         {pins.map((pin) => (
           <PostPinComponent
             key={pin._id}
@@ -15,6 +19,7 @@ export default function PostPins({ pins }: { pins: PostPin[] }) {
           />
         ))}
       </div>
+      <SectionSeparator />
     </section>
   )
 }

@@ -1,36 +1,43 @@
+import cn from 'classnames'
 import type { Post, PostPin } from 'lib/sanity.queries'
 import Link from 'next/link'
 
-import PostPinThumbnail from './PostPinThumbnail'
+import BlogImage from './BlogImage'
 
 export default function PostPin({
-  title,
-  slug,
-  coverImage,
-  tags
-}: Omit<PostPin, '_id'>) {
-  const className= coverImage ?
-    'grid grid-cols-2 md:gap-x-8 lg:gap-x-16' :
-    'grid grid-cols-1 md:gap-x-8 lg:gap-x-16'
+                                  title,
+                                  slug,
+                                  coverImage,
+                                  tags
+                                }: Omit<PostPin, '_id'>) {
   return (
-    <div className='grid grid-cols-2 md:gap-x-8 lg:gap-x-16'>
-      {coverImage &&
-        <div className='mb-5'>
-        <PostPinThumbnail
+    <div className={cn('flex md:gap-x-8 lg:gap-x-16')}>
+      <div className='mb-5 flex-none'>
+        <BlogImage
           slug={slug}
           title={title}
           image={coverImage}
-          priority={false}
-          width={64}
-          height={64}
+          priority={true}
+          width={128}
+          height={128}
         />
-      </div>}
-      <h5 className="mb-3 text-3xl leading-snug">
-        <Link href={`/posts/${slug}`} className="hover:underline">
-          {title}
-        </Link>
-      </h5>
-    {/* TODO: add tags */}
+      </div>
+      <div className={cn('flex-auto')}>
+        <h2 className={cn('text-md leading-snug')}>
+          <Link href={`/posts/${slug}`} className='hover:underline'>
+            {title}
+          </Link>
+        </h2>
+        {tags && tags.length &&
+          <div className={cn('flex mt-10')}>
+            <div className={cn('flex-none mr-2.5')}><p>Tags:</p></div>
+            {tags.map((tag) =>
+              <div className={cn('flex-none mr-2.5 text-emerald-700 font-semibold')} key={tag}><a href='#'>#{tag}</a>
+              </div>)}
+          </div>
+        }
+      </div>
+      {/* TODO: add tags */}
     </div>
   )
 }

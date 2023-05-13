@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import PostSummaryComponent from 'components/PostSummary'
 import type { PostSummary } from 'lib/sanity.queries'
 
@@ -5,8 +6,9 @@ export default function PostSummaries({ summaries }: { summaries: PostSummary[] 
   return (
     <section>
       <div className='mb-32 grid grid-cols-1 gap-y-20 md:gap-x-16 md:gap-y-32 lg:gap-x-32'>
-        {summaries.map((summary) => (
+        {summaries.map((summary, index) => (
           <PostSummaryComponent
+            index={index}
             key={summary._id}
             title={summary.title}
             slug={summary.slug}

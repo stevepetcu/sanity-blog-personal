@@ -44,7 +44,7 @@ export const postSlugsQuery = groq`
 `
 
 export const postPinsListQuery = groq`
-*[_type == "post"] | order(date desc, publishedAt desc) {
+*[_type == "post"] | order(date desc, _updatedAt desc) {
   ${postPinnedFields}
 }
 `
@@ -61,17 +61,26 @@ export const postBySlugQuery = groq`
 }
 `
 
+export interface BlogImage {
+  caption: string
+  alt: string
+  placement: 'top' | 'right' | 'bottom' | 'left'
+  asset?: {
+    _ref: string
+  }
+  crop?: Crop
+  hotspot?: Hotspot
+}
+
 export interface Author {
   name: string
   picture: {
     name: string
-    picture: {
-      asset: {
-        _ref: string
-      },
-      crop?: Crop
-      hotspot?: Hotspot
-    }
+    asset: {
+      _ref: string
+    },
+    crop?: Crop
+    hotspot?: Hotspot
   }
 }
 
@@ -80,17 +89,7 @@ export interface PostSection {
   heading?: string
   anchor?: Slug
   body: any // blocks
-  sectionImage?: {
-    caption?: string
-    attribution: string
-    alt: string
-    placement: 'top' | 'right' | 'bottom' | 'left'
-    asset?: {
-      _ref: string
-    }
-    crop?: Crop
-    hotspot?: Hotspot
-  }
+  sectionImage?: BlogImage
 }
 
 export interface Post {
@@ -98,16 +97,7 @@ export interface Post {
   title: string
   slug: string
   summary: string
-  coverImage?: {
-    caption?: string
-    attribution: string
-    alt: string
-    asset?: {
-      _ref: string
-    }
-    crop?: Crop
-    hotspot?: Hotspot
-  }
+  coverImage?: BlogImage
   content: PostSection[]
   footnotes: any // blocks
   tags: string[]
@@ -120,16 +110,7 @@ export interface PostPin {
   _id: string
   title: string
   slug: string
-  coverImage?: {
-    caption?: string
-    attribution: string
-    alt: string
-    asset?: {
-      _ref: string
-    }
-    crop?: Crop
-    hotspot?: Hotspot
-  }
+  coverImage?: BlogImage
   tags
 }
 
@@ -138,16 +119,7 @@ export interface PostSummary {
   title: string
   slug: string
   summary: string
-  coverImage?: {
-    caption?: string
-    attribution: string
-    alt: string
-    asset?: {
-      _ref: string
-    }
-    crop?: Crop
-    hotspot?: Hotspot
-  }
+  coverImage?: BlogImage
   tags: string[]
   author: Author
   publishedAt: string

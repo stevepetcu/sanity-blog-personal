@@ -8,6 +8,7 @@
  *
  */
 import { PortableText } from '@portabletext/react'
+import cn from 'classnames'
 import Image from 'next/image'
 
 import { urlForImage } from '../lib/sanity.image'
@@ -19,13 +20,14 @@ import { PostPageProps } from './PostPage'
 //  1. Extract a reusable image component
 //  2. Add a button to copy the heading's anchor
 export default function PostSection({
+                                      index,
                                       heading,
                                       anchor,
                                       body,
                                       sectionImage
-                                    }: Omit<PostSection, '_id'>) {
+                                    }: Omit<PostSection & {index: number}, '_id'>) {
   return (
-    <div className={`mx-auto max-w-2xl ${styles.portableText}`}>
+    <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
       {heading && <h2 id={anchor.current}>{heading}</h2>}
       <PortableText value={body} />
       {sectionImage &&
@@ -37,8 +39,8 @@ export default function PostSection({
           title={sectionImage.alt}
           src={urlForImage(sectionImage.asset._ref).width(480 * 4).height(320 * 4).url()}
           sizes='100vw'
-          priority={false}
+          priority={index <= 1}
         />}
-    </div>
+    </section>
   )
 }

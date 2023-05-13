@@ -1,5 +1,6 @@
+import cn from 'classnames'
 import Avatar from 'components/AuthorAvatar'
-import CoverImage from 'components/CoverImage'
+import BlogImage from 'components/BlogImage'
 import Date from 'components/PostDate'
 import PostTitle from 'components/PostTitle'
 import type { Post } from 'lib/sanity.queries'
@@ -11,17 +12,15 @@ export default function PostHeader(
   return (
     <>
       <PostTitle>{title}</PostTitle>
-      <div className="hidden md:mb-12 md:block">
-        {author && <Avatar name={author.name} picture={author.picture} />}
+      <div className='mb-8 sm:mx-0 md:mb-8'>
+        <BlogImage title={title} image={coverImage} width={1280} height={720} priority />
       </div>
-      <div className="mb-8 sm:mx-0 md:mb-16">
-        <CoverImage title={title} image={coverImage} priority slug={slug} />
-      </div>
-      <div className="mx-auto max-w-2xl">
-        <div className="mb-6 block md:hidden">
+      <div className={cn('flex items-center mx-auto max-w-2xl')}>
+        <div className={cn('flex-none mr-2.5')}>
           {author && <Avatar name={author.name} picture={author.picture} />}
         </div>
-        <div className="mb-6 text-lg">
+        <span className={cn('flex-none mr-2.5 pb-2.5 text-2xl')}>.</span>
+        <div className={cn('text-lg flex-none')}>
           <Date dateString={publishedAt} />
         </div>
       </div>
