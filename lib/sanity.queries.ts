@@ -43,14 +43,24 @@ export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current) && publishedAt <= now()][].slug.current
 `
 
+export const postTagsQuery = groq`
+*[_type == "post" && defined(tags) && publishedAt <= now()][].tags
+`
+
 export const postPinsListQuery = groq`
-*[_type == "post" && publishedAt <= now()] | order(date desc, _updatedAt desc) {
+*[_type == "post" && publishedAt <= now()] | order(_updatedAt desc) {
   ${postPinnedFields}
 }
 `
 
 export const postSummariesListQuery = groq`
-*[_type == "post" && publishedAt <= now()] | order(date desc, publishedAt desc) [0...10] {
+*[_type == "post" && publishedAt <= now()] | order(publishedAt desc) [0...10] {
+  ${postSummaryFields}
+}
+`
+
+export const postSummariesListByTagQuery = (tag: string) => groq`
+*[_type == "post" && publishedAt <= now() && "${tag}" in tags] | order(publishedAt desc) [0...10] {
   ${postSummaryFields}
 }
 `

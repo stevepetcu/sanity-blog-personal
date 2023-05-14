@@ -2,11 +2,12 @@ import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
   type Post,
   postBySlugQuery, PostPin, postPinsListQuery,
-  postSlugsQuery,
-  postSummariesListQuery, PostSummary,
+  postSlugsQuery, postSummariesListByTagQuery,
+  postSummariesListQuery, PostSummary, postTagsQuery,
   type Settings,
   settingsQuery
 } from 'lib/sanity.queries'
+import _ from 'lodash'
 import { createClient } from 'next-sanity'
 
 /**
@@ -31,6 +32,14 @@ export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   return []
 }
 
+export async function getAllPostsTags(): Promise<string[]> {
+  if (client) {
+    const tagsList = (await client.fetch<string[][]>(postTagsQuery)) || []
+    return _.flatten(tagsList);
+  }
+  return []
+}
+
 export async function getPostBySlug(slug: string): Promise<Post> {
   if (client) {
     return (await client.fetch(postBySlugQuery, { slug })) || ({} as any)
@@ -39,6 +48,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 }
 
 export async function getPostSummariesList(
+  tag?: string,
   token?: string | null
 ): Promise<PostSummary[]> {
   if (projectId) {
@@ -51,7 +61,9 @@ export async function getPostSummariesList(
       token: token || undefined
     })
 
-    return await client.fetch(postSummariesListQuery)
+    return tag ?
+      await client.fetch(postSummariesListByTagQuery(tag)) :
+      await client.fetch(postSummariesListQuery)
   }
 
   return []

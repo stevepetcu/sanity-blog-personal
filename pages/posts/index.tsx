@@ -1,6 +1,10 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
-import { getPostPinsList, getPostSummariesList, getSettings } from 'lib/sanity.client'
+import {
+  getPostPinsList,
+  getPostSummariesList,
+  getSettings
+} from 'lib/sanity.client'
 import { PostPin, PostSummary, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
@@ -23,7 +27,6 @@ interface PreviewData {
   token?: string
 }
 
-// TODO: This page is now redundant, figure out what to return here.
 export default function Page(props: PageProps) {
   const { pins, summaries, settings, preview, token } = props
 
@@ -52,7 +55,7 @@ export const getStaticProps: GetStaticProps<
   const [settings, pins = [], summaries = []] = await Promise.all([
     getSettings(),
     getPostPinsList(),
-    getPostSummariesList(),
+    getPostSummariesList()
   ])
 
   return {
@@ -61,7 +64,7 @@ export const getStaticProps: GetStaticProps<
       summaries,
       settings,
       preview,
-      token: previewData.token ?? null,
-    },
+      token: previewData.token ?? null
+    }
   }
 }

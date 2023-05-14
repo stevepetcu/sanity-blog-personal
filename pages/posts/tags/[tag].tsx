@@ -1,6 +1,11 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
-import { getPostPinsList, getPostSummariesList, getSettings } from 'lib/sanity.client'
+import {
+  getAllPostsTags,
+  getPostPinsList,
+  getPostSummariesList,
+  getSettings
+} from 'lib/sanity.client'
 import { PostPin, PostSummary, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
@@ -23,7 +28,6 @@ interface PreviewData {
   token?: string
 }
 
-// TODO: This page is now redundant, figure out what to return here.
 export default function Page(props: PageProps) {
   const { pins, summaries, settings, preview, token } = props
 
@@ -47,12 +51,12 @@ export const getStaticProps: GetStaticProps<
   Query,
   PreviewData
 > = async (ctx) => {
-  const { preview = false, previewData = {} } = ctx
+  const { preview = false, previewData = {}, params } = ctx
 
   const [settings, pins = [], summaries = []] = await Promise.all([
     getSettings(),
     getPostPinsList(),
-    getPostSummariesList(),
+    getPostSummariesList(params.tag)
   ])
 
   return {
@@ -61,7 +65,16 @@ export const getStaticProps: GetStaticProps<
       summaries,
       settings,
       preview,
-      token: previewData.token ?? null,
-    },
+      token: previewData.token ?? null
+    }
+  }
+}
+
+export const getStaticPaths = async () => {
+  const tags = await getAllPostsTags()
+
+  return {
+    paths: tags?.map((tag) => `/posts/tags/${tag}`) || [],
+    fallback: 'blocking'
   }
 }

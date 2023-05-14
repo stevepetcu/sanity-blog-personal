@@ -47,11 +47,13 @@ export default function PostSummary({
           <div>
             <Date dateString={publishedAt} />
           </div>
+          {/* TODO: 1. extract a tags component */}
           {tags && tags.length &&
             <div className={cn('flex')}>
               <span className={cn('pb-1.5 hidden md:inline-flex flex-none')}>.</span>
               {tags.map((tag) =>
-                <small className={cn('ml-1.5 pt-1.5 flex-none text-sky-500 font-semibold uppercase sm:pb-1 md:pb-0')} key={tag}><a href='#'>#{tag}</a>
+                <small className={cn('ml-1.5 pt-1.5 flex-none text-sky-500 font-semibold uppercase sm:pb-1 md:pb-0')} key={tag}>
+                  <a href={`/posts/tags/${tag}`}>#{tag}</a>
                 </small>)}
             </div>
           }

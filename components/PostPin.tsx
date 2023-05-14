@@ -36,7 +36,7 @@ export default function PostPin({
           <div className={cn('flex mt-10 items-center')}>
             <small className={cn('flex-none mr-2.5')}><p>Tags:</p></small>
             {tags.map((tag) =>
-              <small className={cn('flex-none mr-2.5 text-sky-500 font-semibold uppercase')} key={tag}><a href='#'>#{tag}</a>
+              <small className={cn('flex-none mr-2.5 text-sky-500 font-semibold uppercase')} key={tag}><a href={`/posts/tags/${tag}`}>#{tag}</a>
               </small>)}
           </div>
         }
