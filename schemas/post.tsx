@@ -1,4 +1,5 @@
 import { BookIcon } from '@sanity/icons'
+import cn from 'classnames'
 import { format, parseISO } from 'date-fns'
 import { defineArrayMember, defineField, defineType, SlugValue } from 'sanity'
 
@@ -66,7 +67,7 @@ export default defineType({
                       type: 'string',
                       name: 'href',
                       title: 'URL',
-                      validation: (rule) => rule.required(),
+                      validation: (rule) => rule.required()
                     },
                     {
                       title: 'Open in a new tab',
@@ -74,14 +75,14 @@ export default defineType({
                       type: 'boolean',
                       initialValue: true
                     }
-                  ],
-                }),
-              ],
-            },
+                  ]
+                })
+              ]
+            }
           })],
           title: 'Caption',
           hidden: (document) => {
-            return document?.parent?.asset === undefined;
+            return document?.parent?.asset === undefined
           },
           validation: (rule) => rule.custom((value: string, context) => {
             if (value && value.length > 0 && !context.parent.asset) {
@@ -100,7 +101,7 @@ export default defineType({
           type: 'string',
           title: 'Alt',
           hidden: (document) => {
-            return document?.parent?.asset === undefined;
+            return document?.parent?.asset === undefined
           },
           validation: (rule) => rule.custom((value: string, context) => {
             if (value && value.length > 0 && !context.parent.asset) {
@@ -143,11 +144,11 @@ export default defineType({
               maxLength: 110,
               isUnique: (value: string, context) => {
                 const documentContentSections =
-                  context.document.content as Array<{ anchor: SlugValue, _key: string }>;
-                const slugParent = context.parent as { _key: string };
+                  context.document.content as Array<{ anchor: SlugValue, _key: string }>
+                const slugParent = context.parent as { _key: string }
 
                 return documentContentSections.some((section) =>
-                  slugParent._key !== section._key && section.anchor && section.anchor.current === value) === false;
+                  slugParent._key !== section._key && section.anchor && section.anchor.current === value) === false
               }
             },
             validation: (rule) => rule.custom((value: SlugValue, context) => {
@@ -171,7 +172,7 @@ export default defineType({
                         type: 'string',
                         name: 'href',
                         title: 'URL',
-                        validation: (rule) => rule.required(),
+                        validation: (rule) => rule.required()
                       },
                       {
                         title: 'Open in a new tab',
@@ -179,10 +180,47 @@ export default defineType({
                         type: 'boolean',
                         initialValue: true
                       }
-                    ],
-                  }),
+                    ]
+                  })
                 ],
-              },
+                decorators: [
+                  { title: 'Strong', value: 'strong' },
+                  { title: 'Emphasis', value: 'em' },
+                  {
+                    title: 'Underline',
+                    value: 'underline',
+                    icon: () => (
+                      <span style={{textDecoration: 'underline', textDecorationColor: 'lightblue'}}>U</span>
+                    ),
+                    component: props => (
+                      <span style={{textDecoration: 'underline', textDecorationColor: 'lightblue'}}>{props.children}</span>
+                    )
+                  },
+                  { title: 'Code', value: 'code' },
+                  {
+                    title: 'Highlight',
+                    value: 'highlight',
+                    icon: () => (
+                      <span style={{ backgroundColor: 'darkblue', padding: '0px 5px' }}>H</span>
+                    ),
+                    component: props => (
+                      <span style={{ backgroundColor: 'darkblue' }}>{props.children}</span>
+                    )
+                  },
+                  {
+                    title: 'Superscript',
+                    value: 'sup',
+                    icon: () => (<>T<sup>S</sup></>),
+                    component: props => <sup>{ props.children }</sup>
+                  },
+                  {
+                    title: 'Subscript',
+                    value: 'sub',
+                    icon: () => (<>T<sub>S</sub></>),
+                    component: props => <sub>{ props.children }</sub>
+                  }
+                ]
+              }
             })],
             validation: (rule) => rule.required().min(1)
           },
@@ -209,7 +247,7 @@ export default defineType({
                             type: 'string',
                             name: 'href',
                             title: 'URL',
-                            validation: (rule) => rule.required(),
+                            validation: (rule) => rule.required()
                           },
                           {
                             title: 'Open in a new tab',
@@ -217,14 +255,14 @@ export default defineType({
                             type: 'boolean',
                             initialValue: true
                           }
-                        ],
-                      }),
-                    ],
-                  },
+                        ]
+                      })
+                    ]
+                  }
                 })],
                 title: 'Caption',
                 hidden: (document) => {
-                  return document?.parent?.asset === undefined;
+                  return document?.parent?.asset === undefined
                 },
                 validation: (rule) => rule.custom((value: string, context) => {
                   if (value && value.length > 0 && !context.parent.asset) {
@@ -243,7 +281,7 @@ export default defineType({
                 type: 'string',
                 title: 'Alt',
                 hidden: (document) => {
-                  return document?.parent?.asset === undefined;
+                  return document?.parent?.asset === undefined
                 },
                 validation: (rule) => rule.custom((value: string, context) => {
                   if (value && value.length > 0 && !context.parent.asset) {
@@ -272,7 +310,7 @@ export default defineType({
                   direction: 'horizontal'
                 },
                 hidden: (document) => {
-                  return document?.parent?.asset === undefined;
+                  return document?.parent?.asset === undefined
                 },
                 validation: (rule) => rule.custom((value: string, context) => {
                   if (value && value.length > 0 && !context.parent.asset) {
@@ -280,11 +318,11 @@ export default defineType({
                   }
 
                   if (context.parent.asset && !['top', 'right', 'bottom', 'left'].includes(value)) {
-                    return 'Please place the image.';
+                    return 'Please place the image.'
                   }
 
-                  return true;
-                }),
+                  return true
+                })
               }
             ]
           }
@@ -292,11 +330,11 @@ export default defineType({
       }],
       validation: (rule) => rule.required().min(1).max(10)
     }),
-    defineField ({
+    defineField({
       title: 'Footnotes',
       name: 'footnotes',
       type: 'array',
-      of: [{type: 'block'}]
+      of: [{ type: 'block' }]
     }),
     defineField({
       name: 'summary',
@@ -332,14 +370,14 @@ export default defineType({
       title: 'Published at, desc',
       name: 'publishedAtDateDesc',
       by: [
-        {field: 'publishedAt', direction: 'desc'}
+        { field: 'publishedAt', direction: 'desc' }
       ]
     },
     {
       title: 'Published at, asc',
       name: 'publishedAtDateAsc',
       by: [
-        {field: 'publishedAt', direction: 'asc'}
+        { field: 'publishedAt', direction: 'asc' }
       ]
     }
   ],

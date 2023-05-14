@@ -1,9 +1,9 @@
 .portableText a {
   cursor: pointer;
-  @apply text-blue-500 underline;
+  @apply text-sky-500;
 }
 .portableText a:hover {
-  @apply text-blue-800;
+  @apply text-sky-700 underline underline-offset-2;
 }
 .portableText p {
   @apply mt-0 !important;
