@@ -39,19 +39,19 @@ export default function PostSummary({
           </Link>
         </h3>
         {summary && <p className={cn('mb-4 text-lg leading-relaxed')}>{summary}</p>}
-        <div className={cn('flex items-center')}>
-          <div className='flex-none'>
+        <div className={cn('items-center space-x-2.5 flex')}>
+          <div className='sm:flex-none'>
             {author && <Avatar name={author.name} picture={author.picture} />}
           </div>
-          <span className={cn('pr-2 pl-2 pb-1.5')}>.</span>
+          <span className={cn('pb-1.5 hidden md:inline-flex flex-none')}>.</span>
           <div>
             <Date dateString={publishedAt} />
           </div>
           {tags && tags.length &&
             <div className={cn('flex')}>
-              <span className={cn('pr-2 pl-2 pb-1.5')}>.</span>
+              <span className={cn('pb-1.5 hidden md:inline-flex flex-none')}>.</span>
               {tags.map((tag) =>
-                <small className={cn('pt-1.5 flex-none mr-2.5 text-sky-500 font-semibold uppercase')} key={tag}><a href='#'>#{tag}</a>
+                <small className={cn('ml-1.5 pt-1.5 flex-none text-sky-500 font-semibold uppercase sm:pb-1 md:pb-0')} key={tag}><a href='#'>#{tag}</a>
                 </small>)}
             </div>
           }
