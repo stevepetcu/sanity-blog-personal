@@ -7,8 +7,10 @@
  * https://portabletext.org/
  *
  */
+import { LinkIcon } from '@sanity/icons'
 import cn from 'classnames'
 import Image from 'next/image'
+import { useState } from 'react'
 
 import { PostSection } from '../lib/sanity.queries'
 import BlogImage from './BlogImage'
@@ -24,13 +26,39 @@ export default function PostSection({
                                       anchor,
                                       body,
                                       sectionImage
-                                    }: Omit<PostSection & {index: number}, '_id'>) {
+                                    }: Omit<PostSection & { index: number }, '_id'>) {
+
+  const [isLinkToHeadingCopied, setIsLinkToHeadingCopied] = useState(false);
+  async function copyTextToClipboard(text) {
+    // TODO: probably don't need this function.
+    if ('clipboard' in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand('copy', true, text);
+    }
+  }
+  const copyLinkToHeading = async (anchor: string) => {
+    const location = window.location.origin + window.location.pathname // TODO: can I use `useLocation` with next js?
+
+    try {
+      await copyTextToClipboard(`${location}#${anchor}`);
+      setIsLinkToHeadingCopied(true);
+      setTimeout(() => {
+        setIsLinkToHeadingCopied(false);
+      }, 1000);
+    } catch (e) {
+      console.error(e); // TODO: handle this better.
+    }
+  }
+
   return (
     <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
-      {heading && <h2 id={anchor.current}>{heading}</h2>}
+      {heading &&
+        <h2 onClick={() => copyLinkToHeading(anchor.current)} id={anchor.current} className={cn('transition-all ease-in-out cursor-grab', {'text-green-700': isLinkToHeadingCopied})}>{heading}</h2>}
       <SanePortableText content={body} />
       {sectionImage &&
-        <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={320} priority={index <= 1} alwaysShowCaption={true} />
+        <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={320} priority={index <= 1}
+                   alwaysShowCaption={true} />
       }
     </section>
   )
