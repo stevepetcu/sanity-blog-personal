@@ -33,11 +33,11 @@ export default function PostPin({
           </Link>
         </h2>
         {tags && tags.length &&
-          <div className={cn('flex mt-10')}>
-            <div className={cn('flex-none mr-2.5')}><p>Tags:</p></div>
+          <div className={cn('flex mt-10 items-center')}>
+            <small className={cn('flex-none mr-2.5')}><p>Tags:</p></small>
             {tags.map((tag) =>
-              <div className={cn('flex-none mr-2.5 text-emerald-700 font-semibold')} key={tag}><a href='#'>#{tag}</a>
-              </div>)}
+              <small className={cn('flex-none mr-2.5 text-sky-500 font-semibold uppercase')} key={tag}><a href='#'>#{tag}</a>
+              </small>)}
           </div>
         }
       </div>

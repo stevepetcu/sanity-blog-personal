@@ -11,17 +11,17 @@ export default function AuthorAvatar(props: Author) {
           picture?.asset?._ref &&
           (
             <Image
-              src={ urlForImage(picture).height(96).width(96).fit('crop').url() }
+              src={ urlForImage(picture).height(100).width(100).fit('crop').url() }
               className="rounded-full"
-              height={96}
-              width={96}
+              height={50}
+              width={50}
               alt={`Author's avatar: ${name}`}
               title={`Author's avatar: ${name}`}
             />
           )
         }
       </div>
-      <div className="text-xl font-bold">{name}</div>
+      <div className="text-md font-semibold">{name}</div>
     </div>
   )
 }
