@@ -40,23 +40,23 @@ const postSummaryFields = groq`
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
 export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
+*[_type == "post" && defined(slug.current) && publishedAt <= now()][].slug.current
 `
 
 export const postPinsListQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc) {
+*[_type == "post" && publishedAt <= now()] | order(date desc, _updatedAt desc) {
   ${postPinnedFields}
 }
 `
 
 export const postSummariesListQuery = groq`
-*[_type == "post"] | order(date desc, publishedAt desc) [0...10] {
+*[_type == "post" && publishedAt <= now()] | order(date desc, publishedAt desc) [0...10] {
   ${postSummaryFields}
 }
 `
 
 export const postBySlugQuery = groq`
-*[_type == "post" && slug.current == $slug][0] {
+*[_type == "post" && slug.current == $slug && publishedAt <= now()][0] {
   ${postViewFields}
 }
 `
