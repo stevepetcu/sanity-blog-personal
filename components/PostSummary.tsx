@@ -53,7 +53,7 @@ export default function PostSummary({
               <span className={cn('pb-1.5 hidden md:inline-flex flex-none')}>.</span>
               {tags.map((tag) =>
                 <small className={cn('ml-1.5 pt-1.5 flex-none text-sky-500 font-semibold uppercase sm:pb-1 md:pb-0')} key={tag}>
-                  <a href={`/posts/tags/${tag}`}>#{tag}</a>
+                  <a href={`/posts?tag=${tag}`}>#{tag}</a>
                 </small>)}
             </div>
           }

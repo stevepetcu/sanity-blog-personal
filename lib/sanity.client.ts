@@ -3,7 +3,7 @@ import {
   type Post,
   postBySlugQuery, PostPin, postPinsListQuery,
   postSlugsQuery, postSummariesListByTagQuery,
-  postSummariesListQuery, PostSummary, postTagsQuery,
+  postSummariesListQuery, PostSummary,
   type Settings,
   settingsQuery
 } from 'lib/sanity.queries'
@@ -28,14 +28,6 @@ export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   if (client) {
     const slugs = (await client.fetch<string[]>(postSlugsQuery)) || []
     return slugs.map((slug) => ({ slug }))
-  }
-  return []
-}
-
-export async function getAllPostsTags(): Promise<string[]> {
-  if (client) {
-    const tagsList = (await client.fetch<string[][]>(postTagsQuery)) || []
-    return _.flatten(tagsList);
   }
   return []
 }
