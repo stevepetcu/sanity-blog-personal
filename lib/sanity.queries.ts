@@ -55,11 +55,22 @@ export const postSummariesListQuery = groq`
 }
 `
 
-export const postSummariesListByTagQuery = (tag: string) => groq`
-*[_type == "post" && publishedAt <= now() && "${tag}" in tags] | order(publishedAt desc) [0...10] {
+export const postSummariesListByTagQuery = (tags: string[]) => {
+  let tagsQuery = ''
+  tags.map((tag, index) => {
+    if (index !== tags.length - 1) {
+      tagsQuery += `"${tag}" in tags || `
+    } else {
+      tagsQuery += `"${tag}" in tags`
+    }
+  })
+
+  return groq`
+*[_type == "post" && publishedAt <= now() && ${tagsQuery}] | order(publishedAt desc) [0...10] {
   ${postSummaryFields}
 }
 `
+}
 
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug && publishedAt <= now()][0] {

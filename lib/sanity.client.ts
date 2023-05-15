@@ -40,7 +40,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 }
 
 export async function getPostSummariesList(
-  tag?: string,
+  tags?: string[],
   token?: string | null
 ): Promise<PostSummary[]> {
   if (projectId) {
@@ -53,8 +53,8 @@ export async function getPostSummariesList(
       token: token || undefined
     })
 
-    return tag ?
-      await client.fetch(postSummariesListByTagQuery(tag)) :
+    return tags.length > 0 ?
+      await client.fetch(postSummariesListByTagQuery(tags)) :
       await client.fetch(postSummariesListQuery)
   }
 

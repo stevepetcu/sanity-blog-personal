@@ -1,14 +1,14 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
-import IndexPage from 'components/IndexPage'
 import {
   getPostPinsList,
   getPostSummariesList,
   getSettings
 } from 'lib/sanity.client'
 import { PostPin, PostSummary, Settings } from 'lib/sanity.queries'
-import { GetStaticProps } from 'next'
-import { useSearchParams } from 'next/navigation'
-import { lazy, useEffect, useState } from 'react'
+import { GetServerSideProps } from 'next'
+import { lazy } from 'react'
+
+import IndexPage from '../../components/IndexPage'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -18,6 +18,7 @@ interface PageProps {
   settings: Settings
   preview: boolean
   token: string | null
+  tags: string[]
 }
 
 interface Query {
@@ -29,75 +30,46 @@ interface PreviewData {
 }
 
 export default function Page(props: PageProps) {
-  // TODO: separate the post pins rendering as a static component
-  //  See how to make the Post Summaries List static when no tag query parameters are there – and
-  //  dynamic, when there are query parameters.
-  //  See https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering
-  const { pins, summaries, settings, preview, token } = props
-
-  const queryParams = useSearchParams();
-  const tag = queryParams.get('tag');
-
-  const [taggedSummaries, setTaggedSummaries] = useState<PostSummary[]>([])
-
-  useEffect(() => {
-    console.log('Tag: ', tag);
-    const setTaggedSummariesAsync = async () => {
-      setTaggedSummaries(await getPostSummariesList(tag)); // TODO: error handling?
-    }
-
-    if (tag) {
-      setTaggedSummariesAsync(); // TODO: error handling?
-    }
-  }, [tag])
+  const { pins, summaries, settings, preview, token, tags } = props
 
   if (preview) {
-    return tag ?
-      (
-        <PreviewSuspense
-          fallback={
-            <IndexPage loading preview postPins={pins} postSummaries={taggedSummaries} settings={settings} showPins={true} />
-          }
-        >
-          <PreviewIndexPage token={token} />
-        </PreviewSuspense>
-      ) :
-      (
+    return (
       <PreviewSuspense
         fallback={
-          <IndexPage loading preview postPins={pins} postSummaries={summaries} settings={settings} showPins={false} />
+          <IndexPage loading preview postPins={pins} postSummaries={summaries} settings={settings}
+                     showPins={!tags.length} />
         }
       >
-        <PreviewIndexPage token={token} />
+        <PreviewIndexPage token={token} showPins={!tags.length} />
       </PreviewSuspense>
     )
   }
 
-  return tag?
-    (
-      <PreviewSuspense
-        fallback={
-          <IndexPage loading preview postPins={pins} postSummaries={summaries} settings={settings} showPins={true} />
-        }
-      >
-        <IndexPage loading preview postPins={pins} postSummaries={taggedSummaries} settings={settings} showPins={false} />
-      </PreviewSuspense>
-    ) :
-    <IndexPage postPins={pins} postSummaries={summaries} settings={settings} showPins={true} />
+  return <IndexPage postPins={pins} postSummaries={summaries} settings={settings} showPins={!tags.length} />
 }
 
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   PageProps,
   Query,
   PreviewData
 > = async (ctx) => {
-  const { preview = false, previewData = {} } = ctx
+  const { preview = false, previewData = {}, query } = ctx
 
-  const [settings, pins = [], summaries = []] = await Promise.all([
+  // TODO: this ternary below isn't the most readable thing.
+  const tags = typeof query.tag === undefined ?
+    [] :
+    typeof query.tag === 'string' ?
+      [query.tag] :
+      Array.isArray(query.tag) ?
+        query.tag :
+        []
+
+  const [settings, summaries = []] = await Promise.all([
     getSettings(),
-    getPostPinsList(),
-    getPostSummariesList()
+    getPostSummariesList(tags)
   ])
+
+  const pins = tags.length === 0 ? await getPostPinsList() : []
 
   return {
     props: {
@@ -105,7 +77,8 @@ export const getStaticProps: GetStaticProps<
       summaries,
       settings,
       preview,
-      token: previewData.token ?? null
+      token: previewData.token ?? null,
+      tags
     }
   }
 }

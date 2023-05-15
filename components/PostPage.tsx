@@ -5,7 +5,6 @@ import PostHeader from 'components/PostHeader'
 import PostPageHead from 'components/PostPageHead'
 import PostSection from 'components/PostSection'
 import PostTitle from 'components/PostTitle'
-import SectionSeparator from 'components/SectionSeparator'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 
@@ -50,7 +49,7 @@ export default function PostPage(props: PostPageProps) {
                 {
                   post.content.map((section, index) =>
                     <PostSection key={section._key} index={index} heading={section.heading} anchor={section.anchor}
-                                 body={section.body} sectionImage={section.sectionImage}/>)
+                                 body={section.body} sectionImage={section.sectionImage} />)
                 }
                 {post.footnotes && <PostFootnotes content={post.footnotes} />}
               </article>
