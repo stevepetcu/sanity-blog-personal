@@ -7,14 +7,14 @@
  * https://portabletext.org/
  *
  */
-import { LinkIcon } from '@sanity/icons'
+import { CheckmarkIcon, LinkIcon } from '@sanity/icons'
 import cn from 'classnames'
-import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { PostSection } from '../lib/sanity.queries'
 import BlogImage from './BlogImage'
-import styles from './PostBody.module.css'
+import styles from './PostSection.module.css'
 import SanePortableText from './SanePortableText'
 
 // TODO:
@@ -27,39 +27,38 @@ export default function PostSection({
                                       body,
                                       sectionImage
                                     }: Omit<PostSection, '_key'> & { index: number }) {
-
   const [isLinkToHeadingCopied, setIsLinkToHeadingCopied] = useState(false)
-
-  async function copyTextToClipboard(text) {
-    // TODO: probably don't need this function, just use the navigator.clipboard directly
-    //  Better yet, configure the base path thru settings and concatenate it with /posts etc.
-    //  Instead of using the window object.
-    if ('clipboard' in navigator) {
-      return await navigator.clipboard.writeText(text)
-    } else {
-      return document.execCommand('copy', true, text)
-    }
-  }
+  const location = useRouter()
 
   const copyLinkToHeading = async (anchor: string) => {
-    const location = window.location.origin + window.location.pathname // TODO: can I use `useLocation` with next js?
+    // We could generate the location statically, but we'd need to mess
+    // with environment variables. Given the website domain has a few
+    // aliases, we'll go with using the window object for now, since
+    // this function only runs client-side anyway.
+    const location = window?.location?.origin + window?.location?.pathname
 
     try {
-      await copyTextToClipboard(`${location}#${anchor}`)
+      await navigator.clipboard.writeText(`${location}#${anchor}`)
       setIsLinkToHeadingCopied(true)
       setTimeout(() => {
         setIsLinkToHeadingCopied(false)
       }, 1000)
     } catch (e) {
-      console.error(e) // TODO: handle this better.
+      console.error(`Failed to copy the anchor link to clipboard; ${e.message}.`)
     }
   }
 
   return (
     <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
       {heading &&
-        <h2 onClick={() => copyLinkToHeading(anchor.current)} id={anchor.current}
-            className={cn('transition-all ease-in-out cursor-grab', { 'text-green-700': isLinkToHeadingCopied })}>{heading}</h2>}
+        <div onClick={() => copyLinkToHeading(anchor.current)}
+             className={cn(`${styles.sectionHeading} group flex space-x-1.5 items-center)`)}>
+          <h2 id={anchor.current}>
+            {heading}
+          </h2>
+          {!isLinkToHeadingCopied && <LinkIcon width='2.5rem' height='2.5rem' className={cn('translate-x-0 transition-all ease-in-out text-sky-500')}/>}
+          {isLinkToHeadingCopied && <CheckmarkIcon width='2.5rem' height='2.5rem' className={cn('translate-x-0 transition-all ease-in-out text-green-600')}/>}
+        </div>}
       <SanePortableText content={body} />
       {sectionImage &&
         <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={320} priority={index <= 1}

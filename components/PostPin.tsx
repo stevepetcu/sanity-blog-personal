@@ -1,7 +1,8 @@
 import cn from 'classnames'
-import type { Post, PostPin } from 'lib/sanity.queries'
+import type { PostPin } from 'lib/sanity.queries'
 import Link from 'next/link'
 
+import { POSTS_PAGE_PATH } from '../pages/posts'
 import BlogImage from './BlogImage'
 
 export default function PostPin({
@@ -28,7 +29,7 @@ export default function PostPin({
       }
       <div className={cn('flex-auto')}>
         <h2 className={cn('text-md leading-snug')}>
-          <Link href={`/posts/${slug}`} className='hover:underline'>
+          <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>
         </h2>
@@ -36,7 +37,7 @@ export default function PostPin({
           <div className={cn('flex mt-10 items-center')}>
             <small className={cn('flex-none mr-2.5')}><p>Tags:</p></small>
             {tags.map((tag) =>
-              <small className={cn('flex-none mr-2.5 text-sky-500 font-semibold uppercase')} key={tag}><a href={`/posts?tag=${tag}`}>#{tag}</a>
+              <small className={cn('flex-none mr-2.5 text-sky-500 font-semibold uppercase')} key={tag}><a href={`${POSTS_PAGE_PATH}?tag=${tag}`}>#{tag}</a>
               </small>)}
           </div>
         }

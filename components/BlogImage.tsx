@@ -6,6 +6,7 @@ import React from 'react'
 
 import { PixelRatioContext } from '../contexts/PixelRatioContext'
 import { BlogImage } from '../lib/sanity.queries'
+import { POSTS_PAGE_PATH } from '../pages/posts'
 import styles from './BlogImage.module.css'
 import SanePortableText from './SanePortableText'
 
@@ -50,7 +51,7 @@ export default function BlogImage(props: BlogImageProps) {
   return (
     <div className={cn('group relative overflow-clip drop-shadow-sm', { 'transition-all duration-200 hover:drop-shadow-lg': slug })}>
       {slug ? (
-        <Link href={`/posts/${slug}`} aria-label={title}>
+        <Link href={`${POSTS_PAGE_PATH}/${slug}`} aria-label={title}>
           {imageComponent}
         </Link>
       ) : (

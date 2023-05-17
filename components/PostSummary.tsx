@@ -4,6 +4,7 @@ import Date from 'components/PostDate'
 import type { PostSummary } from 'lib/sanity.queries'
 import Link from 'next/link'
 
+import { POSTS_PAGE_PATH } from '../pages/posts'
 import BlogImage from './BlogImage'
 
 export default function PostSummary({
@@ -34,7 +35,7 @@ export default function PostSummary({
       }
       <div>
         <h3 className={cn('mb-3 text-3xl leading-snug')}>
-          <Link href={`/posts/${slug}`} className='hover:underline'>
+          <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>
         </h3>
@@ -53,7 +54,7 @@ export default function PostSummary({
               <span className={cn('pb-1.5 hidden md:inline-flex flex-none')}>.</span>
               {tags.map((tag) =>
                 <small className={cn('ml-1.5 pt-1.5 flex-none text-sky-500 font-semibold uppercase sm:pb-1 md:pb-0')} key={tag}>
-                  <a href={`/posts?tag=${tag}`}>#{tag}</a>
+                  <a href={`${POSTS_PAGE_PATH}?tag=${tag}`}>#{tag}</a>
                 </small>)}
             </div>
           }

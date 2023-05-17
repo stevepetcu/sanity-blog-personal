@@ -3,13 +3,15 @@ import {
   dataset,
   previewSecretId,
   projectId,
-  useCdn,
+  useCdn
 } from 'lib/sanity.api'
 import { postBySlugQuery } from 'lib/sanity.queries'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import type { PageConfig } from 'next/types'
 import { createClient } from 'next-sanity'
 import { getSecret } from 'plugins/productionUrl/utils'
+
+import { POSTS_PAGE_PATH } from '../posts'
 
 // res.setPreviewData only exists in the nodejs runtime, setting the config here allows changing the global runtime
 // option in next.config.mjs without breaking preview mode
@@ -18,7 +20,7 @@ export const config: PageConfig = { runtime: 'nodejs' }
 function redirectToPreview(
   res: NextApiResponse<string | void>,
   previewData: { token?: string },
-  Location: '/' | `/posts/${string}`
+  Location: '/posts' | `/posts/${string}`
 ): void {
   // Enable Preview Mode by setting the cookies
   res.setPreviewData(previewData)
@@ -63,7 +65,7 @@ export default async function preview(
 
   // If no slug is provided open preview mode on the frontpage
   if (!req.query.slug) {
-    return redirectToPreview(res, previewData, '/')
+    return redirectToPreview(res, previewData, POSTS_PAGE_PATH)
   }
 
   // Check if the post with the given `slug` exists
@@ -71,10 +73,10 @@ export default async function preview(
     // Fallback to using the WRITE token until https://www.sanity.io/docs/vercel-integration starts shipping a READ token.
     // As this client only exists on the server and the token is never shared with the browser, we don't risk escalating permissions to untrustworthy users
     token:
-      process.env.SANITY_API_READ_TOKEN || process.env.SANITY_API_WRITE_TOKEN,
+      process.env.SANITY_API_READ_TOKEN || process.env.SANITY_API_WRITE_TOKEN
   })
   const post = await client.fetch(postBySlugQuery, {
-    slug: req.query.slug,
+    slug: req.query.slug
   })
 
   // If the slug doesn't exist prevent preview mode from being enabled
@@ -84,5 +86,5 @@ export default async function preview(
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  redirectToPreview(res, previewData, `/posts/${post.slug}`)
+  redirectToPreview(res, previewData, `${POSTS_PAGE_PATH}/${post.slug}`)
 }

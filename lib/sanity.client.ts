@@ -7,7 +7,6 @@ import {
   type Settings,
   settingsQuery
 } from 'lib/sanity.queries'
-import _ from 'lodash'
 import { createClient } from 'next-sanity'
 
 /**
