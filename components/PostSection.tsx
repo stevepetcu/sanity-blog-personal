@@ -51,14 +51,14 @@ export default function PostSection({
   return (
     <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
       {heading &&
-        <div onClick={() => copyLinkToHeading(anchor.current)}
-             className={cn(`${styles.sectionHeading} group flex space-x-1.5 items-center)`)}>
-          <h2 id={anchor.current}>
-            {heading}
-          </h2>
-          {!isLinkToHeadingCopied && <LinkIcon width='2.5rem' height='2.5rem' className={cn('translate-x-0 transition-all ease-in-out text-sky-500')}/>}
-          {isLinkToHeadingCopied && <CheckmarkIcon width='2.5rem' height='2.5rem' className={cn('translate-x-0 transition-all ease-in-out text-green-600')}/>}
-        </div>}
+        <h2 onClick={() => copyLinkToHeading(anchor.current)} id={anchor.current}
+            className={cn(`${styles.sectionHeading} group`)}>
+          {heading}
+          {!isLinkToHeadingCopied && <LinkIcon width='2.5rem' height='2.5rem'
+                                               className={cn('inline mb-1.5 group-hover:translate-x-1.5 transition-all ease-in-out text-sky-500')} />}
+          {isLinkToHeadingCopied && <CheckmarkIcon width='2.5rem' height='2.5rem'
+                                                   className={cn('inline mb-1.5 group-hover:translate-x-1.5 transition-all ease-in-out text-green-600')} />}
+        </h2>}
       <SanePortableText content={body} />
       {sectionImage &&
         <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={320} priority={index <= 1}
