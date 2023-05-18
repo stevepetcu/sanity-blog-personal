@@ -41,17 +41,17 @@ export default function PostSummary({
           </Link>
         </h3>
         {summary && <p className={cn('mb-4 text-lg leading-relaxed')}>{summary}</p>}
-        <div className={cn('items-center space-x-2.5 flex')}>
-          <div className='sm:flex-none'>
+        <div className={cn('flex flex-wrap items-center space-x-2.5')}>
+          <div className={cn('flex-none')}>
             {author && <Avatar name={author.name} picture={author.picture} />}
           </div>
-          <span className={cn('pb-1.5 hidden md:inline-flex flex-none')}>.</span>
-          <div>
+          <span className={cn('pb-1.5 inline-flex flex-none')}>.</span>
+          <div className={cn('whitespace-nowrap')}>
             <Date dateString={publishedAt} />
           </div>
           {tags && tags.length &&
             <>
-              <span className={cn('pb-1.5 hidden md:inline-flex flex-none')}>.</span>
+              <span className={cn('pb-1.5 inline-flex flex-none')}>.</span>
               <TagList tags={tags} />
             </>
           }

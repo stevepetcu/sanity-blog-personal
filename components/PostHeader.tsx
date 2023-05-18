@@ -11,14 +11,20 @@ export default function PostHeader(
   const { title, coverImage, publishedAt, author, slug } = props
   return (
     <>
-      <PostTitle>{title}</PostTitle>
-      {
-        coverImage &&
-        <div className='mb-8 sm:mx-0 md:mb-8'>
-          <BlogImage title={title} image={coverImage} width={1280} height={720} priority alwaysShowCaption={true} />
+      <div className={cn('relative')}>
+        <div className={cn('absolute bottom-0 w-full z-20 p-5 ' +
+          'bg-gradient-to-r from-sky-500/25 to-indigo-500/25 ' +
+          'text-slate-800 backdrop-blur')}>
+          <PostTitle>{title}</PostTitle>
         </div>
-      }
-      <div className={cn('flex items-center mx-auto max-w-2xl')}>
+        {
+          coverImage &&
+          <div className='relative mb-8 sm:mx-0 md:mb-8 z-10 rounded'>
+            <BlogImage title={title} image={coverImage} width={1280} height={720} priority alwaysShowCaption={true} captionPosition={'top'} />
+          </div>
+        }
+      </div>
+      <div className={cn('flex items-center mx-auto max-w-2xl px-5')}>
         <div className={cn('flex-none mr-2.5')}>
           {author && <Avatar name={author.name} picture={author.picture} />}
         </div>

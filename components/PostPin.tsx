@@ -28,14 +28,15 @@ export default function PostPin({
           />
         </div>
       }
-      <div className={cn('flex-auto p-2')}>
-        <h2 className={cn('text-md leading-snug text-xl mb-3')}>
+      <div className={cn('p-2')}>
+        <h3 className={cn('text-md leading-snug text-xl mb-3')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>
-        </h2>
-        {tags && tags.length &&
-          <TagList tags={tags} />}
+        </h3>
+        <div className={cn('flex space-x-2.5')}>
+          {tags && tags.length && <TagList tags={tags} />}
+        </div>
       </div>
     </div>
   )

@@ -1,3 +1,10 @@
-export default function SectionSeparator() {
-  return <hr className="mb-16 mt-8 border-accent-2" />
+import cn from 'classnames'
+
+interface SectionSeparatorProps {
+  mt?: number
+  mb?: number
+}
+
+export default function SectionSeparator({mt, mb}: SectionSeparatorProps) {
+  return <hr className={cn(`mt-${mt || 8} mb-${mb || 16} border-accent-2`)} />
 }

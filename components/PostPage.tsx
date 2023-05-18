@@ -19,7 +19,7 @@ export interface PostPageProps {
 
 export default function PostPage(props: PostPageProps) {
   const { preview, loading, post, settings } = props
-  const { title } = settings
+  const { title, description } = settings
 
   const slug = post?.slug
 
@@ -33,7 +33,7 @@ export default function PostPage(props: PostPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          <BlogHeader title={title} level={2} />
+          <BlogHeader title={title} description={description} level={2} />
           {preview && !post ? (
             <PostTitle>Loading…</PostTitle>
           ) : (

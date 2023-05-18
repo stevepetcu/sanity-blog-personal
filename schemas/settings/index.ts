@@ -22,6 +22,8 @@ export default defineType({
     }),
     defineField({
       name: 'description',
+      // TODO: Add a separate field for the blog's homepage meta description;
+      //  on posts pages, use the posts' summary.
       description:
         'Used both for the <meta> description tag for SEO, and the blog subheader.',
       title: 'Description',

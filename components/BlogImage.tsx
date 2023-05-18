@@ -18,21 +18,21 @@ interface BlogImageProps {
   width: number
   height: number
   alwaysShowCaption: boolean
+  captionPosition?: 'top' | 'bottom'
 }
 
 export default function BlogImage(props: BlogImageProps) {
   const pixelRatio = React.useContext(PixelRatioContext)
 
-  const { title, slug, image, width, height, priority, alwaysShowCaption } = props
+  const { title, slug, image, width, height, priority, alwaysShowCaption, captionPosition } = props
   const scaledWidth = pixelRatio * width
   const scaledHeight = pixelRatio * height
+  const captionVerticalPosition = !captionPosition || 'bottom' === captionPosition ? 'bottom-0' : 'top-0'
 
   const imageComponent =
-    <div
-      className={cn('relative')}
-    >
+    <div className={cn('relative')}>
       <Image
-        className={cn('h-auto w-full rounded-tr-lg')}
+        className={cn('h-auto w-full rounded')}
         width={scaledWidth}
         height={scaledHeight}
         alt={image.alt}
@@ -44,12 +44,14 @@ export default function BlogImage(props: BlogImageProps) {
     </div>
 
   const captionClassName = alwaysShowCaption ?
-    `text-xs absolute bottom-0 left-0 bg-white/75 p-1 ${styles.portableText}` :
-    `translate-y-10 transition-all ease-in-out group-hover:-translate-y-0 text-xs absolute bottom-0 left-0 bg-white/75 p-1 ${styles.portableText}`
+    `text-xs absolute ${captionVerticalPosition} left-0 bg-white/10 backdrop-blur-sm p-1 rounded ${styles.portableText}` :
+    `translate-y-10 transition-all ease-in-out group-hover:-translate-y-0 text-xs absolute ${captionVerticalPosition} left-0 bg-white/10 backdrop-blur-sm p-1 rounded ${styles.portableText}`
 
 
   return (
-    <div className={cn('group relative overflow-clip drop-shadow-sm', { 'transition-all duration-200 hover:drop-shadow-lg': slug })}>
+    <figure
+      className={cn('group relative overflow-clip drop-shadow-sm',
+        { 'transition-all duration-200 hover:drop-shadow-lg': slug })}>
       {slug ? (
         <Link href={`${POSTS_PAGE_PATH}/${slug}`} aria-label={title}>
           {imageComponent}
@@ -57,10 +59,10 @@ export default function BlogImage(props: BlogImageProps) {
       ) : (
         imageComponent
       )}
-      <div
+      <figcaption
         className={cn(captionClassName)}>
         <SanePortableText content={image.caption} />
-      </div>
-    </div>
+      </figcaption>
+    </figure>
   )
 }
