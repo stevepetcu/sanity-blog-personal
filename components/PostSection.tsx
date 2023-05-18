@@ -54,10 +54,10 @@ export default function PostSection({
         <h2 onClick={() => copyLinkToHeading(anchor.current)} id={anchor.current}
             className={cn(`${styles.sectionHeading} group`)}>
           {heading}
-          {!isLinkToHeadingCopied && <LinkIcon width='2.5rem' height='2.5rem'
-                                               className={cn('inline mb-1.5 group-hover:translate-x-1.5 transition-all ease-in-out text-sky-500')} />}
-          {isLinkToHeadingCopied && <CheckmarkIcon width='2.5rem' height='2.5rem'
-                                                   className={cn('inline mb-1.5 group-hover:translate-x-1.5 transition-all ease-in-out text-green-600')} />}
+          {!isLinkToHeadingCopied && <LinkIcon
+            className={cn(styles.sectionHeadingAnchorIcon)} />}
+          {isLinkToHeadingCopied && <CheckmarkIcon
+            className={cn(`${styles.sectionHeadingAnchorIcon} text-green-600`)} />}
         </h2>}
       <SanePortableText content={body} />
       {sectionImage &&

@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import { POSTS_PAGE_PATH } from '../pages/posts'
 import BlogImage from './BlogImage'
+import TagList from './TagList'
 
 export default function PostSummary({
                                       index,
@@ -48,15 +49,11 @@ export default function PostSummary({
           <div>
             <Date dateString={publishedAt} />
           </div>
-          {/* TODO: 1. extract a tags component */}
           {tags && tags.length &&
-            <div className={cn('flex')}>
+            <>
               <span className={cn('pb-1.5 hidden md:inline-flex flex-none')}>.</span>
-              {tags.map((tag) =>
-                <small className={cn('ml-1.5 pt-1.5 flex-none text-sky-500 font-semibold uppercase sm:pb-1 md:pb-0')} key={tag}>
-                  <a href={`${POSTS_PAGE_PATH}?tag=${tag}`}>#{tag}</a>
-                </small>)}
-            </div>
+              <TagList tags={tags} />
+            </>
           }
         </div>
         {/*  TODO: add list of tags */}

@@ -23,3 +23,7 @@
 .sectionHeading {
     @apply mb-4 mt-12 text-3xl leading-snug cursor-pointer;
 }
+
+.sectionHeadingAnchorIcon {
+    @apply text-4xl inline mb-1.5 group-hover:translate-x-1.5 transition-all ease-in-out text-sky-500
+}

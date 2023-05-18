@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { POSTS_PAGE_PATH } from '../pages/posts'
 import BlogImage from './BlogImage'
+import TagList from './TagList'
 
 export default function PostPin({
                                   title,
@@ -34,12 +35,7 @@ export default function PostPin({
           </Link>
         </h2>
         {tags && tags.length &&
-          <div className={cn('flex mt-10 items-center')}>
-            <small className={cn('flex-none mr-2.5')}><p>Tags:</p></small>
-            {tags.map((tag) =>
-              <small className={cn('flex-none mr-2.5 text-sky-500 font-semibold uppercase')} key={tag}><a href={`${POSTS_PAGE_PATH}?tag=${tag}`}>#{tag}</a>
-              </small>)}
-          </div>
+          <TagList tags={tags} />
         }
       </div>
       {/* TODO: add tags */}
