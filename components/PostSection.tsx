@@ -17,9 +17,6 @@ import BlogImage from './BlogImage'
 import styles from './PostSection.module.css'
 import SanePortableText from './SanePortableText'
 
-// TODO:
-//  1. Extract a reusable image component
-//  2. Add a button to copy the heading's anchor
 export default function PostSection({
                                       index,
                                       heading,

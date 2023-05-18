@@ -18,7 +18,7 @@ const postViewFields = groq`
   "updatedAt": _updatedAt,
 `
 
-const postPinnedFields = groq`
+const postPinFields = groq`
   _id,
   title,
   "slug": slug.current,
@@ -45,7 +45,7 @@ export const postSlugsQuery = groq`
 
 export const postPinsListQuery = groq`
 *[_type == "post" && publishedAt <= now()] | order(_updatedAt desc) {
-  ${postPinnedFields}
+  ${postPinFields}
 }
 `
 

@@ -13,9 +13,12 @@ export default function TagList({ tags, classNames }: TagListProps) {
   return (
     <div className={cn(`${classNames} flex space-x-2.5`)}>
       {tags.map((tag) =>
-        <small className={cn('flex-none text-sky-500 font-semibold uppercase mt-0.5')} key={tag}>
-          <Link href={`${POSTS_PAGE_PATH}?tag=${tag}`} aria-label={`List all posts tagged with "${tag}".`}>#{tag}</Link>
-        </small>)}
+        <Link key={tag} href={`${POSTS_PAGE_PATH}?tag=${tag}`} aria-label={`List all posts tagged with "${tag}".`}>
+          <small
+            className={cn('flex-none mt-1 bg-gray-200 rounded-full px-2.5 py-0.5 uppercase font-semibold text-gray-700 hover:text-sky-500 hover:bg-gray-100')}>
+            #{tag}
+          </small>
+        </Link>)}
     </div>
   )
 }
