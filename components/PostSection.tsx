@@ -46,7 +46,7 @@ export default function PostSection({
   }
 
   return (
-    <section className={cn(`mx-auto max-w-2xl px-5 ${styles.portableText}`)}>
+    <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
       {heading &&
         <h2 onClick={() => copyLinkToHeading(anchor.current)} id={anchor.current}
             className={cn(`${styles.sectionHeading} group`)}>
@@ -54,7 +54,7 @@ export default function PostSection({
           {!isLinkToHeadingCopied && <LinkIcon
             className={cn(styles.sectionHeadingAnchorIcon)} />}
           {isLinkToHeadingCopied && <CheckmarkIcon
-            className={cn(`${styles.sectionHeadingAnchorIcon} text-green-600`)} />}
+            className={cn(`${styles.sectionHeadingAnchorIcon}`)} />}
         </h2>}
       <SanePortableText content={body} />
       {sectionImage &&

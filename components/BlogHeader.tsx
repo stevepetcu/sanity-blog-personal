@@ -20,21 +20,21 @@ export default function BlogHeader({
       JSON.stringify(level) || typeof level
     }, only 1 or 2 are allowed`)
   }
-  let fontSize = 1 === level ? 'text-2xl' : 'text-xl'
+  let fontSize = 1 === level ? 'md:text-2xl' : 'md:text-xl'
   return (
     <>
       <header
-        className={cn('mt-5 flex flex-col items-center tracking-tight md:flex-row md:justify-between')}>
-        <h1 className={cn(`${fontSize} font-bold leading-tight tracking-tighter md:pr-8`)}>
+        className={cn('mt-5 flex flex-row items-center tracking-tight justify-between')}>
+        <h1 className={cn(`text-sm ${fontSize} font-bold leading-tight tracking-tighter md:pr-8`)}>
           <Link href={POSTS_PAGE_PATH} className='hover:underline'>
             {title}
           </Link>
         </h1>
-        <span className={cn(`${fontSize} text-right ${styles.portableText}`)}>
+        <span className={cn(`text-sm ${fontSize} text-right ${styles.portableText}`)}>
         <PortableText value={description} />
       </span>
       </header>
-      <SectionSeparator mt={2} mb={12}  />
+      <SectionSeparator mt={'mt-2'} mb={'mb-8'} />
     </>
   )
 }

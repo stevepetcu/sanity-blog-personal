@@ -354,7 +354,10 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [defineArrayMember({
+        type: 'string',
+        validation: (rule) => rule.required().min(3).max(10)
+      })],
       validation: (rule) => rule.max(5)
     }),
     defineField({

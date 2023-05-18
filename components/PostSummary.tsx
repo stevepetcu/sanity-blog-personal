@@ -45,13 +45,13 @@ export default function PostSummary({
           <div className={cn('flex-none')}>
             {author && <Avatar name={author.name} picture={author.picture} />}
           </div>
-          <span className={cn('pb-1.5 inline-flex flex-none')}>.</span>
-          <div className={cn('whitespace-nowrap')}>
+          <span className={cn('pb-1.5 inline-flex flex-none text-xs sm:text-sm md:text-base')}>.</span>
+          <div className={cn('whitespace-nowrap pb-1 sm:pb-0')}>
             <Date dateString={publishedAt} />
           </div>
           {tags && tags.length &&
             <>
-              <span className={cn('pb-1.5 inline-flex flex-none')}>.</span>
+              <span className={cn('pb-1.5 inline-flex flex-none text-xs sm:text-sm md:text-base')}>.</span>
               <TagList tags={tags} />
             </>
           }

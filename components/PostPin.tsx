@@ -13,7 +13,7 @@ export default function PostPin({
                                   tags
                                 }: Omit<PostPin, '_id'>) {
   return (
-    <div className={cn('group flex gap-x-3 shadow-sm rounded overflow-hidden')}>
+    <div className={cn('group flex gap-x-3 rounded overflow-hidden')}>
       {
         coverImage &&
         <div className='flex-none'>
@@ -29,13 +29,13 @@ export default function PostPin({
         </div>
       }
       <div className={cn('p-2')}>
-        <h3 className={cn('text-md leading-snug text-xl mb-3')}>
+        <h3 className={cn('text-sm sm:text-md leading-snug lg:text-xl mb-3')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>
         </h3>
-        <div className={cn('flex space-x-2.5')}>
-          {tags && tags.length && <TagList tags={tags} />}
+        <div className={cn('flex flex-wrap')}>
+          {tags && tags.length && <TagList tags={tags} itemClassNames={'mr-1.5'}/>}
         </div>
       </div>
     </div>
