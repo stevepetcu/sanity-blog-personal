@@ -14,11 +14,11 @@ import SectionSeparator from './SectionSeparator'
 
 export default function PostFootnotes({ content }) {
   return (
-    <footer>
+    <section>
       <SectionSeparator />
       <div className={`mx-auto max-w-2xl ${styles.portableText}`}>
         <PortableText value={content} />
       </div>
-    </footer>
+    </section>
   )
 }

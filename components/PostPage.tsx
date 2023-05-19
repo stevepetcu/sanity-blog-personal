@@ -8,6 +8,7 @@ import PostTitle from 'components/PostTitle'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 
+import BlogFooter from './BlogFooter'
 import PostFootnotes from './PostFootnotes'
 
 export interface PostPageProps {
@@ -56,6 +57,7 @@ export default function PostPage(props: PostPageProps) {
               </article>
             </>
           )}
+          <BlogFooter/>
         </Container>
       </Layout>
     </>

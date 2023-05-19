@@ -10,6 +10,7 @@ import type { PostPin, PostSummary, Settings } from 'lib/sanity.queries'
 import Link from 'next/link'
 
 import { POSTS_PAGE_PATH } from '../pages/posts'
+import BlogFooter from './BlogFooter'
 import PostSummaries from './PostSummaries'
 import SectionSeparator from './SectionSeparator'
 
@@ -43,6 +44,7 @@ export default function IndexPage(props: IndexPageProps) {
           )}
           <SectionSeparator />
           {postSummaries.length > 0 && <PostSummaries summaries={postSummaries} />}
+          <BlogFooter/>
         </Container>
       </Layout>
     </>
