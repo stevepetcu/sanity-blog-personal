@@ -44,14 +44,14 @@ export default function PostSummary({
           <div className={cn('flex-shrink')}>
             {author && <Avatar name={author.name} picture={author.picture} />}
           </div>
-          <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-4 sm:mt-3 md:mt-2')}>.</span>
-          <div className={cn('whitespace-nowrap sm:pb-0 pt-1 mt-2.5 md:mt-2')}>
+          <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-4 sm:mt-2.5 md:mt-2')}>.</span>
+          <div className={cn('whitespace-nowrap sm:pb-0 mt-3.5 sm:mt-3')}>
             <Date dateString={publishedAt} />
           </div>
           {tags && tags.length &&
             <>
-              <span className={cn('pb-1.5 inline-flex flex-none text-xs sm:text-sm md:text-base mt-4 sm:mt-3 md:mt-2')}>.</span>
-              <TagList tags={tags} itemClassNames={'mt-3.5 md:mt-3'}/>
+              <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-4 sm:mt-2.5 md:mt-2')}>.</span>
+              <TagList tags={tags} itemClassNames={'mt-5 sm:mt-3.5 md:mt-3 text-xs sm:text-sm md:text-base'}/>
             </>
           }
         </div>

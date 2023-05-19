@@ -44,7 +44,7 @@ export default function PostPin({
           </Link>
         </h3>
         <div className={cn('flex flex-wrap')}>
-          {tags && tags.length && <TagList tags={tags} itemClassNames={'mr-1.5 mb-1.5'} />}
+          {tags && tags.length && <TagList tags={tags} itemClassNames={'mr-1.5 mb-1.5 text-xs sm:text-sm lg:text-base'} />}
         </div>
       </div>
     </div>
