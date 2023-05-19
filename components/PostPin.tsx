@@ -38,7 +38,7 @@ export default function PostPin({
         </div>
       }
       <div className={cn('p-2')}>
-        <h3 className={cn('leading-snug text-sm sm:text-base mb-3 font-medium text-slate-700')}>
+        <h3 className={cn('leading-snug text-lg sm:text-base mb-3 font-medium text-slate-700')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>
