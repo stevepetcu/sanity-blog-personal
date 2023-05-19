@@ -9,9 +9,11 @@ export default function PostPins({ pins }: { pins: PostPin[] }) {
     <section>
       <h2 className={cn('text-md leading-snug mb-5 font-semibold')}>Pinned posts</h2>
       <div className={cn('grid grid-cols-1 gap-x-3.5 gap-y-5 sm:grid-cols-2 lg:gap-x-5 lg:grid-cols-3')}>
-        {pins.map((pin) => (
+        {pins.map((pin, index) => (
           <PostPinComponent
             key={pin._id}
+            index={index + 1}
+            total={pins.length}
             title={pin.title}
             slug={pin.slug}
             coverImage={pin.coverImage}

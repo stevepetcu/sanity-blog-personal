@@ -58,8 +58,7 @@ export default function PostSection({
         </h2>}
       <SanePortableText content={body} />
       {sectionImage &&
-        <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={320} priority={index <= 1}
-                   alwaysShowCaption={true} />
+        <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={320} priority={index <= 1} />
       }
     </section>
   )

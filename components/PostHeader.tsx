@@ -23,7 +23,7 @@ export default function PostHeader(
         {
           coverImage &&
           <div className='relative sm:mx-0 z-10 rounded'>
-            <BlogImage title={title} image={coverImage} width={1280} height={720} priority alwaysShowCaption={true} captionPosition={'top'} />
+            <BlogImage title={title} image={coverImage} width={1280} height={720} priority captionPosition={'top'} />
           </div>
         }
       </div>

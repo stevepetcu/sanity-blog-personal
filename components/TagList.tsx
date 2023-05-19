@@ -16,9 +16,9 @@ export default function TagList({ tags, itemClassNames }: TagListProps) {
         <Link key={tag} href={`${POSTS_PAGE_PATH}?tag=${tag}`}
               aria-label={`List all posts tagged with "${tag}".`} className={cn(itemClassNames)}>
           <small
-            className={cn('flex-initial mt-1 bg-gray-200 rounded-xl px-2.5 py-0.5 ' +
-              'font-semibold text-gray-700 lowercase text-xs sm:uppercase sm:text-sm ' +
-              'hover:text-sky-500 hover:bg-gray-100 whitespace-nowrap')}>
+            className={cn('flex-initial mt-1 bg-slate-200 rounded-xl px-2.5 py-0.5 ' +
+              'font-semibold text-slate-700 lowercase text-xs sm:uppercase sm:text-sm ' +
+              'hover:text-sky-500 hover:bg-slate-100 whitespace-nowrap')}>
             #{tag}
           </small>
         </Link>)}

@@ -17,14 +17,13 @@ interface BlogImageProps {
   priority?: boolean
   width: number
   height: number
-  alwaysShowCaption: boolean
   captionPosition?: 'top' | 'bottom'
 }
 
 export default function BlogImage(props: BlogImageProps) {
   const pixelRatio = React.useContext(PixelRatioContext)
 
-  const { title, slug, image, width, height, priority, alwaysShowCaption, captionPosition } = props
+  const { title, slug, image, width, height, priority, captionPosition } = props
   const scaledWidth = pixelRatio * width
   const scaledHeight = pixelRatio * height
   const captionVerticalPosition = !captionPosition || 'bottom' === captionPosition ? 'bottom-0' : 'top-0'
@@ -43,11 +42,6 @@ export default function BlogImage(props: BlogImageProps) {
       />
     </div>
 
-  const captionClassName = alwaysShowCaption ?
-    `text-xs absolute ${captionVerticalPosition} left-0 bg-white/10 backdrop-blur-sm p-1 rounded ${styles.portableText}` :
-    `translate-y-10 transition-all ease-in-out group-hover:-translate-y-0 text-xs absolute ${captionVerticalPosition} left-0 bg-white/10 backdrop-blur-sm p-1 rounded ${styles.portableText}`
-
-
   return (
     <figure
       className={cn('group relative overflow-clip drop-shadow-sm',
@@ -60,7 +54,7 @@ export default function BlogImage(props: BlogImageProps) {
         imageComponent
       )}
       <figcaption
-        className={cn(captionClassName)}>
+        className={cn(`text-xs absolute ${captionVerticalPosition} left-0 bg-white/10 backdrop-blur-sm p-1 rounded ${styles.portableText}`)}>
         <SanePortableText content={image.caption} />
       </figcaption>
     </figure>

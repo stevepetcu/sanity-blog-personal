@@ -30,7 +30,6 @@ export default function PostSummary({
             priority={index <= 1}
             width={480}
             height={360}
-            alwaysShowCaption={true}
           />
         </div>
       }
@@ -41,22 +40,21 @@ export default function PostSummary({
           </Link>
         </h3>
         {summary && <p className={cn('mb-4 text-lg leading-relaxed')}>{summary}</p>}
-        <div className={cn('flex flex-wrap items-center space-x-2.5')}>
-          <div className={cn('flex-none')}>
+        <div className={cn('flex flex-wrap space-x-1.5 sm:space-x-2 lg:space-x-2.5')}>
+          <div className={cn('flex-shrink')}>
             {author && <Avatar name={author.name} picture={author.picture} />}
           </div>
-          <span className={cn('pb-1.5 inline-flex flex-none text-xs sm:text-sm md:text-base')}>.</span>
-          <div className={cn('whitespace-nowrap pb-1 sm:pb-0')}>
+          <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-4 sm:mt-3 md:mt-2')}>.</span>
+          <div className={cn('whitespace-nowrap sm:pb-0 pt-1 mt-2.5 md:mt-2')}>
             <Date dateString={publishedAt} />
           </div>
           {tags && tags.length &&
             <>
-              <span className={cn('pb-1.5 inline-flex flex-none text-xs sm:text-sm md:text-base')}>.</span>
-              <TagList tags={tags} />
+              <span className={cn('pb-1.5 inline-flex flex-none text-xs sm:text-sm md:text-base mt-4 sm:mt-3 md:mt-2')}>.</span>
+              <TagList tags={tags} itemClassNames={'mt-3.5 md:mt-3'}/>
             </>
           }
         </div>
-        {/*  TODO: add list of tags */}
       </div>
     </div>
   )
