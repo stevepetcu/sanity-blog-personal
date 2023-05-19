@@ -43,6 +43,7 @@ export default function PostPage(props: PostPageProps) {
                   title={post.title}
                   slug={post.slug}
                   coverImage={post.coverImage}
+                  tags={post.tags}
                   publishedAt={post.publishedAt}
                   author={post.author}
                 />

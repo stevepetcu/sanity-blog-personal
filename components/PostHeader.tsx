@@ -5,10 +5,14 @@ import Date from 'components/PostDate'
 import PostTitle from 'components/PostTitle'
 import type { Post } from 'lib/sanity.queries'
 
+import TagList from './TagList'
+
 export default function PostHeader(
-  props: Pick<Post, 'title' | 'coverImage' | 'publishedAt' | 'author' | 'slug'>
+  props: Pick<Post, 'title' | 'coverImage' | 'tags' | 'publishedAt' | 'author' | 'slug'>
 ) {
-  const { title, coverImage, publishedAt, author, slug } = props
+  const { title, coverImage, tags, publishedAt, author, slug } = props
+
+  console.log(tags)
 
   const postTitleClasses = coverImage ? 'absolute' : 'static'
 
@@ -27,14 +31,22 @@ export default function PostHeader(
           </div>
         }
       </div>
-      <div className={cn('flex items-center mx-auto max-w-2xl')}>
-        <div className={cn('flex-none mr-2.5')}>
+      <div className={cn('flex flex-wrap items-center mx-auto max-w-2xl')}>
+        <div className={cn('flex-none')}>
           {author && <Avatar name={author.name} picture={author.picture} />}
         </div>
-        <span className={cn('flex-none mr-2.5 pb-4 sm:pb-3 text-2xl')}>.</span>
+        <span className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
         <div className={cn('text-lg flex-none pb-1 sm:pb-0')}>
           <Date dateString={publishedAt} />
         </div>
+        {tags && tags.length &&
+          <>
+            <span className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
+            <div className={cn('flex flex-wrap ml-2 sm:ml-0')}>
+              <TagList tags={tags} itemClassNames={'mt-1 mr-1 lg:mr-2.5 text-xs sm:text-sm'} />
+            </div>
+          </>
+        }
       </div>
     </>
   )

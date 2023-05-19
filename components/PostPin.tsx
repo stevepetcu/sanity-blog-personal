@@ -24,8 +24,8 @@ export default function PostPin({
             title={title}
             image={coverImage}
             priority={true}
-            width={384}
-            height={99}
+            width={420}
+            height={150}
           />
           <span className={cn('absolute top-1 left-2 font-bold text-white/75 text-sm lg:text-lg')}>
             {index}/{total}
@@ -43,10 +43,10 @@ export default function PostPin({
             {title}
           </Link>
         </h3>
-        <div className={cn('flex flex-wrap')}>
-          {tags && tags.length &&
-            <TagList tags={tags} itemClassNames={'mr-1.5 mb-1.5 text-xs sm:text-sm lg:text-base'} />}
-        </div>
+        {tags && tags.length &&
+          <div className={cn('flex flex-wrap')}>
+            <TagList tags={tags} itemClassNames={'mr-1.5 mb-1.5 text-xs sm:text-sm lg:text-base'} />
+          </div>}
       </div>
     </div>
   )
