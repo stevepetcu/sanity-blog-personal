@@ -14,7 +14,7 @@ const PreviewPostPage = lazy(() => import('components/PreviewPostPage'))
 
 interface PageProps {
   post: Post
-  settings?: Settings
+  settings: Settings
   preview: boolean
   token: string | null
 }

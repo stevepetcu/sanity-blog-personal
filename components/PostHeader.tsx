@@ -11,9 +11,6 @@ export default function PostHeader(
   props: Pick<Post, 'title' | 'coverImage' | 'tags' | 'publishedAt' | 'author' | 'slug'>
 ) {
   const { title, coverImage, tags, publishedAt, author, slug } = props
-
-  console.log(tags)
-
   const postTitleClasses = coverImage ? 'absolute' : 'static'
 
   return (
