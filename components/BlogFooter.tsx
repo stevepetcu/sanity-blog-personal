@@ -21,7 +21,7 @@ export default function BlogFooter({ admin }: Pick<Settings, 'admin'>) {
             {
               gitHubHandle &&
               (
-                <Link href={`https://github.com/${gitHubHandle.name}`} target='_blank'
+                <Link href={`https://github.com/${gitHubHandle.name}`} target='_blank' rel='noopener'
                       className='text-slate-600 hover:text-slate-900 shrink ml-2.5'>
                   <FontAwesomeIcon
                     icon={faGithubSquare}
@@ -33,7 +33,7 @@ export default function BlogFooter({ admin }: Pick<Settings, 'admin'>) {
             {
               linkedInHandle &&
               (
-                <Link href={`https://linkedin.com/in/${linkedInHandle.name}`} target='_blank'
+                <Link href={`https://linkedin.com/in/${linkedInHandle.name}`} target='_blank' rel='noopener'
                       className='text-slate-600 hover:text-slate-900 shrink ml-2.5'>
                   <FontAwesomeIcon
                     icon={faLinkedin}
@@ -44,7 +44,6 @@ export default function BlogFooter({ admin }: Pick<Settings, 'admin'>) {
             }
           </div>
         </div>
-      {/*</div>*/}
     </footer>
   )
 }
