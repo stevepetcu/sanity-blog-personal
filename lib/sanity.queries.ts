@@ -37,15 +37,17 @@ const postSummaryFields = groq`
   publishedAt,
 `
 
-const authorFullDataFields = groq`
+const settingsFullDataFields = groq`
   _id,
-  firstName,
-  lastName,
-  picture,
-  handles
+  title,
+  description,
+  ogImage,
+  "admin": admin->{firstName, lastName, handles}
 `
 
-export const settingsQuery = groq`*[_type == "settings"][0]`
+export const settingsQuery = groq`*[_type == "settings"][0] {
+  ${settingsFullDataFields}
+}`
 
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current) && publishedAt <= now()][].slug.current
@@ -86,12 +88,6 @@ export const postBySlugQuery = groq`
 }
 `
 
-export const fullAuthorDataByLastName = (lastName: string) => groq`
-*[_type == "author" && lastName == ${lastName}][0] {
-  ${authorFullDataFields}
-}
-`
-
 export interface BlogImage {
   caption: any // blocks
   alt: string
@@ -114,7 +110,10 @@ export interface Author {
     crop?: Crop
     hotspot?: Hotspot
   },
-  handles: string[]
+  handles?: {
+    website: string
+    name: string
+  }[]
 }
 
 export interface PostSection {
@@ -159,8 +158,9 @@ export interface PostSummary {
 }
 
 export interface Settings {
-  title?: string
-  description?: any[]
+  title: string
+  description: any[]
+  admin: Author
   ogImage?: {
     title?: string
   }

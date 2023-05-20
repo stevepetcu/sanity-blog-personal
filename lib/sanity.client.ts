@@ -17,10 +17,11 @@ const client = projectId
   : null
 
 export async function getSettings(): Promise<Settings> {
-  if (client) {
-    return (await client.fetch(settingsQuery)) || {}
+  if (!client) {
+    throw Error('Project id is missing.')
   }
-  return {}
+
+  return (await client.fetch(settingsQuery))
 }
 
 export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {

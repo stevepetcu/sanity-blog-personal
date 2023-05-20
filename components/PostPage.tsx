@@ -57,7 +57,7 @@ export default function PostPage(props: PostPageProps) {
               </article>
             </>
           )}
-          <BlogFooter/>
+          <BlogFooter admin={settings.admin}/>
         </Container>
       </Layout>
     </>

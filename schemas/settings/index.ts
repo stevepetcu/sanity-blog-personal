@@ -1,6 +1,7 @@
 import { CogIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
+import authorType from '../author'
 import OpenGraphInput from './OpenGraphInput'
 
 export default defineType({
@@ -55,6 +56,13 @@ export default defineType({
         }),
       ],
       validation: (rule) => rule.max(155).required(),
+    }),
+    defineField({
+      name: 'admin',
+      title: 'Admin',
+      type: 'reference',
+      to: [{ type: authorType.name }],
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: 'ogImage',

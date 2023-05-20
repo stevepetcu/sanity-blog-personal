@@ -56,7 +56,7 @@ export default defineType({
           fields: [
             {
               type: 'string',
-              name: 'handleWebsite',
+              name: 'website',
               title: 'Website',
               options: {
                 list: AuthorLinkedHandleWebsiteOptions,
@@ -65,7 +65,7 @@ export default defineType({
             },
             {
               type: 'string',
-              name: 'handleName',
+              name: 'name',
               title: 'Handle',
               validation: (rule) => rule.required()
             }

@@ -37,14 +37,14 @@ export default function IndexPage(props: IndexPageProps) {
           {showPins && postPins.length > 0 && <PostPins pins={postPins} />}
           {!showPins && (
             <Link href={`${POSTS_PAGE_PATH}`}
-              className="inline-flex items-center">
-              <ArrowLeftIcon className={cn('text-3xl')}/>
+                  className='inline-flex items-center'>
+              <ArrowLeftIcon className={cn('text-3xl')} />
               <span>Back to all the posts</span>
             </Link>
           )}
           <SectionSeparator />
           {postSummaries.length > 0 && <PostSummaries summaries={postSummaries} />}
-          <BlogFooter/>
+          <BlogFooter admin={settings.admin} />
         </Container>
       </Layout>
     </>
