@@ -18,6 +18,7 @@ export default function PostSummary({
                                       author,
                                       publishedAt
                                     }: Omit<PostSummary & { index: number }, '_id'>) {
+
   return (
     <div className={cn('flex flex-col-reverse lg:flex-row md:gap-x-8 lg:gap-x-16')}>
       <div className={'grow basis-2/3'}>
@@ -26,7 +27,7 @@ export default function PostSummary({
             {title}
           </Link>
         </h3>
-        {summary && <p className={cn('mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed line-clamp-3 text-left md:text-justify')}>{summary}</p>}
+        {summary && <p className={cn(`mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed text-left md:text-justify line-clamp-2`)}>{summary}</p>}
         <div className={cn('flex flex-wrap space-x-1.5 sm:space-x-2 lg:space-x-2.5')}>
           <div className={cn('flex-shrink')}>
             {author && <Avatar firstName={author.firstName} picture={author.picture} />}
@@ -52,7 +53,7 @@ export default function PostSummary({
             image={coverImage}
             priority={index <= 1}
             width={480}
-            height={360}
+            height={270}
           />
         </div>
       }

@@ -15,6 +15,7 @@ export default function PostPins({ pins }: { pins: PostPin[] }) {
             index={index + 1}
             total={pins.length}
             title={pin.title}
+            summary={pin.summary}
             slug={pin.slug}
             coverImage={pin.coverImage}
             tags={pin.tags}

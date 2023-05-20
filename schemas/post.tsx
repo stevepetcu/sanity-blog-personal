@@ -305,9 +305,7 @@ export default defineType({
                 options: {
                   list: [
                     { title: 'Top', value: 'top' },
-                    { title: 'Right', value: 'right' },
-                    { title: 'Bottom', value: 'bottom' },
-                    { title: 'Left', value: 'left' }
+                    { title: 'Bottom', value: 'bottom' }
                   ],
                   layout: 'radio',
                   direction: 'horizontal'

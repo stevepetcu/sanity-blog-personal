@@ -1,15 +1,5 @@
-/**
- * This component uses Portable Text to render a post body.
- *
- * You can learn more about Portable Text on:
- * https://www.sanity.io/docs/block-content
- * https://github.com/portabletext/react-portabletext
- * https://portabletext.org/
- *
- */
 import { CheckmarkIcon, LinkIcon } from '@sanity/icons'
 import cn from 'classnames'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { PostSection } from '../lib/sanity.queries'
@@ -25,7 +15,6 @@ export default function PostSection({
                                       sectionImage
                                     }: Omit<PostSection, '_key'> & { index: number }) {
   const [isLinkToHeadingCopied, setIsLinkToHeadingCopied] = useState(false)
-  const location = useRouter()
 
   const copyLinkToHeading = async (anchor: string) => {
     // We could generate the location statically, but we'd need to mess
@@ -45,21 +34,40 @@ export default function PostSection({
     }
   }
 
-  return (
-    <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
-      {heading &&
-        <h2 onClick={() => copyLinkToHeading(anchor.current)} id={anchor.current}
-            className={cn(`${styles.sectionHeading} group`)}>
-          {heading}
-          {!isLinkToHeadingCopied && <LinkIcon
-            className={cn(styles.sectionHeadingAnchorIcon)} />}
-          {isLinkToHeadingCopied && <CheckmarkIcon
-            className={cn(`${styles.sectionHeadingAnchorIcon}`)} />}
-        </h2>}
-      <SanePortableText content={body} />
-      {sectionImage &&
-        <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={320} priority={index <= 1} />
-      }
-    </section>
-  )
+  const imagePlacement = sectionImage ? sectionImage.placement || 'none' : 'none'
+  const sectionHeading = <>
+    {heading &&
+      <h2 onClick={() => copyLinkToHeading(anchor.current)} id={anchor.current}
+          className={cn(`${styles.sectionHeading} group`)}>
+        {heading}
+        {!isLinkToHeadingCopied && <LinkIcon
+          className={cn(styles.sectionHeadingAnchorIcon)} />}
+        {isLinkToHeadingCopied && <CheckmarkIcon
+          className={cn(`${styles.sectionHeadingAnchorIcon}`)} />}
+      </h2>}
+  </>
+  const sectionBody = <>
+    <SanePortableText content={body} />
+  </>
+
+  switch (imagePlacement) {
+    // TODO: extract these 'top' and 'bottom' values as constants.
+    case 'top':
+      return (<section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
+        {sectionHeading}
+        <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={270} priority={index <= 1} />
+        {sectionBody}
+      </section>)
+    case 'bottom':
+      return (<section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
+        {sectionHeading}
+        {sectionBody}
+        <BlogImage title={sectionImage.alt} image={sectionImage} width={480} height={270} priority={index <= 1} />
+      </section>)
+    default:
+      return (<section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
+        {sectionHeading}
+        {sectionBody}
+      </section>)
+  }
 }

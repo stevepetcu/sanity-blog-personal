@@ -23,6 +23,7 @@ const postPinFields = groq`
   title,
   "slug": slug.current,
   coverImage,
+  summary,
   tags,
 `
 
@@ -91,7 +92,14 @@ export const postBySlugQuery = groq`
 export interface BlogImage {
   caption: any // blocks
   alt: string
-  placement: 'top' | 'right' | 'bottom' | 'left'
+  // Reminder: "left" and "right" don't look great on my content width, but
+  // the biggest issue is that the image height for an aspect ratio of 9:16
+  // looks huge on smaller devices, where the image is placed above/below
+  // the text. To fix this, I could try sending the device information over
+  // to the server to generate the image size based on that, but it would be
+  // complicated and still not work in a response way (e.g., flipping the
+  // device on its side). Not worth it for what it looks like anyway.
+  placement: 'top' | 'bottom'
   asset?: {
     _ref: string
   }
@@ -143,6 +151,7 @@ export interface PostPin {
   title: string
   slug: string
   coverImage?: BlogImage
+  summary: string
   tags
 }
 

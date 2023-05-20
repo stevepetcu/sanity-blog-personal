@@ -10,6 +10,7 @@ export default function PostPin({
                                   title,
                                   slug,
                                   coverImage,
+                                  summary,
                                   tags,
                                   index,
                                   total
@@ -18,31 +19,33 @@ export default function PostPin({
     <div className={cn('group rounded')}>
       {
         coverImage &&
-        <div className={cn('relative')}>
+        <div className={cn('relative mb-2')}>
           <BlogImage
             slug={slug}
             title={title}
             image={coverImage}
             priority={true}
             width={420}
-            height={150}
+            height={140}
           />
-          <span className={cn('absolute top-1 left-2 font-bold text-white/75 text-sm lg:text-lg')}>
+          <span className={cn('absolute top-1 left-2 font-bold text-white/75 text-xl sm:text-sm lg:text-lg')}>
             {index}/{total}
           </span>
         </div>
       }
       {!coverImage &&
-        <div>
-          <span className={cn('ml-2 font-bold text-slate-400 text-sm lg:text-lg')}>{index}/{total}</span>
+        <div className={cn('pt-0 md:pt-0.5 lg:pt-1')}>
+          <span className={cn('ml-2 font-bold text-slate-400 text-lg sm:text-base lg:text-lg')}>{index}/{total}</span>
         </div>
       }
       <div className={cn('p-2')}>
-        <h3 className={cn('leading-snug text-lg sm:text-base mb-3 font-medium text-slate-700')}>
+        <h3 className={cn('leading-snug text-lg mb-3 font-medium text-slate-700')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>
         </h3>
+        {!coverImage &&
+          <p className={cn(`mb-3 text-base text-slate-500 leading-relaxed line-clamp-3`)}>{summary}</p>}
         {tags && tags.length &&
           <div className={cn('flex flex-wrap')}>
             <TagList tags={tags} itemClassNames={'mr-1.5 mb-1.5 text-xs sm:text-sm lg:text-base'} />
