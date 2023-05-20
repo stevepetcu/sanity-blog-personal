@@ -72,7 +72,7 @@ export default defineType({
           ]
         }
       )],
-      validation: (rule) => rule.unique(),
+      validation: (rule) => rule.unique().error('Cannot link multiple handles for the same website.'),
       initialValue: []
     }),
   ]
