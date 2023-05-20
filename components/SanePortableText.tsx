@@ -1,6 +1,6 @@
 import { PortableText } from '@portabletext/react'
-import { LaunchIcon } from '@sanity/icons'
 import cn from 'classnames'
+import Link from 'next/link'
 import React from 'react'
 
 // TODO: TS things
@@ -10,11 +10,11 @@ const components = {
     link: ({ value, children }) => {
       const { blank, href } = value
       return blank || undefined === blank ?
-        <a href={href} target='_blank' rel='noopener' className={cn('text-sky-500 after:content-["↗"]')}
+        <Link href={href} target='_blank' rel='noopener' className={cn('text-sky-500 after:content-["↗"]')}
            aria-label={`Visit link "${children}". Link opens in a new tab.`}>
           {children}
-        </a>
-        : <a href={href} className={cn('text-sky-500')} aria-label={`Visit link "${children}". Link opens in the same tab.`}>{children}</a>
+        </Link>
+        : <Link href={href} className={cn('text-sky-500')} aria-label={`Visit link "${children}". Link opens in the same tab.`}>{children}</Link>
     },
     underline: ({ children }) => {
       return <span className={'underline decoration-sky-500 decoration-2'}>{children}</span>
