@@ -64,10 +64,10 @@ export default defineType({
                   name: 'link',
                   fields: [
                     {
-                      type: 'string',
+                      type: 'url',
                       name: 'href',
                       title: 'URL',
-                      validation: (rule) => rule.required()
+                      validation: (rule) => rule.required().uri({ scheme: 'https' })
                     },
                     {
                       title: 'Open in a new tab',
@@ -169,10 +169,10 @@ export default defineType({
                     name: 'link',
                     fields: [
                       {
-                        type: 'string',
+                        type: 'url',
                         name: 'href',
                         title: 'URL',
-                        validation: (rule) => rule.required()
+                        validation: (rule) => rule.required().uri({ scheme: 'https' })
                       },
                       {
                         title: 'Open in a new tab',
@@ -190,10 +190,13 @@ export default defineType({
                     title: 'Underline',
                     value: 'underline',
                     icon: () => (
-                      <span style={{textDecoration: 'underline', textDecorationColor: 'lightblue'}}>U</span>
+                      <span style={{ textDecoration: 'underline', textDecorationColor: 'lightblue' }}>U</span>
                     ),
                     component: props => (
-                      <span style={{textDecoration: 'underline', textDecorationColor: 'lightblue'}}>{props.children}</span>
+                      <span style={{
+                        textDecoration: 'underline',
+                        textDecorationColor: 'lightblue'
+                      }}>{props.children}</span>
                     )
                   },
                   { title: 'Code', value: 'code' },
@@ -211,13 +214,13 @@ export default defineType({
                     title: 'Superscript',
                     value: 'sup',
                     icon: () => (<>T<sup>S</sup></>),
-                    component: props => <sup>{ props.children }</sup>
+                    component: props => <sup>{props.children}</sup>
                   },
                   {
                     title: 'Subscript',
                     value: 'sub',
                     icon: () => (<>T<sub>S</sub></>),
-                    component: props => <sub>{ props.children }</sub>
+                    component: props => <sub>{props.children}</sub>
                   }
                 ]
               }
@@ -244,10 +247,10 @@ export default defineType({
                         name: 'link',
                         fields: [
                           {
-                            type: 'string',
+                            type: 'url',
                             name: 'href',
                             title: 'URL',
-                            validation: (rule) => rule.required()
+                            validation: (rule) => rule.required().uri({ scheme: 'https' })
                           },
                           {
                             title: 'Open in a new tab',
