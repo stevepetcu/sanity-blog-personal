@@ -13,7 +13,7 @@ const postViewFields = groq`
   content,
   footnotes,
   tags,
-  "author": author->{name, picture},
+  "author": author->{firstName, picture},
   publishedAt,
   "updatedAt": _updatedAt,
 `
@@ -33,8 +33,16 @@ const postSummaryFields = groq`
   summary,
   coverImage,
   tags,
-  "author": author->{name, picture},
+  "author": author->{firstName, picture},
   publishedAt,
+`
+
+const authorFullDataFields = groq`
+  _id,
+  firstName,
+  lastName,
+  picture,
+  handles
 `
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
@@ -50,7 +58,7 @@ export const postPinsListQuery = groq`
 `
 
 export const postSummariesListQuery = groq`
-*[_type == "post" && publishedAt <= now()] | order(publishedAt desc) [0...10] {
+*[_type == "post" && publishedAt <= now()] | order(publishedAt desc) [0...50] {
   ${postSummaryFields}
 }
 `
@@ -78,6 +86,12 @@ export const postBySlugQuery = groq`
 }
 `
 
+export const fullAuthorDataByLastName = (lastName: string) => groq`
+*[_type == "author" && lastName == ${lastName}][0] {
+  ${authorFullDataFields}
+}
+`
+
 export interface BlogImage {
   caption: any // blocks
   alt: string
@@ -90,7 +104,8 @@ export interface BlogImage {
 }
 
 export interface Author {
-  name: string
+  firstName: string
+  lastName?: string
   picture: {
     name: string
     asset: {
@@ -98,7 +113,8 @@ export interface Author {
     },
     crop?: Crop
     hotspot?: Hotspot
-  }
+  },
+  handles: string[]
 }
 
 export interface PostSection {

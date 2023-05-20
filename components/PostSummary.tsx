@@ -29,7 +29,7 @@ export default function PostSummary({
         {summary && <p className={cn('mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed line-clamp-3 text-left md:text-justify')}>{summary}</p>}
         <div className={cn('flex flex-wrap space-x-1.5 sm:space-x-2 lg:space-x-2.5')}>
           <div className={cn('flex-shrink')}>
-            {author && <Avatar name={author.name} picture={author.picture} />}
+            {author && <Avatar firstName={author.firstName} picture={author.picture} />}
           </div>
           <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-2.5 sm:mt-1 md:mt-0')}>.</span>
           <div className={cn('whitespace-nowrap mt-2 sm:mt-1.5 md:mt-1')}>

@@ -33,7 +33,7 @@ export default function PostHeader(
       </div>
       <div className={cn('flex flex-wrap items-center mx-auto max-w-2xl')}>
         <div className={cn('flex-none')}>
-          {author && <Avatar name={author.name} picture={author.picture} />}
+          {author && <Avatar firstName={author.firstName} picture={author.picture} />}
         </div>
         <span className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
         <div className={cn('text-lg flex-none pb-1 sm:pb-0')}>

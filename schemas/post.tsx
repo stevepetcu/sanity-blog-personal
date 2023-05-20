@@ -390,7 +390,7 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
+      author: 'author.firstName',
       date: 'publishedAt',
       media: 'coverImage'
     },
