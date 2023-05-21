@@ -25,7 +25,7 @@ export interface IndexPageProps {
 
 export default function IndexPage(props: IndexPageProps) {
   const { preview, loading, postPins, postSummaries, settings, showPins } = props
-  const { title, description } = settings
+  const { title, description, admin } = settings
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          <BlogHeader title={title} description={description} level={1} />
+          <BlogHeader title={title} description={description} admin={admin} level={1} />
           {showPins && postPins.length > 0 && <PostPins pins={postPins} />}
           {!showPins && (
             <Link href={`${POSTS_PAGE_PATH}`}

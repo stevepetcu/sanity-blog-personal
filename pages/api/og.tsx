@@ -15,6 +15,7 @@ export default async function og(req: NextRequest, res: NextResponse) {
   )
   const { searchParams } = new URL(req.url)
 
+  // TODO: why would I want to get this from the query params? Maybe to dynamically generate this image?
   let title = searchParams.get('title')
   if (!title) {
     const client = createClient({
