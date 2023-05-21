@@ -35,8 +35,8 @@ export default function AuthorLinks({ admin, linkClassNames, placement }: Pick<S
           })} />
       </Link>
       <Link href='#' className={cn(`group shrink ml-5 ${linkClassNames}`)}
-            title={`${admin.firstName}'s code experiments`}
-            aria-label={`${admin.firstName}'s code experiments`}>
+            title={`${admin.firstName}'s live code experiments`}
+            aria-label={`${admin.firstName}'s live code experiments`}>
         <FontAwesomeIcon
           icon={faFlaskVial}
           className={cn('w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 rotate-12 hover:rotate-0 transition-all ease-in-out', {
