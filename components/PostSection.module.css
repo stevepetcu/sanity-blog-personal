@@ -2,28 +2,77 @@
     @apply text-lg leading-relaxed;
 }
 
-.portableText p,
-.portableText ul,
-.portableText ol,
-.portableText blockquote {
-    @apply my-6;
+.portableText h2 {
+    @apply mb-4 mt-12 text-xl md:text-3xl leading-snug cursor-pointer;
 }
 
 .portableText h3 {
-    @apply mb-4 mt-8 text-2xl leading-snug;
+    @apply mb-4 mt-8 text-base md:text-2xl leading-snug;
 }
 
 .portableText a {
     @apply text-sky-500;
 }
+
 .portableText a:hover {
     @apply text-sky-700 underline;
 }
 
-.sectionHeading {
-    @apply mb-4 mt-12 text-3xl leading-snug cursor-pointer;
+.sectionBody p,
+.sectionBody blockquote {
+    @apply my-6 text-base md:text-xl;
 }
 
-.sectionHeadingAnchorIcon {
-    @apply text-4xl inline mb-1.5 group-hover:translate-x-1.5 transition-all ease-in-out text-sky-500
+.sectionBody ul {
+    @apply list-disc list-inside text-base md:text-xl
+}
+
+.sectionBody > ul {
+    @apply my-6
+}
+
+.sectionBody ul ul {
+    list-style: circle;
+    @apply list-inside ml-5
+}
+
+.sectionBody ul ul ul {
+    list-style: square;
+    @apply list-inside ml-5
+}
+
+.sectionBody ul ul ul ul {
+    list-style: initial;
+    @apply list-inside ml-5
+}
+
+.sectionBody > ol {
+    @apply my-6
+}
+
+.sectionBody ol {
+    @apply list-decimal list-inside text-base md:text-xl
+}
+
+.sectionBody ol ol {
+    list-style: lower-alpha;
+    @apply list-inside ml-5
+}
+
+.sectionBody ol ol ol {
+    list-style: lower-roman;
+    @apply list-inside ml-5
+}
+
+.sectionBody ol ol ol ol {
+    list-style: initial;
+    @apply list-inside ml-5
+}
+
+.sectionHeadingAnchorCopyIcon {
+    @apply inline shrink text-sky-500 pb-2 w-8 h-8 -ml-3 md:w-12 md:h-12 md:-ml-12;
+}
+
+.sectionBody blockquote {
+    @apply p-5 border-l-4 border-slate-500 text-slate-900 bg-sky-50 antialiased italic;
 }

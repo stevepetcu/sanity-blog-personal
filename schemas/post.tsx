@@ -1,5 +1,4 @@
 import { BookIcon } from '@sanity/icons'
-import cn from 'classnames'
 import { format, parseISO } from 'date-fns'
 import { defineArrayMember, defineField, defineType, SlugValue } from 'sanity'
 

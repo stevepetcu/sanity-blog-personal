@@ -38,17 +38,19 @@ export default function PostSection({
   const sectionHeading = <>
     {heading &&
       <h2 onClick={() => copyLinkToHeading(anchor.current)} id={anchor.current}
-          className={cn(`${styles.sectionHeading} group`)}>
+          className={cn(`group`)}>
+        {!isLinkToHeadingCopied &&
+          <LinkIcon className={cn(styles.sectionHeadingAnchorCopyIcon)} />
+        }
+        {isLinkToHeadingCopied &&
+          <CheckmarkIcon className={cn(`${styles.sectionHeadingAnchorCopyIcon}`)} />
+        }
         {heading}
-        {!isLinkToHeadingCopied && <LinkIcon
-          className={cn(styles.sectionHeadingAnchorIcon)} />}
-        {isLinkToHeadingCopied && <CheckmarkIcon
-          className={cn(`${styles.sectionHeadingAnchorIcon}`)} />}
       </h2>}
   </>
-  const sectionBody = <>
+  const sectionBody = <div className={styles.sectionBody}>
     <SanePortableText content={body} />
-  </>
+  </div>
 
   switch (imagePlacement) {
     // TODO: extract these 'top' and 'bottom' values as constants.

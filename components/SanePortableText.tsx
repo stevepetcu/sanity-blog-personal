@@ -1,3 +1,5 @@
+import { faArrowUpFromBracket, faArrowUpRightFromSquare, faSquareArrowUpRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PortableText } from '@portabletext/react'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -10,9 +12,10 @@ const components = {
     link: ({ value, children }) => {
       const { blank, href } = value
       return blank || undefined === blank ?
-        <Link href={href} target='_blank' rel='noopener' className={cn('text-sky-500 after:content-["↗"]')}
+        <Link href={href} target='_blank' rel='noopener' className={cn('text-sky-500')}
            aria-label={`Visit link "${children}". Link opens in a new tab.`}>
           {children}
+          <sup><FontAwesomeIcon icon={faArrowUpRightFromSquare} className={'ml-1'}/></sup>
         </Link>
         : <Link href={href} className={cn('text-sky-500')} aria-label={`Visit link "${children}". Link opens in the same tab.`}>{children}</Link>
     },
@@ -27,7 +30,7 @@ const components = {
     },
     sub: ({ children }) => {
       return <sub>{children}</sub>
-    }
+    },
   }
 }
 
