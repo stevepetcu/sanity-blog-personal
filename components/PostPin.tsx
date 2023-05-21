@@ -49,7 +49,7 @@ export default function PostPin({
         {!coverImage &&
           <p className={cn(`text-base text-slate-500 leading-relaxed line-clamp-3`)}>{summary}</p>}
         <div className={cn('flex flex-wrap mt-2.5 text-sm text-slate-800')}>
-          <p className={'mr-2'}>Updated at:</p>
+          <p className={'mr-1.5'}>Updated at:</p>
           <Date dateString={updatedAt}/>
         </div>
         {tags && tags.length &&

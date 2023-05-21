@@ -33,13 +33,14 @@ export default function PostSummary({
             {author && <Avatar firstName={author.firstName} picture={author.picture} />}
           </div>
           <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-2.5 sm:mt-1 md:mt-0')}>.</span>
-          <div className={cn('whitespace-nowrap mt-2 sm:mt-1')}>
-            <Date dateString={publishedAt} classNames={'text-xs sm:text-sm font-light'} />
+          <div className={cn('flex flex-wrap whitespace-nowrap mt-3.5 sm:mt-2 text-xs sm:text-sm font-light')}>
+            <p className={'mr-1 sm:mr-1.5'}>Published at:</p>
+            <Date dateString={publishedAt} />
           </div>
           {tags && tags.length &&
             <>
               <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-2.5 sm:mt-1 md:mt-0')}>.</span>
-              <TagList tags={tags} itemClassNames={'mt-3.5 sm:mt-1.5 md:mt-1 text-xs sm:text-sm md:text-base'}/>
+              <TagList tags={tags} itemClassNames={'mt-3.5 sm:mt-1.5 text-xs sm:text-sm md:text-base'}/>
             </>
           }
         </div>
