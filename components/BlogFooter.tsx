@@ -9,7 +9,7 @@ export default function BlogFooter({ admin }: Pick<Settings, 'admin'>) {
       <div className='mx-auto w-full max-w-screen-xl px-4 pb-5 flex sm:items-center sm:justify-between font-light
       text-slate-600 hover:text-slate-900'>
         <span className='text-slate-600 grow'>🧑‍💻 by {admin.firstName} {admin.lastName}</span>
-        <AuthorLinks admin={admin} />
+        <AuthorLinks admin={admin} placement={'footer'}/>
       </div>
     </footer>
   )

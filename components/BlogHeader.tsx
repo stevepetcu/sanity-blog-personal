@@ -40,7 +40,7 @@ export default function BlogHeader({
           className={cn(`hidden sm:inline-flex basis-1/3 grow text-center text-sm ${headerFontSize} ${styles.portableText}`)}>
             <PortableText value={description} />
           </span>
-        <AuthorLinks admin={admin} linkClassNames={`text-sm ${linksFontSize}`} />
+        <AuthorLinks admin={admin} linkClassNames={`text-sm ${linksFontSize}`} placement={'header'}/>
       </header>
       <SectionSeparator mt={'mt-2'} mb={'mb-8'} />
     </>
