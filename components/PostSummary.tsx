@@ -27,19 +27,19 @@ export default function PostSummary({
             {title}
           </Link>
         </h3>
-        {summary && <p className={cn(`mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed text-left md:text-justify line-clamp-2`)}>{summary}</p>}
+        {summary && <p className={cn(`mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed text-left md:text-justify font-light line-clamp-2`)}>{summary}</p>}
         <div className={cn('flex flex-wrap space-x-1.5 sm:space-x-2 lg:space-x-2.5')}>
           <div className={cn('flex-shrink')}>
             {author && <Avatar firstName={author.firstName} picture={author.picture} />}
           </div>
           <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-2.5 sm:mt-1 md:mt-0')}>.</span>
-          <div className={cn('whitespace-nowrap mt-2 sm:mt-1.5 md:mt-1')}>
-            <Date dateString={publishedAt} />
+          <div className={cn('whitespace-nowrap mt-2 sm:mt-1')}>
+            <Date dateString={publishedAt} classNames={'text-xs sm:text-sm font-light'} />
           </div>
           {tags && tags.length &&
             <>
               <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-2.5 sm:mt-1 md:mt-0')}>.</span>
-              <TagList tags={tags} itemClassNames={'mt-3.5 sm:mt-2 md:mt-1 text-xs sm:text-sm md:text-base'}/>
+              <TagList tags={tags} itemClassNames={'mt-3.5 sm:mt-1.5 md:mt-1 text-xs sm:text-sm md:text-base'}/>
             </>
           }
         </div>

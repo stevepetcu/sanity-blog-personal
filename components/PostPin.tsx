@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { POSTS_PAGE_PATH } from '../pages/posts'
 import BlogImage from './BlogImage'
+import Date from './PostDate'
 import TagList from './TagList'
 
 export default function PostPin({
@@ -12,6 +13,7 @@ export default function PostPin({
                                   coverImage,
                                   summary,
                                   tags,
+                                  updatedAt,
                                   index,
                                   total
                                 }: Omit<PostPin, '_id'> & { index: number, total: number }) {
@@ -39,15 +41,19 @@ export default function PostPin({
         </div>
       }
       <div className={cn('p-2')}>
-        <h3 className={cn('leading-snug text-lg mb-3 font-medium text-slate-700')}>
+        <h3 className={cn('leading-snug text-lg font-medium text-slate-800')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>
         </h3>
         {!coverImage &&
-          <p className={cn(`mb-3 text-base text-slate-500 leading-relaxed line-clamp-3`)}>{summary}</p>}
+          <p className={cn(`text-base text-slate-500 leading-relaxed line-clamp-3`)}>{summary}</p>}
+        <div className={cn('flex flex-wrap mt-2.5 text-sm text-slate-800')}>
+          <p className={'mr-2'}>Updated at:</p>
+          <Date dateString={updatedAt}/>
+        </div>
         {tags && tags.length &&
-          <div className={cn('flex flex-wrap')}>
+          <div className={cn('flex flex-wrap mt-2.5')}>
             <TagList tags={tags} itemClassNames={'mr-1.5 mb-1.5 text-xs sm:text-sm lg:text-base'} />
           </div>}
       </div>

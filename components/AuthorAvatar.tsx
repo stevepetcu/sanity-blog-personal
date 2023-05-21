@@ -7,7 +7,7 @@ export default function AuthorAvatar(props: Author) {
   const { firstName, picture } = props
   return (
     <div className='flex items-center'>
-      <div className={cn('mr-2 mb-2 sm:mb-0 ml-2.5')}>
+      <div className={cn('mr-2 mb-2 sm:mb-0')}>
         {
           picture?.asset?._ref &&
           (

@@ -25,6 +25,7 @@ const postPinFields = groq`
   coverImage,
   summary,
   tags,
+  "updatedAt": _updatedAt,
 `
 
 const postSummaryFields = groq`
@@ -153,6 +154,7 @@ export interface PostPin {
   coverImage?: BlogImage
   summary: string
   tags
+  updatedAt: string
 }
 
 export interface PostSummary {

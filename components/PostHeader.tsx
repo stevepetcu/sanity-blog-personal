@@ -8,9 +8,9 @@ import type { Post } from 'lib/sanity.queries'
 import TagList from './TagList'
 
 export default function PostHeader(
-  props: Pick<Post, 'title' | 'coverImage' | 'tags' | 'publishedAt' | 'author' | 'slug'>
+  props: Pick<Post, 'title' | 'coverImage' | 'tags' | 'publishedAt' | 'updatedAt' | 'author' | 'slug'>
 ) {
-  const { title, coverImage, tags, publishedAt, author, slug } = props
+  const { title, coverImage, tags, publishedAt, updatedAt, author, slug } = props
   const postTitleClasses = coverImage ? 'absolute' : 'static'
 
   return (
@@ -32,18 +32,27 @@ export default function PostHeader(
         <div className={cn('flex-none')}>
           {author && <Avatar firstName={author.firstName} picture={author.picture} />}
         </div>
-        <span className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
-        <div className={cn('text-lg flex-none pb-1 sm:pb-0')}>
-          <Date dateString={publishedAt} />
-        </div>
         {tags && tags.length &&
           <>
-            <span className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
+            <span
+              className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
             <div className={cn('flex flex-wrap ml-2 sm:ml-0')}>
               <TagList tags={tags} itemClassNames={'mt-1 mr-1 lg:mr-2.5 text-xs sm:text-sm'} />
             </div>
           </>
         }
+      </div>
+      <div className={cn('text-xs sm:text-sm md:text-base flex flex-wrap items-center mx-auto max-w-2xl')}>
+        <p>Published at:</p>
+        <div className={cn('flex-none ml-1.5')}>
+          <Date dateString={publishedAt} classNames={'font-light'} />
+        </div>
+        <span
+          className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
+        <p>Updated at:</p>
+        <div className={cn('flex-none ml-1.5')}>
+          <Date dateString={updatedAt} classNames={'font-light'} />
+        </div>
       </div>
     </>
   )
