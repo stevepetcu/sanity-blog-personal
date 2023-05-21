@@ -1,4 +1,5 @@
 import { faGithubSquare, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faFileCode } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
@@ -16,34 +17,42 @@ export default function BlogFooter({ admin }: Pick<Settings, 'admin'>) {
       <div className='mx-auto w-full max-w-screen-xl'>
         <div className='px-4 pb-5 flex sm:items-center sm:justify-between font-light'>
           <span className='text-slate-600 grow'>🧑‍💻 by {admin.firstName} {admin.lastName}</span>
-            <Link href='#' className='text-slate-600 hover:text-slate-900 shrink ml-2.5'>About</Link>
-            <Link href='#' className='text-slate-600 hover:text-slate-900 shrink ml-2.5'>CV</Link>
-            {
-              gitHubHandle &&
-              (
-                <Link href={`https://github.com/${gitHubHandle.name}`} target='_blank' rel='noopener'
-                      className='text-slate-600 hover:text-slate-900 shrink ml-2.5'>
-                  <FontAwesomeIcon
-                    icon={faGithubSquare}
-                    aria-label={`${admin.firstName}'s GitHub account`}
-                    className={'w-7 h-7'}/>
-                </Link>
-              )
-            }
-            {
-              linkedInHandle &&
-              (
-                <Link href={`https://linkedin.com/in/${linkedInHandle.name}`} target='_blank' rel='noopener'
-                      className='text-slate-600 hover:text-slate-900 shrink ml-2.5'>
-                  <FontAwesomeIcon
-                    icon={faLinkedin}
-                    aria-label={`${admin.firstName}'s LinkedIn account`}
-                    className={'w-7 h-7'}/>
-                </Link>
-              )
-            }
-          </div>
+          <Link href='#' className='text-slate-600 hover:text-slate-900 shrink ml-2.5 sm:ml-3.5 md:ml-5'>About</Link>
+          <Link href='#' className='text-slate-600 hover:text-slate-900 shrink ml-2.5 sm:ml-3.5 md:ml-5'
+                title={`${admin.firstName}'s resume`}>
+            <FontAwesomeIcon
+              icon={faFileCode}
+              aria-label={`${admin.firstName}'s resume`}
+              className={'w-7 h-7'} />
+          </Link>
+          {
+            gitHubHandle &&
+            (
+              <Link href={`https://github.com/${gitHubHandle.name}`} target='_blank' rel='noopener'
+                    className='text-slate-600 hover:text-slate-900 shrink ml-2.5 sm:ml-3.5 md:ml-5'
+                    title={`${admin.firstName}'s GitHub account`}>
+                <FontAwesomeIcon
+                  icon={faGithubSquare}
+                  aria-label={`${admin.firstName}'s GitHub account`}
+                  className={'w-7 h-7'} />
+              </Link>
+            )
+          }
+          {
+            linkedInHandle &&
+            (
+              <Link href={`https://linkedin.com/in/${linkedInHandle.name}`} target='_blank' rel='noopener'
+                    className='text-slate-600 hover:text-slate-900 shrink ml-2.5 sm:ml-3.5 md:ml-5'
+                    title={`${admin.firstName}'s LinkedIn account`}>
+                <FontAwesomeIcon
+                  icon={faLinkedin}
+                  aria-label={`${admin.firstName}'s LinkedIn account`}
+                  className={'w-7 h-7'} />
+              </Link>
+            )
+          }
         </div>
+      </div>
     </footer>
   )
 }
