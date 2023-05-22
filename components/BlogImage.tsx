@@ -55,8 +55,7 @@ export default function BlogImage(props: BlogImageProps) {
       )}
       <figcaption
         className={cn(`text-xs absolute ${captionVerticalPosition} left-0 
-        bg-white/12 backdrop-blur-sm p-1 rounded ${styles.portableText} text-slate-200
-        mix-blend-hard-light`)}>
+        bg-white/12 backdrop-blur-sm p-1 rounded ${styles.portableText} text-slate-700`)}>
         <SanePortableText content={image.caption} />
       </figcaption>
     </figure>

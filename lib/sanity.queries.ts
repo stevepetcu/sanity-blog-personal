@@ -37,6 +37,7 @@ const postSummaryFields = groq`
   tags,
   "author": author->{firstName, picture},
   publishedAt,
+  "updatedAt": _updatedAt,
 `
 
 const settingsFullDataFields = groq`
@@ -166,6 +167,7 @@ export interface PostSummary {
   tags: string[]
   author: Author
   publishedAt: string
+  updatedAt: string
 }
 
 export interface Settings {

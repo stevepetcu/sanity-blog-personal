@@ -6,18 +6,24 @@ import Link from 'next/link'
 
 import { POSTS_PAGE_PATH } from '../pages/posts'
 import BlogImage from './BlogImage'
+import PostMetadata from './PostMetadata'
 import TagList from './TagList'
 
-export default function PostSummary({
-                                      index,
-                                      title,
-                                      slug,
-                                      summary,
-                                      coverImage,
-                                      tags,
-                                      author,
-                                      publishedAt
-                                    }: Omit<PostSummary & { index: number }, '_id'>) {
+interface PostSummaryProps {
+  summary: Omit<PostSummary, '_id'>
+  index: number
+}
+
+export default function PostSummary({ summary, index }: PostSummaryProps) {
+  const {
+    title,
+    slug,
+    summary: summaryBody,
+    coverImage,
+    tags,
+    author,
+    publishedAt
+  } = summary
 
   return (
     <div className={cn('flex flex-col-reverse lg:flex-row md:gap-x-8 lg:gap-x-16')}>
@@ -27,23 +33,9 @@ export default function PostSummary({
             {title}
           </Link>
         </h3>
-        {summary && <p className={cn(`mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed text-left md:text-justify font-light line-clamp-2`)}>{summary}</p>}
-        <div className={cn('flex flex-wrap space-x-1.5 sm:space-x-2 lg:space-x-2.5')}>
-          <div className={cn('flex-shrink')}>
-            {author && <Avatar firstName={author.firstName} picture={author.picture} />}
-          </div>
-          <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-2.5 sm:mt-1 md:mt-0')}>.</span>
-          <div className={cn('flex flex-wrap whitespace-nowrap mt-3.5 sm:mt-2 text-xs sm:text-sm font-light')}>
-            <p className={'mr-1 sm:mr-1.5'}>Published at:</p>
-            <Date dateString={publishedAt} />
-          </div>
-          {tags && tags.length &&
-            <>
-              <span className={cn('inline-flex flex-none text-xs sm:text-sm md:text-base mt-2.5 sm:mt-1 md:mt-0')}>.</span>
-              <TagList tags={tags} itemClassNames={'mt-3.5 sm:mt-1.5 text-xs sm:text-sm md:text-base'}/>
-            </>
-          }
-        </div>
+        {summary && <p
+          className={cn(`mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed text-left md:text-justify font-light line-clamp-2`)}>{summaryBody}</p>}
+        <PostMetadata post={summary} publishedDate={{ show: true, position: 'inline' }} />
       </div>
       {
         coverImage &&

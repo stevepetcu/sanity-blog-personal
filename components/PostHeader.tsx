@@ -5,6 +5,7 @@ import Date from 'components/PostDate'
 import PostTitle from 'components/PostTitle'
 import type { Post } from 'lib/sanity.queries'
 
+import PostMetadata from './PostMetadata'
 import TagList from './TagList'
 
 export default function PostHeader(
@@ -28,32 +29,9 @@ export default function PostHeader(
           </div>
         }
       </div>
-      <div className={cn('flex flex-wrap items-center mx-auto max-w-2xl')}>
-        <div className={cn('flex-none')}>
-          {author && <Avatar firstName={author.firstName} picture={author.picture} />}
-        </div>
-        {tags && tags.length &&
-          <>
-            <span
-              className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
-            <div className={cn('flex flex-wrap ml-2 sm:ml-0')}>
-              <TagList tags={tags} itemClassNames={'mt-1 mr-1 lg:mr-2.5 text-xs sm:text-sm'} />
-            </div>
-          </>
-        }
-      </div>
-      <div className={cn('text-xs sm:text-sm md:text-base flex flex-wrap items-center mx-auto max-w-2xl')}>
-        <p>Published at:</p>
-        <div className={cn('flex-none ml-1.5')}>
-          <Date dateString={publishedAt} classNames={'font-light'} />
-        </div>
-        <span
-          className={cn('flex-none ml-1 mr-1 lg:ml-2.5 lg:mr-2.5 pb-2 sm:pb-2.5 md:pb-3 lg:pb-4 text-base md:text-2xl')}>.</span>
-        <p>Updated at:</p>
-        <div className={cn('flex-none ml-1.5')}>
-          <Date dateString={updatedAt} classNames={'font-light'} />
-        </div>
-      </div>
+      <PostMetadata post={props}
+                    publishedDate={{ show: true, position: 'below' }} updatedDate={{ show: true, position: 'below' }}
+                    classNames={'mx-auto max-w-2xl'} />
     </>
   )
 }
