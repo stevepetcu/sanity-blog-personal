@@ -19,7 +19,7 @@ export default function PostHeader(
       <div className={cn('relative -mx-5 mb-8 ')}>
         <div className={cn(`${postTitleClasses} bottom-0 w-full z-20 p-5 ` +
           'bg-gradient-to-r from-indigo-500/30 from-10% via-sky-500/50 via-40% to-emerald-500/10 to-90% ' +
-          'text-slate-700 backdrop-blur mix-blend-luminosity')}>
+          'text-slate-700 backdrop-blur-sm mix-blend-luminosity')}>
           <PostTitle>{title}</PostTitle>
         </div>
         {

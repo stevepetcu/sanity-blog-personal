@@ -27,6 +27,7 @@ export default function BlogImage(props: BlogImageProps) {
   const scaledWidth = pixelRatio * width
   const scaledHeight = pixelRatio * height
   const captionVerticalPosition = !captionPosition || 'bottom' === captionPosition ? 'bottom-0' : 'top-0'
+  const roundedCorners = !captionPosition || 'bottom' === captionPosition ? 'rounded-b' : 'rounded-t'
 
   const imageComponent =
     <div className={cn('relative')}>
@@ -55,7 +56,8 @@ export default function BlogImage(props: BlogImageProps) {
       )}
       <figcaption
         className={cn(`text-xs absolute ${captionVerticalPosition} left-0 
-        bg-white/12 backdrop-blur-sm p-1 rounded ${styles.portableText} text-slate-700`)}>
+        bg-white/10 p-1 ${roundedCorners} ${styles.portableText} 
+        text-slate-700 text-center w-full backdrop-blur-sm`)}>
         <SanePortableText content={image.caption} />
       </figcaption>
     </figure>

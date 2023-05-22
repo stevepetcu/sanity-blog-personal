@@ -15,7 +15,7 @@ const components = {
         <Link href={href} target='_blank' rel='noopener' className={cn('text-sky-500')}
            aria-label={`Visit link "${children}". Link opens in a new tab.`}>
           {children}
-          <sup><FontAwesomeIcon icon={faArrowUpRightFromSquare} className={'ml-1'}/></sup>
+          <sup><FontAwesomeIcon icon={faArrowUpRightFromSquare} className={'ml-1 w-2'}/></sup>
         </Link>
         : <Link href={href} className={cn('text-sky-500')} aria-label={`Visit link "${children}". Link opens in the same tab.`}>{children}</Link>
     },
