@@ -65,8 +65,7 @@
 }
 
 .sectionBody ol ol ol ol {
-    list-style: initial;
-    @apply list-inside ml-5
+    @apply list-decimal list-inside ml-5
 }
 
 .sectionHeadingAnchorCopyIcon {

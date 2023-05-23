@@ -27,7 +27,8 @@ export default function BlogImage(props: BlogImageProps) {
   const scaledHeight = pixelRatio * height
 
   const imageComponent =
-    <div className={cn('relative')}>
+    <div
+      className={cn('relative bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-indigo-50 from-35% via-sky-100 via-50% to-emerald-50 to-75%')}>
       <Image
         className={cn('h-auto w-full rounded')}
         width={scaledWidth}
