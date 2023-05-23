@@ -1,29 +1,26 @@
 import cn from 'classnames'
-import Avatar from 'components/AuthorAvatar'
-import Date from 'components/PostDate'
 import type { PostSummary } from 'lib/sanity.queries'
 import Link from 'next/link'
 
 import { POSTS_PAGE_PATH } from '../pages/posts'
 import BlogImage from './BlogImage'
 import PostMetadata from './PostMetadata'
-import TagList from './TagList'
 
 interface PostSummaryProps {
-  summary: Omit<PostSummary, '_id'>
+  postSummary: Omit<PostSummary, '_id'>
   index: number
 }
 
-export default function PostSummary({ summary, index }: PostSummaryProps) {
+export default function PostSummary({ postSummary, index }: PostSummaryProps) {
   const {
     title,
     slug,
-    summary: summaryBody,
+    summary,
     coverImage,
     tags,
     author,
     publishedAt
-  } = summary
+  } = postSummary
 
   return (
     <div className={cn('flex flex-col-reverse lg:flex-row md:gap-x-8 lg:gap-x-16')}>
@@ -33,9 +30,9 @@ export default function PostSummary({ summary, index }: PostSummaryProps) {
             {title}
           </Link>
         </h3>
-        {summary && <p
-          className={cn(`mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed text-left md:text-justify font-light line-clamp-2`)}>{summaryBody}</p>}
-        <PostMetadata post={summary} publishedDate={{ show: true, position: 'inline' }} />
+        {postSummary && <p
+          className={cn(`mb-5 md:mb-8 lg:mb-12 text-lg leading-relaxed text-left md:text-justify font-light line-clamp-2`)}>{summary}</p>}
+        <PostMetadata post={postSummary} publishedDate={{ show: true, position: 'inline' }} />
       </div>
       {
         coverImage &&

@@ -17,9 +17,8 @@ interface AuthorLinksProps {
   linkClassNames?: string
 }
 
-export default function AuthorLinks(props: AuthorLinksProps) {
-  const { firstName, lastName, handles } = props.admin
-  const { placement, linkClassNames } = props
+export default function AuthorLinks({ admin, placement, linkClassNames }: AuthorLinksProps) {
+  const { firstName, lastName, handles } = admin
   const gitHubHandle = handles.find(handle => handle.website === AuthorLinkedHandleWebsiteKeys.GITHUB)
   const linkedInHandle = handles.find(handle => handle.website === AuthorLinkedHandleWebsiteKeys.LINKEDIN)
   const linkTransformOriginLeft = placement === 'footer' ? 'origin-bottom-left' : 'origin-top-right'

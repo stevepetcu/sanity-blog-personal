@@ -13,7 +13,7 @@ interface PostPinProps {
   total: number
 }
 
-export default function PostPin(props: PostPinProps) {
+export default function PostPin({ postPin, index, total }: PostPinProps) {
   const {
     title,
     slug,
@@ -21,8 +21,7 @@ export default function PostPin(props: PostPinProps) {
     summary,
     tags,
     updatedAt
-  } = props.postPin
-  const { index, total } = props
+  } = postPin
 
   return (
     <div className={cn('group rounded')}>
