@@ -7,16 +7,23 @@ import BlogImage from './BlogImage'
 import Date from './PostDate'
 import TagList from './TagList'
 
-export default function PostPin({
-                                  title,
-                                  slug,
-                                  coverImage,
-                                  summary,
-                                  tags,
-                                  updatedAt,
-                                  index,
-                                  total
-                                }: Omit<PostPin, '_id'> & { index: number, total: number }) {
+interface PostPinProps {
+  postPin: Omit<PostPin, '_id'>,
+  index: number
+  total: number
+}
+
+export default function PostPin(props: PostPinProps) {
+  const {
+    title,
+    slug,
+    coverImage,
+    summary,
+    tags,
+    updatedAt
+  } = props.postPin
+  const { index, total } = props
+
   return (
     <div className={cn('group rounded')}>
       {
@@ -48,12 +55,12 @@ export default function PostPin({
         </h3>
         {!coverImage &&
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
-          <p className={cn(`text-base text-slate-500 leading-relaxed line-clamp-3`)}>{summary}</p>
+            <p className={cn(`text-base text-slate-500 leading-relaxed line-clamp-3`)}>{summary}</p>
           </Link>
         }
         <div className={cn('flex flex-wrap mt-2.5 text-sm text-slate-800')}>
           <p className={'mr-1.5'}>Updated at:</p>
-          <Date dateString={updatedAt}/>
+          <Date dateString={updatedAt} />
         </div>
         {tags && tags.length &&
           <div className={cn('flex flex-wrap mt-2.5')}>
