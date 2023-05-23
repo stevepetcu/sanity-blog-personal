@@ -1,19 +1,15 @@
-import { toPlainText } from '@portabletext/react'
-import BlogMeta from 'components/BlogMeta'
-import { Settings } from 'lib/sanity.queries'
-import Head from 'next/head'
+import { toPlainText } from '@portabletext/react';
+import BlogMeta from 'components/BlogMeta';
+import { Settings } from 'lib/sanity.queries';
+import Head from 'next/head';
 
 export interface IndexPageHeadProps {
   settings: Settings
 }
 
 export default function IndexPageHead({ settings }: IndexPageHeadProps) {
-  const {
-    title,
-    description,
-    ogImage = {},
-  } = settings
-  const ogImageTitle = ogImage?.title
+  const { title, description, ogImage = {} } = settings;
+  const ogImageTitle = ogImage?.title;
 
   return (
     <Head>
@@ -26,7 +22,7 @@ export default function IndexPageHead({ settings }: IndexPageHeadProps) {
       />
       <meta
         property="og:image"
-        // Because OG images must have a absolute URL, we use the
+        // Because OG images must have an absolute URL, we use the
         // `VERCEL_URL` environment variable to get the deployment’s URL.
         // More info:
         // https://vercel.com/docs/concepts/projects/environment-variables
@@ -35,5 +31,5 @@ export default function IndexPageHead({ settings }: IndexPageHeadProps) {
         }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
       />
     </Head>
-  )
+  );
 }

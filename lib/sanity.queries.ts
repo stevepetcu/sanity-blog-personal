@@ -1,6 +1,9 @@
-import { groq } from 'next-sanity'
-import { Slug } from 'sanity'
-import { Crop, Hotspot } from 'sanity/src/core/form/inputs/files/ImageToolInput/imagetool'
+import { groq } from 'next-sanity';
+import { Slug } from 'sanity';
+import {
+  Crop,
+  Hotspot,
+} from 'sanity/src/core/form/inputs/files/ImageToolInput/imagetool';
 
 // TODO: figure out how to type all the things and disallow "any"
 
@@ -16,7 +19,7 @@ const postViewFields = groq`
   "author": author->{firstName, picture},
   publishedAt,
   "updatedAt": _updatedAt,
-`
+`;
 
 const postPinFields = groq`
   _id,
@@ -26,7 +29,7 @@ const postPinFields = groq`
   summary,
   tags,
   "updatedAt": _updatedAt,
-`
+`;
 
 const postSummaryFields = groq`
   _id,
@@ -38,7 +41,7 @@ const postSummaryFields = groq`
   "author": author->{firstName, picture},
   publishedAt,
   "updatedAt": _updatedAt,
-`
+`;
 
 const settingsFullDataFields = groq`
   _id,
@@ -46,50 +49,50 @@ const settingsFullDataFields = groq`
   description,
   ogImage,
   "admin": admin->{firstName, lastName, handles}
-`
+`;
 
 export const settingsQuery = groq`*[_type == "settings"][0] {
   ${settingsFullDataFields}
-}`
+}`;
 
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current) && publishedAt <= now()][].slug.current
-`
+`;
 
 export const postPinsListQuery = groq`
 *[_type == "post" && publishedAt <= now()] | order(_updatedAt desc) {
   ${postPinFields}
 }
-`
+`;
 
 export const postSummariesListQuery = groq`
 *[_type == "post" && publishedAt <= now()] | order(publishedAt desc) [0...50] {
   ${postSummaryFields}
 }
-`
+`;
 
 export const postSummariesListByTagQuery = (tags: string[]) => {
-  let tagsQuery = ''
+  let tagsQuery = '';
   tags.map((tag, index) => {
     if (index !== tags.length - 1) {
-      tagsQuery += `"${tag}" in tags || `
+      tagsQuery += `"${tag}" in tags || `;
     } else {
-      tagsQuery += `"${tag}" in tags`
+      tagsQuery += `"${tag}" in tags`;
     }
-  })
+  });
 
   return groq`
 *[_type == "post" && publishedAt <= now() && ${tagsQuery}] | order(publishedAt desc) [0...10] {
   ${postSummaryFields}
 }
-`
-}
+`;
+};
 
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug && publishedAt <= now()][0] {
   ${postViewFields}
 }
-`
+`;
 
 export interface BlogImage {
   caption: any // blocks
@@ -116,10 +119,10 @@ export interface Author {
     name: string
     asset: {
       _ref: string
-    },
+    }
     crop?: Crop
     hotspot?: Hotspot
-  },
+  }
   handles?: {
     website: string
     name: string

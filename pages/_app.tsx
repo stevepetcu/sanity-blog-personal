@@ -1,9 +1,9 @@
-import 'tailwindcss/tailwind.css'
+import 'tailwindcss/tailwind.css';
 
 import { Analytics } from '@vercel/analytics/react';
-import { AppProps } from 'next/app'
+import { AppProps } from 'next/app';
 
-import { PixelRatioProvider } from '../contexts/PixelRatioContext'
+import { PixelRatioProvider } from '../contexts/PixelRatioContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,5 +13,5 @@ export default function App({ Component, pageProps }: AppProps) {
         <Analytics />
       </PixelRatioProvider>
     </>
-  )
+  );
 }

@@ -62,7 +62,7 @@ export default defineType({
       title: 'Admin',
       type: 'reference',
       to: [{ type: authorType.name }],
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'ogImage',

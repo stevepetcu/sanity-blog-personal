@@ -1,7 +1,7 @@
-import { PortableText } from '@portabletext/react'
+import { PortableText } from '@portabletext/react';
 
-import styles from './PostFootnotes.module.css'
-import SectionSeparator from './SectionSeparator'
+import styles from './PostFootnotes.module.css';
+import SectionSeparator from './SectionSeparator';
 
 export default function PostFootnotes({ content }) {
   return (
@@ -11,5 +11,5 @@ export default function PostFootnotes({ content }) {
         <PortableText value={content} />
       </div>
     </section>
-  )
+  );
 }

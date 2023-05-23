@@ -1,16 +1,13 @@
-import { PreviewSuspense } from '@sanity/preview-kit'
-import PostPage from 'components/PostPage'
-import {
-  getAllPostsSlugs, getPostBySlug,
-  getSettings
-} from 'lib/sanity.client'
-import { Post, Settings } from 'lib/sanity.queries'
-import { GetStaticProps } from 'next'
-import { lazy } from 'react'
+import { PreviewSuspense } from '@sanity/preview-kit';
+import PostPage from 'components/PostPage';
+import { getAllPostsSlugs, getPostBySlug, getSettings } from 'lib/sanity.client';
+import { Post, Settings } from 'lib/sanity.queries';
+import { GetStaticProps } from 'next';
+import { lazy } from 'react';
 
-import { POSTS_PAGE_PATH } from './index'
+import { POSTS_PAGE_PATH } from './index';
 
-const PreviewPostPage = lazy(() => import('components/PreviewPostPage'))
+const PreviewPostPage = lazy(() => import('components/PreviewPostPage'));
 
 interface PageProps {
   post: Post
@@ -28,30 +25,19 @@ interface PreviewData {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { settings, post, preview, token } = props
+  const { settings, post, preview, token } = props;
 
   if (preview) {
     return (
       <PreviewSuspense
-        fallback={
-          <PostPage
-            loading
-            preview
-            post={post}
-            settings={settings}
-          />
-        }
+        fallback={<PostPage loading preview post={post} settings={settings} />}
       >
-        <PreviewPostPage
-          token={token}
-          post={post}
-          settings={settings}
-        />
+        <PreviewPostPage token={token} post={post} settings={settings} />
       </PreviewSuspense>
-    )
+    );
   }
 
-  return <PostPage post={post} settings={settings} />
+  return <PostPage post={post} settings={settings} />;
 }
 
 export const getStaticProps: GetStaticProps<
@@ -59,19 +45,21 @@ export const getStaticProps: GetStaticProps<
   Query,
   PreviewData
 > = async (ctx) => {
-  const { preview = false, previewData = {}, params = {} } = ctx
+  const { preview = false, previewData = {}, params = {} } = ctx;
 
-  const token = previewData.token
+  // TODO: I think we need to pass this token into the `getPostBySlug` fn, for previews.
+  //  Check Git history to see how it was used before.
+  const token = previewData.token ?? null;
 
   const [settings, post] = await Promise.all([
     getSettings(),
-    getPostBySlug(params.slug)
-  ])
+    getPostBySlug(params.slug),
+  ]);
 
   if (!post) {
     return {
-      notFound: true
-    }
+      notFound: true,
+    };
   }
 
   return {
@@ -79,16 +67,16 @@ export const getStaticProps: GetStaticProps<
       post,
       settings,
       preview,
-      token: previewData.token ?? null
-    }
-  }
-}
+      token,
+    },
+  };
+};
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllPostsSlugs()
+  const slugs = await getAllPostsSlugs();
 
   return {
     paths: slugs?.map(({ slug }) => `${POSTS_PAGE_PATH}/${slug}`) || [],
-    fallback: 'blocking'
-  }
-}
+    fallback: 'blocking',
+  };
+};

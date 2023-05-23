@@ -1,4 +1,5 @@
-import AlertBanner from 'components/AlertBanner'
+import AlertBanner from 'components/AlertBanner';
+import React from 'react';
 
 export default function BlogLayout({
   preview,
@@ -16,5 +17,5 @@ export default function BlogLayout({
         <main>{children}</main>
       </div>
     </>
-  )
+  );
 }

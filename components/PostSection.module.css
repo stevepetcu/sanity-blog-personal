@@ -1,77 +1,77 @@
 .portableText {
-    @apply text-lg leading-relaxed;
+  @apply text-lg leading-relaxed;
 }
 
 .portableText h2 {
-    @apply mb-4 mt-12 text-xl md:text-3xl leading-snug cursor-pointer;
+  @apply mb-4 mt-12 cursor-pointer text-xl leading-snug md:text-3xl;
 }
 
 .portableText h3 {
-    @apply mb-4 mt-8 text-base md:text-2xl leading-snug;
+  @apply mb-4 mt-8 text-base leading-snug md:text-2xl;
 }
 
 .portableText a {
-    @apply text-sky-500;
+  @apply text-sky-500;
 }
 
 .portableText a:hover {
-    @apply text-sky-700 underline;
+  @apply text-sky-700 underline;
 }
 
 .sectionBody p,
 .sectionBody blockquote {
-    @apply my-6 text-base md:text-xl;
+  @apply my-6 text-base md:text-xl;
 }
 
 .sectionBody ul {
-    @apply list-disc list-inside text-base md:text-xl
+  @apply list-inside list-disc text-base md:text-xl;
 }
 
 .sectionBody > ul {
-    @apply my-6
+  @apply my-6;
 }
 
 .sectionBody ul ul {
-    list-style: circle;
-    @apply list-inside ml-5
+  list-style: circle;
+  @apply ml-5 list-inside;
 }
 
 .sectionBody ul ul ul {
-    list-style: square;
-    @apply list-inside ml-5
+  list-style: square;
+  @apply ml-5 list-inside;
 }
 
 .sectionBody ul ul ul ul {
-    list-style: initial;
-    @apply list-inside ml-5
+  list-style: initial;
+  @apply ml-5 list-inside;
 }
 
 .sectionBody > ol {
-    @apply my-6
+  @apply my-6;
 }
 
 .sectionBody ol {
-    @apply list-decimal list-inside text-base md:text-xl
+  @apply list-inside list-decimal text-base md:text-xl;
 }
 
 .sectionBody ol ol {
-    list-style: lower-alpha;
-    @apply list-inside ml-5
+  list-style: lower-alpha;
+  @apply ml-5 list-inside;
 }
 
 .sectionBody ol ol ol {
-    list-style: lower-roman;
-    @apply list-inside ml-5
+  list-style: lower-roman;
+  @apply ml-5 list-inside;
 }
 
 .sectionBody ol ol ol ol {
-    @apply list-decimal list-inside ml-5
+  @apply ml-5 list-inside list-decimal;
 }
 
 .sectionHeadingAnchorCopyIcon {
-    @apply inline shrink text-sky-500 pb-2 w-8 h-8 -ml-3 md:w-12 md:h-12 md:-ml-12;
+  @apply -ml-3 inline h-8 w-8 shrink pb-2 text-sky-500 md:-ml-12 md:h-12 md:w-12;
 }
 
 .sectionBody blockquote {
-    @apply p-5 border-l-4 border-slate-500 text-slate-900 bg-sky-50 antialiased italic;
+  @apply border-l-4 border-slate-500 bg-sky-50 p-5 italic text-slate-900 antialiased;
 }

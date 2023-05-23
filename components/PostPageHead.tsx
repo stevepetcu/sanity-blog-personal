@@ -1,7 +1,7 @@
-import BlogMeta from 'components/BlogMeta'
-import { urlForImage } from 'lib/sanity.image'
-import { Post, Settings } from 'lib/sanity.queries'
-import Head from 'next/head'
+import BlogMeta from 'components/BlogMeta';
+import { urlForImage } from 'lib/sanity.image';
+import { Post, Settings } from 'lib/sanity.queries';
+import Head from 'next/head';
 
 export interface PostPageHeadProps {
   settings: Settings
@@ -9,7 +9,7 @@ export interface PostPageHeadProps {
 }
 
 export default function PostPageHead({ settings, post }: PostPageHeadProps) {
-  const title = settings.title
+  const title = settings.title;
   return (
     <Head>
       <title>{post.title ? `${post.title} | ${title}` : title}</title>
@@ -25,5 +25,5 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
         />
       )}
     </Head>
-  )
+  );
 }

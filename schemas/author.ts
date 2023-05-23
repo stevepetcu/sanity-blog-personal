@@ -2,23 +2,23 @@ import { UserIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export enum AuthorLinkedHandleWebsiteKeys {
-  LINKEDIN =  'linkedin',
+  LINKEDIN = 'linkedin',
   GITHUB = 'github',
-  HACKERRANK = 'hackerrank'
+  HACKERRANK = 'hackerrank',
 }
 export const AuthorLinkedHandleWebsiteOptions = [
   {
     title: 'LinkedIn',
-    value: AuthorLinkedHandleWebsiteKeys.LINKEDIN
+    value: AuthorLinkedHandleWebsiteKeys.LINKEDIN,
   },
   {
     title: 'GitHub',
-    value: AuthorLinkedHandleWebsiteKeys.GITHUB
+    value: AuthorLinkedHandleWebsiteKeys.GITHUB,
   },
   {
     title: 'HackerRank',
-    value: AuthorLinkedHandleWebsiteKeys.HACKERRANK
-  }
+    value: AuthorLinkedHandleWebsiteKeys.HACKERRANK,
+  },
 ]
 
 export default defineType({
@@ -31,26 +31,26 @@ export default defineType({
       name: 'firstName',
       title: 'First name',
       type: 'string',
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'lastName',
       title: 'Last name',
-      type: 'string'
+      type: 'string',
     }),
     defineField({
       name: 'picture',
       title: 'Picture',
       type: 'image',
       options: { hotspot: true },
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'handles',
       title: 'Handles',
       type: 'array',
-      of: [defineArrayMember(
-        {
+      of: [
+        defineArrayMember({
           type: 'object',
           name: 'handle',
           fields: [
@@ -61,19 +61,22 @@ export default defineType({
               options: {
                 list: AuthorLinkedHandleWebsiteOptions,
               },
-              validation: (rule) => rule.required()
+              validation: (rule) => rule.required(),
             },
             {
               type: 'string',
               name: 'name',
               title: 'Handle',
-              validation: (rule) => rule.required()
-            }
-          ]
-        }
-      )],
-      validation: (rule) => rule.unique().error('Cannot link multiple handles for the same website.'),
-      initialValue: []
+              validation: (rule) => rule.required(),
+            },
+          ],
+        }),
+      ],
+      validation: (rule) =>
+        rule
+          .unique()
+          .error('Cannot link multiple handles for the same website.'),
+      initialValue: [],
     }),
-  ]
+  ],
 })

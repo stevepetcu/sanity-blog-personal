@@ -1,6 +1,6 @@
-import PostPage, { PostPageProps } from 'components/PostPage'
-import { usePreview } from 'lib/sanity.preview'
-import { type Post, postSummariesListQuery } from 'lib/sanity.queries'
+import PostPage, { PostPageProps } from 'components/PostPage';
+import { usePreview } from 'lib/sanity.preview';
+import { type Post, postSummariesListQuery } from 'lib/sanity.queries';
 
 export default function PreviewPostPage({
   token,
@@ -9,17 +9,13 @@ export default function PreviewPostPage({
 }: {
   token: null | string
 } & PostPageProps) {
-  const { post: postPreview, morePosts }: { post: Post; morePosts: Post[] } =
-    usePreview(token, postSummariesListQuery, {
+  const { post: postPreview }: { post: Post } = usePreview(
+    token,
+    postSummariesListQuery,
+    {
       slug: post.slug,
-    }) || { post: null, morePosts: [] }
+    }
+  ) || { post: null, morePosts: [] };
 
-  return (
-    <PostPage
-      preview
-      post={postPreview}
-      morePosts={morePosts}
-      settings={settings}
-    />
-  )
+  return <PostPage preview post={postPreview} settings={settings} />;
 }

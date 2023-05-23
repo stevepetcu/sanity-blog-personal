@@ -1,5 +1,6 @@
 /**
- * All the shared stuff that goes into <head> on `(blog)` routes, can be be imported by `head.tsx` files in the /app dir or wrapped in a <Head> component in the /pages dir.
+ * All the shared stuff that goes into <head> on `(blog)` routes, can be imported
+ * by `head.tsx` files in the /app dir or wrapped in a <Head> component in the /pages dir.
  */
 
 export default function BlogMeta() {
@@ -29,5 +30,5 @@ export default function BlogMeta() {
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
     </>
-  )
+  );
 }
