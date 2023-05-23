@@ -47,7 +47,10 @@ export default function PostPin({
           </Link>
         </h3>
         {!coverImage &&
-          <p className={cn(`text-base text-slate-500 leading-relaxed line-clamp-3`)}>{summary}</p>}
+          <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
+          <p className={cn(`text-base text-slate-500 leading-relaxed line-clamp-3`)}>{summary}</p>
+          </Link>
+        }
         <div className={cn('flex flex-wrap mt-2.5 text-sm text-slate-800')}>
           <p className={'mr-1.5'}>Updated at:</p>
           <Date dateString={updatedAt}/>
