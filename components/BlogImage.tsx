@@ -17,17 +17,14 @@ interface BlogImageProps {
   priority?: boolean
   width: number
   height: number
-  captionPosition?: 'top' | 'bottom'
 }
 
 export default function BlogImage(props: BlogImageProps) {
   const pixelRatio = React.useContext(PixelRatioContext)
 
-  const { title, slug, image, width, height, priority, captionPosition } = props
+  const { title, slug, image, width, height, priority } = props
   const scaledWidth = pixelRatio * width
   const scaledHeight = pixelRatio * height
-  const captionVerticalPosition = !captionPosition || 'bottom' === captionPosition ? 'bottom-0' : 'top-0'
-  const roundedCorners = !captionPosition || 'bottom' === captionPosition ? 'rounded-b' : 'rounded-t'
 
   const imageComponent =
     <div className={cn('relative')}>
@@ -45,7 +42,7 @@ export default function BlogImage(props: BlogImageProps) {
 
   return (
     <figure
-      className={cn('group relative overflow-clip drop-shadow-sm',
+      className={cn('relative overflow-clip drop-shadow-sm',
         { 'transition-all duration-200 hover:drop-shadow-lg': slug })}>
       {slug ? (
         <Link href={`${POSTS_PAGE_PATH}/${slug}`} aria-label={title}>
@@ -55,9 +52,10 @@ export default function BlogImage(props: BlogImageProps) {
         imageComponent
       )}
       <figcaption
-        className={cn(`text-xs absolute ${captionVerticalPosition} left-0 
-        bg-white/10 p-1 ${roundedCorners} ${styles.portableText} 
-        text-slate-700 text-center w-full backdrop-blur-sm`)}>
+        className={cn(`${styles.portableText} w-full
+        absolute bottom-0 left-0 
+        bg-white/10 p-1 backdrop-blur-sm rounded-t 
+        text-xs text-slate-700 text-center`)}>
         <SanePortableText content={image.caption} />
       </figcaption>
     </figure>
