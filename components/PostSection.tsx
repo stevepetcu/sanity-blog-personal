@@ -49,7 +49,7 @@ export default function PostSection({
         <h2
           onClick={() => copyLinkToHeading(anchor.current)}
           id={anchor.current}
-          className={cn('group')}
+          className={cn('text-slate-800')}
         >
           {!isLinkToHeadingCopied && (
             <LinkIcon className={cn(styles.sectionHeadingAnchorCopyIcon)} />

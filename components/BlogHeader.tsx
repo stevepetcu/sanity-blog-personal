@@ -54,7 +54,7 @@ export default function BlogHeader({
           linkClassNames={`text-sm ${linksFontSize}`}
         />
       </header>
-      <SectionSeparator mt={'mt-2'} mb={'mb-8'} />
+      <SectionSeparator classNames={'mt-2 mb-8'} />
     </>
   );
 }

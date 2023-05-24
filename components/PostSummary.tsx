@@ -16,18 +16,20 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
 
   return (
     <div
-      className={cn('flex flex-col-reverse md:gap-x-8 lg:flex-row lg:gap-x-16')}
+      className={cn('flex md:gap-x-8 pt-7')}
     >
-      <div className={'grow basis-2/3'}>
-        <h3 className={cn('mb-3 text-3xl leading-snug')}>
+      <div className={'grow'}>
+        <h2 className={cn('mb-3 text-slate-800 text-base sm:text-xl font-bold leading-snug line-clamp-2')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className="hover:underline">
             {title}
           </Link>
-        </h3>
+        </h2>
         {postSummary && (
           <p
             className={cn(
-              'mb-5 line-clamp-2 text-left text-lg font-light leading-relaxed md:mb-8 md:text-justify lg:mb-12'
+              'hidden mb-3.5 sm:line-clamp-1 md:line-clamp-2 text-left ' +
+              'text-sm sm:text-base font-light leading-relaxed ' +
+              'md:text-justify text-slate-600'
             )}
           >
             {summary}
@@ -35,18 +37,20 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
         )}
         <PostMetadata
           post={postSummary}
-          publishedDate={{ show: true, position: 'inline' }}
+          showPublishedDate={true}
+          classNames={'text-sm sm:text-sm md:text-sm lg:text-sm'}
+          authorImageSize={16}
         />
       </div>
       {coverImage && (
-        <div className="mb-5 flex-none basis-1/3">
+        <div className="mb-5 flex-none w-24 sm:w-36">
           <BlogImage
             slug={slug}
             title={title}
             image={coverImage}
             priority={index <= 1}
-            width={480}
-            height={270}
+            width={160}
+            height={160}
           />
         </div>
       )}

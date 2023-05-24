@@ -10,41 +10,30 @@ interface PostMetadataProps {
   post: Pick<
     Post,
     'coverImage' | 'tags' | 'publishedAt' | 'updatedAt' | 'author' | 'slug'
-  >
-  publishedDate?: {
-    show: boolean
-    position: 'inline' | 'below'
-  }
-  updatedDate?: {
-    show: boolean
-    position: 'inline' | 'below'
-  }
-  classNames?: string
+  >;
+  showPublishedDate?: boolean;
+  showUpdatedDate?: boolean;
+  classNames?: string;
+  authorImageSize?: number;
 }
 
 export default function PostMetadata({
   post,
-  publishedDate,
-  updatedDate,
   classNames,
+  showPublishedDate,
+  showUpdatedDate,
+  authorImageSize,
 }: PostMetadataProps) {
   const author = post.author;
-  const showPublishedDateInline =
-    publishedDate && publishedDate.show && publishedDate.position === 'inline';
-  const showPublishedDateBelow =
-    publishedDate && publishedDate.show && publishedDate.position === 'below';
-  const showUpdatedDateInline =
-    updatedDate && updatedDate.show && updatedDate.position === 'inline';
-  const showUpdatedDateBelow =
-    updatedDate && updatedDate.show && updatedDate.position === 'below';
 
   return (
     <div
-      className={cn(`text-xs font-light sm:text-sm lg:text-base ${classNames}`)}
+      className={cn(`text-xs font-light sm:text-sm text-slate-600
+      tracking-tighter ${classNames || ''}`)}
     >
       <div
         className={cn(
-          'flex flex-wrap items-center space-x-1 sm:space-x-1.5 lg:space-x-2'
+          'flex flex-wrap items-center gap-x-1 sm:gap-x-1.5 lg:gap-x-2',
         )}
       >
         <div className={cn('mb-2 sm:mb-0')}>
@@ -56,15 +45,15 @@ export default function PostMetadata({
                 .fit('crop')
                 .url()}
               className={cn('rounded-full')}
-              height={35}
-              width={35}
+              height={authorImageSize || 32}
+              width={authorImageSize || 32}
               alt={`Author's avatar: ${author.firstName}`}
               title={`Author's avatar: ${author.firstName}`}
             />
           )}
         </div>
         <p>{author.firstName}</p>
-        {showPublishedDateInline && (
+        {showPublishedDate &&
           <>
             <span className={cn('mb-2 inline-flex shrink lg:font-black')}>
               .
@@ -74,8 +63,8 @@ export default function PostMetadata({
               <Date dateString={post.publishedAt} />
             </div>
           </>
-        )}
-        {showUpdatedDateInline && (
+        }
+        {showUpdatedDate &&
           <>
             <span className={cn('mb-2 inline-flex shrink lg:font-black')}>
               .
@@ -85,39 +74,13 @@ export default function PostMetadata({
               <Date dateString={post.updatedAt} />
             </div>
           </>
-        )}
+        }
         {post.tags && post.tags.length && (
           <>
             <span className={cn('mb-2 inline-flex shrink lg:font-black')}>
               .
             </span>
             <TagList tags={post.tags} />
-          </>
-        )}
-      </div>
-      <div
-        className={cn(
-          'flex flex-wrap items-center space-x-1.5 text-xs font-light sm:space-x-2 ' +
-            'sm:text-sm lg:space-x-2.5 lg:text-base'
-        )}
-      >
-        {showPublishedDateBelow && (
-          <>
-            <div className={cn('flex flex-wrap whitespace-nowrap')}>
-              <p className={'mr-1 sm:mr-1.5 lg:font-normal'}>Published:</p>
-              <Date dateString={post.publishedAt} />
-            </div>
-          </>
-        )}
-        {showUpdatedDateBelow && (
-          <>
-            <span className={cn('mb-2 inline-flex shrink lg:font-black')}>
-              .
-            </span>
-            <div className={cn('flex flex-wrap whitespace-nowrap')}>
-              <p className={'mr-1 sm:mr-1.5 lg:font-normal'}>Updated:</p>
-              <Date dateString={post.updatedAt} />
-            </div>
           </>
         )}
       </div>

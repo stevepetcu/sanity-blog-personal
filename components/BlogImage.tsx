@@ -7,22 +7,24 @@ import React from 'react';
 import { PixelRatioContext } from '../contexts/PixelRatioContext';
 import { BlogImage } from '../lib/sanity.queries';
 import { POSTS_PAGE_PATH } from '../pages/posts';
-import styles from './BlogImage.module.css';
-import SanePortableText from './SanePortableText';
 
 interface BlogImageProps {
-  title: string
-  slug?: string
-  image: BlogImage
-  priority?: boolean
-  width: number
-  height: number
+  title: string;
+  slug?: string;
+  image: BlogImage;
+  priority?: boolean;
+  width: number;
+  height: number;
+  imageClassNames?: string;
 }
 
 export default function BlogImage(props: BlogImageProps) {
   const pixelRatio = React.useContext(PixelRatioContext);
 
-  const { title, slug, image, width, height, priority } = props;
+  const {
+    title, slug, image, width,
+    height, priority, imageClassNames,
+  } = props;
   const scaledWidth = pixelRatio * width;
   const scaledHeight = pixelRatio * height;
 
@@ -30,17 +32,17 @@ export default function BlogImage(props: BlogImageProps) {
     <div
       className={cn(
         'relative bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] ' +
-          'from-indigo-50 from-35% via-sky-100 via-50% to-emerald-50 to-75%'
+        'from-indigo-50 from-35% via-sky-100 via-50% to-emerald-50 to-75%',
       )}
     >
       <Image
-        className={cn('h-auto w-full rounded')}
+        className={cn(`h-auto w-full rounded ${imageClassNames || ''}`)}
         width={scaledWidth}
         height={scaledHeight}
         alt={image.alt}
         title={image.alt}
         src={urlForImage(image).height(scaledHeight).width(scaledWidth).url()}
-        sizes="100vw"
+        sizes='100vw'
         priority={priority}
       />
     </div>
@@ -59,14 +61,14 @@ export default function BlogImage(props: BlogImageProps) {
       ) : (
         imageComponent
       )}
-      <figcaption
-        className={cn(`${styles.portableText} absolute
-        bottom-0 left-0 w-full 
-        rounded-t bg-white/10 p-1 text-center 
-        text-xs text-slate-700 backdrop-blur-sm`)}
-      >
-        <SanePortableText content={image.caption} />
-      </figcaption>
+      {/*<figcaption*/}
+      {/*  className={cn(`${styles.portableText} absolute*/}
+      {/*  bottom-0 left-0 w-full */}
+      {/*  rounded bg-white/10 p-1 text-center */}
+      {/*  text-xs text-slate-700 backdrop-blur-sm`)}*/}
+      {/*>*/}
+      {/*  <SanePortableText content={image.caption} />*/}
+      {/*</figcaption>*/}
     </figure>
   );
 }

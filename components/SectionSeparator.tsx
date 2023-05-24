@@ -1,12 +1,9 @@
-import cn from 'classnames';
-
 interface SectionSeparatorProps {
-  mt?: string
-  mb?: string
+  classNames?: string
 }
 
-export default function SectionSeparator({ mt, mb }: SectionSeparatorProps) {
+export default function SectionSeparator({ classNames }: SectionSeparatorProps) {
   return (
-    <hr className={cn(`${mt || 'mt-8'} ${mb || 'mb-16'} border-accent-2`)} />
+    <hr className={'mt-8 mb-16 border-accent-2 ' + classNames} />
   );
 }

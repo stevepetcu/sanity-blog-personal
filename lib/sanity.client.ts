@@ -8,6 +8,7 @@ import {
   postSummariesListByTagQuery,
   postSummariesListQuery,
   PostSummary,
+  postTagsQuery,
   type Settings,
   settingsQuery,
 } from 'lib/sanity.queries';
@@ -28,11 +29,19 @@ export async function getSettings(): Promise<Settings> {
   return await client.fetch<Settings>(settingsQuery);
 }
 
-export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
+export async function getAllPostSlugs(): Promise<Pick<Post, 'slug'>[]> {
   if (client) {
     const slugs = (await client.fetch<string[]>(postSlugsQuery)) || [];
     return slugs.map((slug) => ({ slug }));
   }
+  return [];
+}
+
+export async function getAllPostTags(): Promise<string[]> {
+  if (client) {
+    return (await client.fetch<string[]>(postTagsQuery)) || [];
+  }
+
   return [];
 }
 
@@ -45,7 +54,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 
 export async function getPostSummariesList(
   tags?: string[],
-  token?: string | null
+  token?: string | null,
 ): Promise<PostSummary[]> {
   if (projectId) {
     // TODO: do I need to create this client here?
@@ -70,7 +79,7 @@ export async function getPostSummariesList(
 }
 
 export async function getPostPinsList(
-  token?: string | null
+  token?: string | null,
 ): Promise<PostPin[]> {
   if (projectId) {
     const client = createClient({

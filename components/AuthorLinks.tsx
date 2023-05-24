@@ -36,7 +36,7 @@ export default function AuthorLinks({
       <Link
         href="#"
         className={cn(
-          `group shrink ${styles.rotate9} transition-all ease-in-out hover:rotate-0 ${linkTransformOriginLeft} ${linkClassNames}`
+          `group shrink ${styles.rotate9} transition-all ease-in-out hover:rotate-0 ${linkTransformOriginLeft} ${linkClassNames || ''}`
         )}
         title={`${firstName}'s about page and resume`}
         aria-label={`${firstName}'s about page and resume`}

@@ -1,6 +1,6 @@
 import { PreviewSuspense } from '@sanity/preview-kit';
 import PostPage from 'components/PostPage';
-import { getAllPostsSlugs, getPostBySlug, getSettings } from 'lib/sanity.client';
+import { getAllPostSlugs, getPostBySlug, getSettings } from 'lib/sanity.client';
 import { Post, Settings } from 'lib/sanity.queries';
 import { GetStaticProps } from 'next';
 import { lazy } from 'react';
@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps<
 };
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllPostsSlugs();
+  const slugs = await getAllPostSlugs();
 
   return {
     paths: slugs?.map(({ slug }) => `${POSTS_PAGE_PATH}/${slug}`) || [],

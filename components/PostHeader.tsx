@@ -43,8 +43,8 @@ export default function PostHeader({ post }: PostHeaderProps) {
       )}
       <PostMetadata
         post={post}
-        publishedDate={{ show: true, position: 'below' }}
-        updatedDate={{ show: true, position: 'below' }}
+        showPublishedDate={true}
+        showUpdatedDate={true}
         classNames={'mx-auto max-w-2xl'}
       />
     </>

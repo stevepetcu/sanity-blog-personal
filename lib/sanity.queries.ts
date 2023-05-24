@@ -1,9 +1,6 @@
 import { groq } from 'next-sanity';
 import { Slug } from 'sanity';
-import {
-  Crop,
-  Hotspot,
-} from 'sanity/src/core/form/inputs/files/ImageToolInput/imagetool';
+import { Crop, Hotspot } from 'sanity/src/core/form/inputs/files/ImageToolInput/imagetool';
 
 // TODO: figure out how to type all the things and disallow "any"
 
@@ -57,6 +54,10 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
 
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current) && publishedAt <= now()][].slug.current
+`;
+
+export const postTagsQuery = groq`
+*[_type == "post" && defined(tags) && publishedAt <= now()][].tags[]
 `;
 
 export const postPinsListQuery = groq`
