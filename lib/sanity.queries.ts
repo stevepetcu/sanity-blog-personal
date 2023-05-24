@@ -56,8 +56,9 @@ export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current) && publishedAt <= now()][].slug.current
 `;
 
+// TODO: order by "popularity" (of the post)
 export const postTagsQuery = groq`
-*[_type == "post" && defined(tags) && publishedAt <= now()][].tags[]
+array::unique(*[_type == "post" && defined(tags) && publishedAt <= now()] | order(_updatedAt desc)[].tags[])[0...8]
 `;
 
 export const postPinsListQuery = groq`

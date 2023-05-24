@@ -16,7 +16,7 @@ export default function IndexAside({ tags, admin }: IndexAsideProps) {
       <div className={cn('flex flex-wrap gap-x-2 gap-y-4 mb-5')}>
         <TagList tags={tags} itemClassNames={'px-2.5 py-1.5'}/>
       </div>
-      <Link className={'text-sm'} href={'#to-do-search-page'}>See more topics</Link>
+      <Link className={'text-sm'} href={'#to-do-search-page'}>See all the topics</Link>
       <BlogFooter admin={admin} classNames={'hidden lg:flex'}/>
     </aside>
   );
