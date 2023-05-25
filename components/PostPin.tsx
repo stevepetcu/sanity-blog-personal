@@ -22,15 +22,15 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
           {index}/{total}
         </span>
       </div>
-      <div className={cn('grow')}>
+      <div className={cn('grow flex flex-col')}>
         <h3 className={cn('text-base font-bold leading-snug tracking-tight ' +
-          'text-slate-800 line-clamp-2 @[200px]/postPin:line-clamp-1 @[500px]/postPin:line-clamp-2')}>
+          'text-slate-800 line-clamp-2')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>
         </h3>
         <PostMetadata post={postPin} numberOfTagsToShow={1}
-          showPublishedDate={true} showUpdatedDate={true} classNames={'mt-2.5'}/>
+          showPublishedDate={true} showUpdatedDate={true} classNames={'pt-2.5 mt-auto'}/>
       </div>
     </div>
   );
