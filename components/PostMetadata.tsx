@@ -40,7 +40,7 @@ export default function PostMetadata({
       <div
         className={cn(
           'flex flex-wrap items-center gap-y-2.5 ' +
-          '@[50px]/metadata:gap-x-1 @[350px]/metadata:gap-x-2',
+          '@[50px]/metadata:gap-x-1 @[350px]/metadata:gap-x-1.5',
         )}
       >
         {author &&
@@ -63,7 +63,7 @@ export default function PostMetadata({
             </div>
             <p>{author.firstName}</p>
             <span className={cn('mb-2 inline-flex shrink ' +
-              '@[50px]/metadata:font-light @[350px]/metadata:font-black')}>.</span>
+              '@[50px]/metadata:font-light @[350px]/metadata:font-bold')}>.</span>
           </>
         }
         {showPublishedDate && post.publishedAt &&
@@ -76,7 +76,7 @@ export default function PostMetadata({
               <Date dateString={post.publishedAt} />
             </div>
             <span className={cn('mb-2 inline-flex shrink ' +
-              '@[50px]/metadata:font-light @[350px]/metadata:font-black')}>.</span>
+              '@[50px]/metadata:font-light @[350px]/metadata:font-bold')}>.</span>
           </>
         }
         {showUpdatedDate &&
@@ -89,7 +89,7 @@ export default function PostMetadata({
               <Date dateString={post.updatedAt} />
             </div>
             <span className={cn('mb-2 inline-flex shrink ' +
-              '@[50px]/metadata:font-light @[350px]/metadata:font-black')}>.</span>
+              '@[50px]/metadata:font-light @[350px]/metadata:font-bold')}>.</span>
           </>
         }
         {post.tags && post.tags.length > 0 && nrOfTagsToShow > 0 && (
