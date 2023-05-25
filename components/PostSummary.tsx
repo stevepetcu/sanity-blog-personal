@@ -19,7 +19,8 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
       className={cn('flex gap-x-4 md:gap-x-8 pt-7')}
     >
       <div className={'grow'}>
-        <h2 className={cn('mb-3 text-slate-800 text-base sm:text-xl font-bold leading-snug line-clamp-1')}>
+        <h2 className={cn('mb-3 text-slate-800 text-base sm:text-xl font-bold leading-snug line-clamp-1',
+          {'line-clamp-2': !coverImage})}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className="hover:underline">
             {title}
           </Link>
@@ -27,9 +28,8 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
         {postSummary && (
           <p
             className={cn(
-              'line-clamp-1 sm:line-clamp-2 text-left ' +
-              'text-sm sm:text-base font-light leading-relaxed ' +
-              'md:text-justify text-slate-600 mb-3.5 '
+              'line-clamp-1 sm:line-clamp-2 text-sm sm:text-base font-light leading-relaxed text-slate-600 mb-3.5',
+              {'line-clamp-2': !coverImage}
             )}
           >
             {summary}
