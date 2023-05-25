@@ -42,8 +42,8 @@ export default function IndexPage(props: IndexPageProps) {
             admin={admin}
             level={1}
           />
-          {!tagsQuery.length && postPins.length > 0 && <PostPins pins={postPins} />}
-          {tagsQuery.length && (
+          {tagsQuery.length === 0 && postPins.length > 0 && <PostPins pins={postPins} />}
+          {tagsQuery.length > 0 && (
             <>
               <Link
                 href={`${POSTS_PAGE_PATH}`}
