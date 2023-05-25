@@ -13,7 +13,7 @@ interface PostPinProps {
 }
 
 export default function PostPin({ postPin, index, total }: PostPinProps) {
-  const { title, slug, coverImage, summary, tags, updatedAt } = postPin;
+  const { title, slug, tags, updatedAt } = postPin;
 
   return (
     <div className={cn('flex gap-x-4 sm:gap-x-5')}>
@@ -30,17 +30,6 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
             {title}
           </Link>
         </h3>
-        {/*{!coverImage && (*/}
-        {/*  <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>*/}
-        {/*    <p*/}
-        {/*      className={cn(*/}
-        {/*        'line-clamp-1 text-base leading-relaxed text-slate-500',*/}
-        {/*      )}*/}
-        {/*    >*/}
-        {/*      {summary}*/}
-        {/*    </p>*/}
-        {/*  </Link>*/}
-        {/*)}*/}
         <div className={cn('mt-2.5 flex flex-wrap text-xs text-slate-600 ' +
           'tracking-tighter sm:tracking-tight lg:tracking-normal')}>
           <p className={'mr-1.5'}>Updated:</p>
@@ -55,25 +44,6 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
           </div>
         )}
       </div>
-      {/*{!coverImage && (*/}
-      {/*)}*/}
-      {/*{coverImage && (*/}
-      {/*  <div className={cn('relative flex-none basis-1/4')}>*/}
-      {/*    <BlogImage*/}
-      {/*      slug={slug}*/}
-      {/*      title={title}*/}
-      {/*      image={coverImage}*/}
-      {/*      priority={true}*/}
-      {/*      width={64}*/}
-      {/*      height={64}*/}
-      {/*      imageClassNames={'rounded-sm'}*/}
-      {/*    />*/}
-      {/*    <span*/}
-      {/*      className={cn('absolute right-2 top-1 text-xl font-bold text-white/75 sm:text-sm lg:text-lg')}>*/}
-      {/*      {index}/{total}*/}
-      {/*    </span>*/}
-      {/*  </div>*/}
-      {/*)}*/}
     </div>
   );
 }
