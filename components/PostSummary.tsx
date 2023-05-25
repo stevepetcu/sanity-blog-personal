@@ -28,7 +28,8 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
         {postSummary && (
           <p
             className={cn(
-              'line-clamp-1 sm:line-clamp-2 text-sm sm:text-base font-light leading-relaxed text-slate-600 mb-3.5',
+              'line-clamp-1 sm:line-clamp-2 text-sm sm:text-base font-light leading-relaxed ' +
+              'text-slate-600 mb-2.5 sm:mb-3.5',
               {'line-clamp-2': !coverImage}
             )}
           >

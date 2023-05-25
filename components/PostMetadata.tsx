@@ -39,7 +39,7 @@ export default function PostMetadata({
     >
       <div
         className={cn(
-          'flex flex-wrap items-center gap-x-1 sm:gap-x-1.5 lg:gap-x-2',
+          'flex flex-wrap items-center gap-x-1 sm:gap-x-1.5 lg:gap-x-2 gap-y-2.5',
         )}
       >
         {author &&
@@ -67,7 +67,7 @@ export default function PostMetadata({
         {showPublishedDate && post.publishedAt &&
           <>
             <div className={cn('flex flex-wrap whitespace-nowrap')}>
-              <p className={'mr-1 sm:mr-1.5'}>Published:</p>
+              <p className={'hidden sm:inline-flex mr-1 sm:mr-1.5'}>Published:</p>
               <Date dateString={post.publishedAt} />
             </div>
             <span className={cn('mb-2 inline-flex shrink lg:font-black')}>.</span>

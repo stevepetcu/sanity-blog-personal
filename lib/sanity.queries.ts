@@ -24,6 +24,7 @@ const postPinFields = groq`
   "slug": slug.current,
   summary,
   tags,
+  publishedAt,
   "updatedAt": _updatedAt,
 `;
 
@@ -158,6 +159,7 @@ export interface PostPin {
   slug: string
   summary: string
   tags
+  publishedAt: string
   updatedAt: string
 }
 

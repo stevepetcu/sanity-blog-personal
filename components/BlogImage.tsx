@@ -7,6 +7,8 @@ import React from 'react';
 import { PixelRatioContext } from '../contexts/PixelRatioContext';
 import { BlogImage } from '../lib/sanity.queries';
 import { POSTS_PAGE_PATH } from '../pages/posts';
+import styles from './BlogImage.module.css';
+import SanePortableText from './SanePortableText';
 
 interface BlogImageProps {
   title: string;
@@ -61,14 +63,15 @@ export default function BlogImage(props: BlogImageProps) {
       ) : (
         imageComponent
       )}
-      {/*<figcaption*/}
-      {/*  className={cn(`${styles.portableText} absolute*/}
-      {/*  bottom-0 left-0 w-full */}
-      {/*  rounded bg-white/10 p-1 text-center */}
-      {/*  text-xs text-slate-700 backdrop-blur-sm`)}*/}
-      {/*>*/}
-      {/*  <SanePortableText content={image.caption} />*/}
-      {/*</figcaption>*/}
+      <figcaption
+        className={cn(`${styles.portableText} absolute
+        bottom-0 left-0 w-full 
+        rounded-b bg-white/10 p-1
+        text-center text-[0.5rem] leading-[0.5rem] sm:text-xs text-slate-700 
+        backdrop-blur-sm`)}
+      >
+        <SanePortableText content={image.caption} />
+      </figcaption>
     </figure>
   );
 }

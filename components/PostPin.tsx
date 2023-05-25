@@ -29,7 +29,8 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
             {title}
           </Link>
         </h3>
-        <PostMetadata post={postPin} numberOfTagsToShow={1} showUpdatedDate={true} classNames={'mt-2.5'}/>
+        <PostMetadata post={postPin} numberOfTagsToShow={1}
+          showPublishedDate={true} showUpdatedDate={true} classNames={'mt-2.5'}/>
       </div>
     </div>
   );
