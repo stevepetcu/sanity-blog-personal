@@ -13,7 +13,7 @@ export default function PostDate({
   const date = parseISO(dateString);
   return (
     <time dateTime={dateString} className={cn(classNames || '')}>
-      {format(date, 'd LLL, yyyy')}
+      {format(date, 'd LLL, `yy')}
     </time>
   );
 }

@@ -12,10 +12,12 @@ import IndexPage from './IndexPage';
 
 export default function PreviewIndexPage({
   token,
-  showPins,
+  tagsQuery,
+  allPostTags,
 }: {
   token: null | string
-  showPins: boolean
+  tagsQuery: string[]
+  allPostTags: string[]
 }) {
   const pins: PostPin[] = usePreview(token, postPinsListQuery) || [];
   const summaries: PostSummary[] =
@@ -28,7 +30,8 @@ export default function PreviewIndexPage({
       postPins={pins}
       postSummaries={summaries}
       settings={settings}
-      showPins={showPins}
+      tagsQuery={tagsQuery}
+      allPostTags={allPostTags}
     />
   );
 }

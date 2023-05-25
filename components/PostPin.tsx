@@ -36,11 +36,9 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
           <Date dateString={updatedAt} />
         </div>
         {tags && tags.length && (
-          <div className={cn('mt-2.5 flex flex-wrap')}>
-            <TagList
-              tags={tags}
-              itemClassNames={'mr-1.5 mb-1.5 text-xs'}
-            />
+          <div className={cn('mt-2.5 flex flex-wrap gap-x-2 text-sm ' +
+            'sm:text-sm md:text-sm lg:text-sm')}>
+            <TagList tags={tags} />
           </div>
         )}
       </div>

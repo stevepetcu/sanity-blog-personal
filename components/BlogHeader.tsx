@@ -33,9 +33,7 @@ export default function BlogHeader({
     <>
       <header className={cn('mt-5 flex flex-row items-center tracking-tight')}>
         <h1
-          className={cn(
-            `grow basis-1/3 text-sm ${headerFontSize} font-bold leading-tight tracking-tighter md:pr-8`
-          )}
+          className={cn(`grow basis-1/3 text-sm ${headerFontSize} font-bold leading-tight tracking-tighter md:pr-8`)}
         >
           <Link href={POSTS_PAGE_PATH} className="hover:underline">
             {title}
@@ -43,16 +41,19 @@ export default function BlogHeader({
         </h1>
         <span
           className={cn(
-            `hidden grow basis-1/3 text-center text-sm sm:inline-flex ${headerFontSize} ${styles.portableText}`
+            `${styles.portableText} hidden sm:inline-block basis-1/3 
+            text-sm ${headerFontSize} text-center lg:text-right`
           )}
         >
           <PortableText value={description} />
         </span>
-        <AuthorLinks
-          admin={admin}
-          placement={'header'}
-          linkClassNames={`text-sm ${linksFontSize}`}
-        />
+        <div className={'flex basis-1/3 justify-end lg:hidden'}>
+          <AuthorLinks
+            admin={admin}
+            placement={'header'}
+            linkClassNames={`text-sm ${linksFontSize}`}
+          />
+        </div>
       </header>
       <SectionSeparator classNames={'mt-2 mb-8'} />
     </>

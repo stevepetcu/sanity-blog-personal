@@ -42,11 +42,11 @@ export default function Page(props: PageProps) {
             postSummaries={summaries}
             allPostTags={allPostTags}
             settings={settings}
-            showPins={!tagsQuery.length}
+            tagsQuery={tagsQuery}
           />
         }
       >
-        <PreviewIndexPage token={token} showPins={!tagsQuery.length} />
+        <PreviewIndexPage token={token} tagsQuery={tagsQuery} allPostTags={allPostTags} />
       </PreviewSuspense>
     );
   }
@@ -57,7 +57,7 @@ export default function Page(props: PageProps) {
       postSummaries={summaries}
       allPostTags={allPostTags}
       settings={settings}
-      showPins={!tagsQuery.length}
+      tagsQuery={tagsQuery}
     />
   );
 }
