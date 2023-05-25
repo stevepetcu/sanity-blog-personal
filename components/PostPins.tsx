@@ -7,7 +7,7 @@ import type { PostPin } from 'lib/sanity.queries';
 export default function PostPins({ pins }: { pins: PostPin[] }) {
   return (
     <section>
-      <div className={'flex items-center mb-5 ml-2'}>
+      <div className={'flex items-center mb-5'}>
         <FontAwesomeIcon
           icon={faThumbtack}
           className={cn('h-5 w-5 mr-4 md:mr-5 p-1.5 bg-slate-200 rounded-full')}

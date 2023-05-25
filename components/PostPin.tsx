@@ -15,10 +15,10 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
   const { title, slug } = postPin;
 
   return (
-    <div className={cn('flex gap-x-4 sm:gap-x-5')}>
+    <div className={cn('flex gap-x-3 md:gap-x-4 xl:gap-x-5')}>
       <div className={cn('shrink -mt-1.5')}>
         <span
-          className={cn('text-3xl font-medium text-slate-200 ')}>
+          className={cn('text-2xl sm:text-3xl md:text-2xl xl:text-3xl font-medium text-slate-200 ')}>
           {index}/{total}
         </span>
       </div>

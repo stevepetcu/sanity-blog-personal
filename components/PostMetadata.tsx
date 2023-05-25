@@ -34,7 +34,7 @@ export default function PostMetadata({
 
   return (
     <div
-      className={cn(`text-sm font-light text-slate-600
+      className={cn(`text-xs sm:text-sm md:text-xs xl:text-sm font-light text-slate-600
       tracking-tighter ${classNames || ''}`)}
     >
       <div
@@ -66,8 +66,8 @@ export default function PostMetadata({
         }
         {showPublishedDate && post.publishedAt &&
           <>
-            <div className={cn('flex flex-wrap whitespace-nowrap')}>
-              <p className={'hidden sm:inline-flex mr-1 sm:mr-1.5'}>Published:</p>
+            <div className={cn('flex whitespace-nowrap')}>
+              <p className={'mr-1 sm:mr-1.5 basis-1/5 grow'}>Published:</p>
               <Date dateString={post.publishedAt} />
             </div>
             <span className={cn('mb-2 inline-flex shrink lg:font-black')}>.</span>
@@ -75,8 +75,8 @@ export default function PostMetadata({
         }
         {showUpdatedDate &&
           <>
-            <div className={cn('flex flex-wrap whitespace-nowrap')}>
-              <p className={'mr-1 sm:mr-1.5'}>Updated:</p>
+            <div className={cn('flex whitespace-nowrap')}>
+              <p className={'mr-1 sm:mr-1.5 basis-1/5 grow'}>Updated:</p>
               <Date dateString={post.updatedAt} />
             </div>
             <span className={cn('mb-2 inline-flex shrink lg:font-black')}>.</span>
