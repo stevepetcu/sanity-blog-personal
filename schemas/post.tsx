@@ -1,8 +1,8 @@
-import { BookIcon } from '@sanity/icons'
-import { format, parseISO } from 'date-fns'
-import { defineArrayMember, defineField, defineType, SlugValue } from 'sanity'
+import { BookIcon } from '@sanity/icons';
+import { format, parseISO } from 'date-fns';
+import { defineArrayMember, defineField, defineType, SlugValue } from 'sanity';
 
-import authorType from './author'
+import authorType from './author';
 
 // TODO:
 //  1. Fix TS errors.
@@ -38,7 +38,7 @@ export default defineType({
         rule.required().custom((value: SlugValue) => {
           return /^[a-z]+(?:-[a-z]+)*$/.test(value.current)
             ? true
-            : 'Slug value must match the RegExp "^[a-z]+(?:-[a-z]+)*$".'
+            : 'Slug value must match the RegExp "^[a-z]+(?:-[a-z]+)*$".';
         }),
     }),
     defineField({
@@ -87,19 +87,19 @@ export default defineType({
           ],
           title: 'Caption',
           hidden: (document) => {
-            return document?.parent?.asset === undefined
+            return document?.parent?.asset === undefined;
           },
           validation: (rule) =>
             rule.custom((value: string, context) => {
               if (value && value.length > 0 && !context.parent.asset) {
-                return 'An image must be added for this value to be accepted.'
+                return 'An image must be added for this value to be accepted.';
               }
 
               if ((!value || value.length < 1) && context.parent.asset) {
-                return 'Please attribute the image.'
+                return 'Please attribute the image.';
               }
 
-              return true
+              return true;
             }),
         },
         {
@@ -107,19 +107,19 @@ export default defineType({
           type: 'string',
           title: 'Alt',
           hidden: (document) => {
-            return document?.parent?.asset === undefined
+            return document?.parent?.asset === undefined;
           },
           validation: (rule) =>
             rule.custom((value: string, context) => {
               if (value && value.length > 0 && !context.parent.asset) {
-                return 'An image must be added for this value to be accepted.'
+                return 'An image must be added for this value to be accepted.';
               }
 
               if ((!value || value.length < 5) && context.parent.asset) {
-                return 'Please add an alt description for the image.'
+                return 'Please add an alt description for the image.';
               }
 
-              return true
+              return true;
             }),
         },
       ],
@@ -146,16 +146,16 @@ export default defineType({
                 source: (document, opts) => {
                   return 'heading' in opts.parent
                     ? (opts.parent.heading as string)
-                        .toLowerCase()
-                        .replace(/\s+/g, '-')
-                        .slice(0, 110)
-                    : ''
+                      .toLowerCase()
+                      .replace(/\s+/g, '-')
+                      .slice(0, 110)
+                    : '';
                 },
                 maxLength: 110,
                 isUnique: (value: string, context) => {
                   const documentContentSections = context.document
-                    .content as Array<{ anchor: SlugValue; _key: string }>
-                  const slugParent = context.parent as { _key: string }
+                    .content as Array<{ anchor: SlugValue; _key: string }>;
+                  const slugParent = context.parent as { _key: string };
 
                   return (
                     documentContentSections.some(
@@ -164,7 +164,7 @@ export default defineType({
                         section.anchor &&
                         section.anchor.current === value
                     ) === false
-                  )
+                  );
                 },
               },
               validation: (rule) =>
@@ -173,7 +173,7 @@ export default defineType({
                     context.parent?.heading.length === 0 ||
                     /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current)
                     ? true
-                    : 'Slug value must match the RegExp "^[a-z0-9]+(?:-[a-z0-9]+)*$".'
+                    : 'Slug value must match the RegExp "^[a-z0-9]+(?:-[a-z0-9]+)*$".';
                 }),
             },
             {
@@ -319,22 +319,22 @@ export default defineType({
                   ],
                   title: 'Caption',
                   hidden: (document) => {
-                    return document?.parent?.asset === undefined
+                    return document?.parent?.asset === undefined;
                   },
                   validation: (rule) =>
                     rule.custom((value: string, context) => {
                       if (value && value.length > 0 && !context.parent.asset) {
-                        return 'An image must be added for this value to be accepted.'
+                        return 'An image must be added for this value to be accepted.';
                       }
 
                       if (
                         (!value || value.length < 1) &&
                         context.parent.asset
                       ) {
-                        return 'Please attribute the image.'
+                        return 'Please attribute the image.';
                       }
 
-                      return true
+                      return true;
                     }),
                 },
                 {
@@ -342,22 +342,22 @@ export default defineType({
                   type: 'string',
                   title: 'Alt',
                   hidden: (document) => {
-                    return document?.parent?.asset === undefined
+                    return document?.parent?.asset === undefined;
                   },
                   validation: (rule) =>
                     rule.custom((value: string, context) => {
                       if (value && value.length > 0 && !context.parent.asset) {
-                        return 'An image must be added for this value to be accepted.'
+                        return 'An image must be added for this value to be accepted.';
                       }
 
                       if (
                         (!value || value.length < 5) &&
                         context.parent.asset
                       ) {
-                        return 'Please attribute the image.'
+                        return 'Please attribute the image.';
                       }
 
-                      return true
+                      return true;
                     }),
                 },
                 {
@@ -373,22 +373,22 @@ export default defineType({
                     direction: 'horizontal',
                   },
                   hidden: (document) => {
-                    return document?.parent?.asset === undefined
+                    return document?.parent?.asset === undefined;
                   },
                   validation: (rule) =>
                     rule.custom((value: string, context) => {
                       if (value && value.length > 0 && !context.parent.asset) {
-                        return 'An image must be added for this value to be accepted.'
+                        return 'An image must be added for this value to be accepted.';
                       }
 
                       if (
                         context.parent.asset &&
                         !['top', 'right', 'bottom', 'left'].includes(value)
                       ) {
-                        return 'Please place the image.'
+                        return 'Please place the image.';
                       }
 
-                      return true
+                      return true;
                     }),
                 },
               ],
@@ -426,7 +426,7 @@ export default defineType({
       of: [
         defineArrayMember({
           type: 'string',
-          validation: (rule) => rule.required().min(3).max(10),
+          validation: (rule) => rule.required().min(2).max(10),
         }),
       ],
       validation: (rule) => rule.max(5),
@@ -462,9 +462,9 @@ export default defineType({
       const subtitles = [
         author && `by ${author}`,
         date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
-      ].filter(Boolean)
+      ].filter(Boolean);
 
-      return { title, media, subtitle: subtitles.join(' ') }
+      return { title, media, subtitle: subtitles.join(' ') };
     },
   },
-})
+});
