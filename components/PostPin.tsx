@@ -15,7 +15,7 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
   const { title, slug } = postPin;
 
   return (
-    <div className={cn('flex gap-x-3 md:gap-x-4 xl:gap-x-5')}>
+    <div className={cn('flex gap-x-3 md:gap-x-4 xl:gap-x-5 @container/postPin')}>
       <div className={cn('shrink -mt-1.5')}>
         <span
           className={cn('text-2xl sm:text-3xl md:text-2xl xl:text-3xl font-medium text-slate-200 ')}>
@@ -24,7 +24,7 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
       </div>
       <div className={cn('grow')}>
         <h3 className={cn('text-base font-bold leading-snug tracking-tight ' +
-          'text-slate-800 line-clamp-2')}>
+          'text-slate-800 line-clamp-2 @[200px]/postPin:line-clamp-1 @[500px]/postPin:line-clamp-2')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className='hover:underline'>
             {title}
           </Link>

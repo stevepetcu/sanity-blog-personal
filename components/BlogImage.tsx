@@ -52,7 +52,7 @@ export default function BlogImage(props: BlogImageProps) {
 
   return (
     <figure
-      className={cn('relative overflow-clip drop-shadow-sm', {
+      className={cn('relative overflow-clip drop-shadow-sm @container/blogImage', {
         'transition-all duration-200 hover:drop-shadow-lg': slug,
       })}
     >
@@ -67,7 +67,10 @@ export default function BlogImage(props: BlogImageProps) {
         className={cn(`${styles.portableText} absolute
         bottom-0 left-0 w-full 
         rounded-b bg-white/10 p-1
-        text-center text-[0.5rem] leading-[0.5rem] sm:text-xs text-slate-700 
+        text-center text-xs
+        @[50px]/blogImage:text-[0.5rem] @[50px]/blogImage:leading-[0.5rem]
+        @[350px]/blogImage:text-xs
+        whitespace-nowrap text-slate-700 
         backdrop-blur-sm`)}
       >
         <SanePortableText content={image.caption} />

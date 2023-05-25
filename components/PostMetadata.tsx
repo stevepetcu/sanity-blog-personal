@@ -35,11 +35,12 @@ export default function PostMetadata({
   return (
     <div
       className={cn(`text-xs sm:text-sm md:text-xs xl:text-sm font-light text-slate-600
-      tracking-tighter ${classNames || ''}`)}
+      tracking-tighter ${classNames || ''} @container/metadata`)}
     >
       <div
         className={cn(
-          'flex flex-wrap items-center gap-x-1 sm:gap-x-1.5 lg:gap-x-2 gap-y-2.5',
+          'flex flex-wrap items-center gap-y-2.5 ' +
+          '@[50px]/metadata:gap-x-1 @[350px]/metadata:gap-x-2',
         )}
       >
         {author &&
@@ -61,25 +62,34 @@ export default function PostMetadata({
               )}
             </div>
             <p>{author.firstName}</p>
-            <span className={cn('mb-2 inline-flex shrink lg:font-black')}>.</span>
+            <span className={cn('mb-2 inline-flex shrink ' +
+              '@[50px]/metadata:font-light @[350px]/metadata:font-black')}>.</span>
           </>
         }
         {showPublishedDate && post.publishedAt &&
           <>
             <div className={cn('flex whitespace-nowrap')}>
-              <p className={'mr-1 sm:mr-1.5 basis-1/5 grow'}>Published:</p>
+              <p className={'mr-1 sm:mr-1.5 basis-1/5 grow ' +
+                '@[50px]/metadata:hidden @[350px]/metadata:inline-flex'}>Published:</p>
+              <p className={'mr-0.5 basis-1/5 grow ' +
+                '@[50px]/metadata:inline-flex @[350px]/metadata:hidden'}>P:</p>
               <Date dateString={post.publishedAt} />
             </div>
-            <span className={cn('mb-2 inline-flex shrink lg:font-black')}>.</span>
+            <span className={cn('mb-2 inline-flex shrink ' +
+              '@[50px]/metadata:font-light @[350px]/metadata:font-black')}>.</span>
           </>
         }
         {showUpdatedDate &&
           <>
             <div className={cn('flex whitespace-nowrap')}>
-              <p className={'mr-1 sm:mr-1.5 basis-1/5 grow'}>Updated:</p>
+              <p className={'mr-1 sm:mr-1.5 basis-1/5 grow ' +
+                '@[50px]/metadata:hidden @[350px]/metadata:inline-flex'}>Updated:</p>
+              <p className={'mr-0.5 basis-1/5 grow ' +
+                '@[50px]/metadata:inline-flex @[350px]/metadata:hidden'}>U:</p>
               <Date dateString={post.updatedAt} />
             </div>
-            <span className={cn('mb-2 inline-flex shrink lg:font-black')}>.</span>
+            <span className={cn('mb-2 inline-flex shrink ' +
+              '@[50px]/metadata:font-light @[350px]/metadata:font-black')}>.</span>
           </>
         }
         {post.tags && post.tags.length > 0 && nrOfTagsToShow > 0 && (
