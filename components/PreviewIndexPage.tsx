@@ -1,5 +1,6 @@
 import { usePreview } from 'lib/sanity.preview';
 import {
+  Post,
   type PostPin,
   postPinsListQuery,
   postSummariesListQuery,
@@ -17,7 +18,7 @@ export default function PreviewIndexPage({
 }: {
   token: null | string
   tagsQuery: string[]
-  allPostTags: string[]
+  allPostTags: Post['tags']
 }) {
   const pins: PostPin[] = usePreview(token, postPinsListQuery) || [];
   const summaries: PostSummary[] =

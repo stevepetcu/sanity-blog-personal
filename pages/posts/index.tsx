@@ -1,6 +1,6 @@
 import { PreviewSuspense } from '@sanity/preview-kit';
 import { getAllPostTags, getPostPinsList, getPostSummariesList, getSettings } from 'lib/sanity.client';
-import { PostPin, PostSummary, Settings } from 'lib/sanity.queries';
+import { Post, PostPin, PostSummary, Settings } from 'lib/sanity.queries';
 import { GetServerSideProps } from 'next';
 import { lazy } from 'react';
 
@@ -12,7 +12,7 @@ interface PageProps {
   pins: PostPin[];
   summaries: PostSummary[];
   settings: Settings;
-  allPostTags: string[];
+  allPostTags: Post['tags'];
   preview: boolean;
   token: string | null;
   tagsQuery: string[];

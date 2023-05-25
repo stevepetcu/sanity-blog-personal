@@ -8,6 +8,7 @@ import Layout from 'components/BlogLayout';
 import IndexPageHead from 'components/IndexPageHead';
 import PostPins from 'components/PostPins';
 import type { PostPin, PostSummary, Settings } from 'lib/sanity.queries';
+import { Post } from 'lib/sanity.queries';
 import Link from 'next/link';
 
 import { POSTS_PAGE_PATH } from '../pages/posts';
@@ -21,7 +22,7 @@ export interface IndexPageProps {
   loading?: boolean
   postPins: PostPin[]
   postSummaries: PostSummary[]
-  allPostTags: string[]
+  allPostTags: Post['tags']
   settings: Settings
   tagsQuery: string[]
 }
@@ -71,7 +72,8 @@ export default function IndexPage(props: IndexPageProps) {
               )}
             </div>
             <div className={'col-span-1 lg:col-span-4 order-first lg:order-last'}>
-              <IndexAside tags={allPostTags.filter(tag => !tagsQuery.includes(tag))} admin={admin} />
+              <IndexAside tags={allPostTags.filter(tag =>
+                !tagsQuery.includes(tag as unknown as string))} admin={admin} />
             </div>
           </div>
           <BlogFooter admin={settings.admin} classNames={'flex lg:hidden'} />

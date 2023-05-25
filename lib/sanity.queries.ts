@@ -22,7 +22,6 @@ const postPinFields = groq`
   _id,
   title,
   "slug": slug.current,
-  coverImage,
   summary,
   tags,
   "updatedAt": _updatedAt,
@@ -157,7 +156,6 @@ export interface PostPin {
   _id: string
   title: string
   slug: string
-  coverImage?: BlogImage
   summary: string
   tags
   updatedAt: string

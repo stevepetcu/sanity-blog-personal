@@ -2,10 +2,11 @@ import cn from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 
+import { Post } from '../lib/sanity.queries';
 import { POSTS_PAGE_PATH } from '../pages/posts';
 
 interface TagListProps {
-  tags: string[];
+  tags: Post['tags'];
   itemClassNames?: string;
 }
 

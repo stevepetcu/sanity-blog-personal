@@ -16,10 +16,10 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
 
   return (
     <div
-      className={cn('flex md:gap-x-8 pt-7')}
+      className={cn('flex gap-x-4 md:gap-x-8 pt-7')}
     >
       <div className={'grow'}>
-        <h2 className={cn('mb-3 text-slate-800 text-base sm:text-xl font-bold leading-snug line-clamp-2')}>
+        <h2 className={cn('mb-3 text-slate-800 text-base sm:text-xl font-bold leading-snug line-clamp-1')}>
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className="hover:underline">
             {title}
           </Link>
@@ -27,9 +27,9 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
         {postSummary && (
           <p
             className={cn(
-              'hidden mb-3.5 sm:line-clamp-1 md:line-clamp-2 text-left ' +
+              'line-clamp-1 sm:line-clamp-2 text-left ' +
               'text-sm sm:text-base font-light leading-relaxed ' +
-              'md:text-justify text-slate-600'
+              'md:text-justify text-slate-600 mb-3.5 '
             )}
           >
             {summary}
@@ -38,8 +38,8 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
         <PostMetadata
           post={postSummary}
           showPublishedDate={true}
-          classNames={'text-sm sm:text-sm md:text-sm lg:text-sm'}
           authorImageSize={16}
+          numberOfTagsToShow={1}
         />
       </div>
       {coverImage && (

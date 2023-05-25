@@ -37,9 +37,9 @@ export async function getAllPostSlugs(): Promise<Pick<Post, 'slug'>[]> {
   return [];
 }
 
-export async function getAllPostTags(): Promise<string[]> {
+export async function getAllPostTags(): Promise<Post['tags']> {
   if (client) {
-    return (await client.fetch<string[]>(postTagsQuery)) || [];
+    return (await client.fetch<Post['tags']>(postTagsQuery)) || [];
   }
 
   return [];

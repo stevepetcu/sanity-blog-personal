@@ -1,12 +1,12 @@
 import cn from 'classnames';
 import Link from 'next/link';
 
-import { Author } from '../lib/sanity.queries';
+import { Author, Post } from '../lib/sanity.queries';
 import BlogFooter from './BlogFooter';
 import TagList from './TagList';
 
 interface IndexAsideProps {
-  tags: string[]
+  tags: Post['tags']
   admin: Author
 }
 export default function IndexAside({ tags, admin }: IndexAsideProps) {

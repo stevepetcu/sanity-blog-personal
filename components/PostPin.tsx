@@ -3,8 +3,7 @@ import type { PostPin } from 'lib/sanity.queries';
 import Link from 'next/link';
 
 import { POSTS_PAGE_PATH } from '../pages/posts';
-import Date from './PostDate';
-import TagList from './TagList';
+import PostMetadata from './PostMetadata';
 
 interface PostPinProps {
   postPin: Omit<PostPin, '_id'>;
@@ -13,7 +12,7 @@ interface PostPinProps {
 }
 
 export default function PostPin({ postPin, index, total }: PostPinProps) {
-  const { title, slug, tags, updatedAt } = postPin;
+  const { title, slug } = postPin;
 
   return (
     <div className={cn('flex gap-x-4 sm:gap-x-5')}>
@@ -30,17 +29,7 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
             {title}
           </Link>
         </h3>
-        <div className={cn('mt-2.5 flex flex-wrap text-xs text-slate-600 ' +
-          'tracking-tighter sm:tracking-tight lg:tracking-normal')}>
-          <p className={'mr-1.5'}>Updated:</p>
-          <Date dateString={updatedAt} />
-        </div>
-        {tags && tags.length && (
-          <div className={cn('mt-2.5 flex flex-wrap gap-x-2 text-sm ' +
-            'sm:text-sm md:text-sm lg:text-sm')}>
-            <TagList tags={tags} />
-          </div>
-        )}
+        <PostMetadata post={postPin} numberOfTagsToShow={1} showUpdatedDate={true} classNames={'mt-2.5'}/>
       </div>
     </div>
   );

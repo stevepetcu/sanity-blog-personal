@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { format, parseISO } from 'date-fns';
+import { format, getYear, parseISO } from 'date-fns';
 
 export default function PostDate({
   dateString,
@@ -11,9 +11,12 @@ export default function PostDate({
   if (!dateString) return null;
 
   const date = parseISO(dateString);
+  const formattedDate = date.getFullYear() === getYear(Date.now()) ?
+    format(date, 'd LLL') :
+    format(date, 'd LLL, `yy');
   return (
     <time dateTime={dateString} className={cn(classNames || '')}>
-      {format(date, 'd LLL, `yy')}
+      {formattedDate}
     </time>
   );
 }
