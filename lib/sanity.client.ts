@@ -54,7 +54,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 
 export async function getPostSummariesList(
   tags?: string[],
-  token?: string | null,
+  token?: string | null
 ): Promise<PostSummary[]> {
   if (projectId) {
     // TODO: do I need to create this client here?
@@ -79,7 +79,7 @@ export async function getPostSummariesList(
 }
 
 export async function getPostPinsList(
-  token?: string | null,
+  token?: string | null
 ): Promise<PostPin[]> {
   if (projectId) {
     const client = createClient({

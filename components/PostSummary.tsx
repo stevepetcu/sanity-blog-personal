@@ -15,12 +15,14 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
   const { title, slug, summary, coverImage } = postSummary;
 
   return (
-    <div
-      className={cn('flex gap-x-4 md:gap-x-8 pt-7')}
-    >
+    <div className={cn('flex gap-x-4 pt-7 md:gap-x-8')}>
       <div className={'grow'}>
-        <h2 className={cn('mb-3 text-slate-800 text-base sm:text-xl font-bold leading-snug line-clamp-1',
-          {'line-clamp-2': !coverImage})}>
+        <h2
+          className={cn(
+            'mb-3 line-clamp-1 text-base font-bold leading-snug text-slate-800 sm:text-xl',
+            { 'line-clamp-2': !coverImage }
+          )}
+        >
           <Link href={`${POSTS_PAGE_PATH}/${slug}`} className="hover:underline">
             {title}
           </Link>
@@ -28,9 +30,9 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
         {postSummary && (
           <p
             className={cn(
-              'line-clamp-1 sm:line-clamp-2 text-sm sm:text-base font-light leading-relaxed ' +
-              'text-slate-600 mb-2.5 sm:mb-3.5',
-              {'line-clamp-2': !coverImage}
+              'line-clamp-1 text-sm font-light leading-relaxed sm:line-clamp-2 sm:text-base ' +
+                'mb-2.5 text-slate-600 sm:mb-3.5',
+              { 'line-clamp-2': !coverImage }
             )}
           >
             {summary}
@@ -44,7 +46,7 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
         />
       </div>
       {coverImage && (
-        <div className="mb-5 flex-none w-24 sm:w-36">
+        <div className="mb-5 w-24 flex-none sm:w-36">
           <BlogImage
             slug={slug}
             title={title}

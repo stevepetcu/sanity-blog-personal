@@ -11,9 +11,10 @@ export default function PostDate({
   if (!dateString) return null;
 
   const date = parseISO(dateString);
-  const formattedDate = date.getFullYear() === getYear(Date.now()) ?
-    format(date, 'd LLL') :
-    format(date, 'd LLL, `yy');
+  const formattedDate =
+    date.getFullYear() === getYear(Date.now())
+      ? format(date, 'd LLL')
+      : format(date, 'd LLL, `yy');
   return (
     <time dateTime={dateString} className={cn(classNames || '')}>
       {formattedDate}

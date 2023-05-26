@@ -1,6 +1,9 @@
 import { groq } from 'next-sanity';
 import { Slug } from 'sanity';
-import { Crop, Hotspot } from 'sanity/src/core/form/inputs/files/ImageToolInput/imagetool';
+import {
+  Crop,
+  Hotspot,
+} from 'sanity/src/core/form/inputs/files/ImageToolInput/imagetool';
 
 // TODO: figure out how to type all the things and disallow "any"
 

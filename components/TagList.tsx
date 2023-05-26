@@ -6,8 +6,8 @@ import { Post } from '../lib/sanity.queries';
 import { POSTS_PAGE_PATH } from '../pages/posts';
 
 interface TagListProps {
-  tags: Post['tags'];
-  itemClassNames?: string;
+  tags: Post['tags']
+  itemClassNames?: string
 }
 
 /**
@@ -28,10 +28,10 @@ export default function TagList({ tags, itemClassNames }: TagListProps) {
           <small
             className={cn(
               'flex-initial px-2.5 py-1.5 ' +
-              'rounded-full bg-slate-100 hover:bg-slate-50 ' +
-              'tracking-tighter font-light lowercase text-slate-800 hover:text-sky-500 md:uppercase ' +
-              'whitespace-nowrap ' +
-              itemClassNames || '',
+                'rounded-full bg-slate-100 hover:bg-slate-50 ' +
+                'font-light lowercase tracking-tighter text-slate-800 hover:text-sky-500 md:uppercase ' +
+                'whitespace-nowrap ' +
+                itemClassNames || ''
             )}
           >
             {tag}

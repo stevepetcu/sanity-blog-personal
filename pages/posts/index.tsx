@@ -1,5 +1,10 @@
 import { PreviewSuspense } from '@sanity/preview-kit';
-import { getAllPostTags, getPostPinsList, getPostSummariesList, getSettings } from 'lib/sanity.client';
+import {
+  getAllPostTags,
+  getPostPinsList,
+  getPostSummariesList,
+  getSettings,
+} from 'lib/sanity.client';
 import { Post, PostPin, PostSummary, Settings } from 'lib/sanity.queries';
 import { GetServerSideProps } from 'next';
 import { lazy } from 'react';
@@ -9,27 +14,28 @@ import IndexPage from '../../components/IndexPage';
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'));
 
 interface PageProps {
-  pins: PostPin[];
-  summaries: PostSummary[];
-  settings: Settings;
-  allPostTags: Post['tags'];
-  preview: boolean;
-  token: string | null;
-  tagsQuery: string[];
+  pins: PostPin[]
+  summaries: PostSummary[]
+  settings: Settings
+  allPostTags: Post['tags']
+  preview: boolean
+  token: string | null
+  tagsQuery: string[]
 }
 
 interface Query {
-  [key: string]: string;
+  [key: string]: string
 }
 
 interface PreviewData {
-  token?: string;
+  token?: string
 }
 
 export const POSTS_PAGE_PATH = '/posts';
 
 export default function Page(props: PageProps) {
-  const { pins, summaries, settings, allPostTags, preview, token, tagsQuery } = props;
+  const { pins, summaries, settings, allPostTags, preview, token, tagsQuery } =
+    props;
 
   if (preview) {
     return (
@@ -46,7 +52,11 @@ export default function Page(props: PageProps) {
           />
         }
       >
-        <PreviewIndexPage token={token} tagsQuery={tagsQuery} allPostTags={allPostTags} />
+        <PreviewIndexPage
+          token={token}
+          tagsQuery={tagsQuery}
+          allPostTags={allPostTags}
+        />
       </PreviewSuspense>
     );
   }

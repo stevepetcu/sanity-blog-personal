@@ -28,8 +28,15 @@ export interface IndexPageProps {
 }
 
 export default function IndexPage(props: IndexPageProps) {
-  const { preview, loading, postPins, postSummaries, allPostTags, settings, tagsQuery } =
-    props;
+  const {
+    preview,
+    loading,
+    postPins,
+    postSummaries,
+    allPostTags,
+    settings,
+    tagsQuery,
+  } = props;
   const { title, description, admin } = settings;
 
   return (
@@ -43,7 +50,9 @@ export default function IndexPage(props: IndexPageProps) {
             admin={admin}
             level={1}
           />
-          {tagsQuery.length === 0 && postPins.length > 0 && <PostPins pins={postPins} />}
+          {tagsQuery.length === 0 && postPins.length > 0 && (
+            <PostPins pins={postPins} />
+          )}
           {tagsQuery.length > 0 && (
             <>
               <Link
@@ -53,27 +62,42 @@ export default function IndexPage(props: IndexPageProps) {
                 <ArrowLeftIcon className={cn('text-xl')} />
                 <span>Back to all the posts</span>
               </Link>
-              <div className={'flex items-center mt-5'}>
+              <div className={'mt-5 flex items-center'}>
                 <FontAwesomeIcon
                   icon={faTags}
-                  className={cn('h-5 w-5 mr-2 p-1.5 bg-slate-200 rounded-full')}
+                  className={cn('mr-2 h-5 w-5 rounded-full bg-slate-200 p-1.5')}
                 />
-                <h2 className={cn('text-2xl sm:text-3xl font-medium text-slate-800 ml-0.5 leading-snug')}>
-                  <span className={'capitalize'}>{tagsQuery.join(', ')}</span> posts
+                <h2
+                  className={cn(
+                    'ml-0.5 text-2xl font-medium leading-snug text-slate-800 sm:text-3xl'
+                  )}
+                >
+                  <span className={'capitalize'}>{tagsQuery.join(', ')}</span>{' '}
+                  posts
                 </h2>
               </div>
             </>
           )}
-          <SectionSeparator classNames={'mb-5'}/>
-          <div className={cn('grid grid-cols-1 lg:grid-cols-10 gap-x-10 mb-14 order-last lg:order-first')}>
+          <SectionSeparator classNames={'mb-5'} />
+          <div
+            className={cn(
+              'order-last mb-14 grid grid-cols-1 gap-x-10 lg:order-first lg:grid-cols-10'
+            )}
+          >
             <div className={'col-span-1 lg:col-span-6'}>
               {postSummaries.length > 0 && (
                 <PostSummaries summaries={postSummaries} />
               )}
             </div>
-            <div className={'col-span-1 lg:col-span-4 order-first lg:order-last'}>
-              <IndexAside tags={allPostTags.filter(tag =>
-                !tagsQuery.includes(tag as unknown as string))} admin={admin} />
+            <div
+              className={'order-first col-span-1 lg:order-last lg:col-span-4'}
+            >
+              <IndexAside
+                tags={allPostTags.filter(
+                  (tag) => !tagsQuery.includes(tag as unknown as string)
+                )}
+                admin={admin}
+              />
             </div>
           </div>
           <BlogFooter admin={settings.admin} classNames={'flex lg:hidden'} />
