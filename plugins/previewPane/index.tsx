@@ -4,12 +4,12 @@
 // It's part of the Studio's “Structure Builder API” and is documented here:
 // https://www.sanity.io/docs/structure-builder-reference
 
-import { DefaultDocumentNodeResolver } from 'sanity/desk'
-import authorType from 'schemas/author'
-import postType from 'schemas/post'
+import { DefaultDocumentNodeResolver } from 'sanity/desk';
+import authorType from 'schemas/author';
+import postType from 'schemas/post';
 
-import AuthorAvatarPreviewPane from './AuthorAvatarPreviewPane'
-import PostPreviewPane from './PostPreviewPane'
+import AuthorAvatarPreviewPane from './AuthorAvatarPreviewPane';
+import PostPreviewPane from './PostPreviewPane';
 
 export const previewDocumentNode = ({
   apiVersion,
@@ -20,35 +20,35 @@ export const previewDocumentNode = ({
 }): DefaultDocumentNodeResolver => {
   return (S, { schemaType }) => {
     switch (schemaType) {
-      case authorType.name:
-        return S.document().views([
-          S.view.form(),
-          S.view
-            .component(({ document }) => (
-              <AuthorAvatarPreviewPane
-                firstName={document.displayed.firstName as any}
-                picture={document.displayed.picture as any}
-              />
-            ))
-            .title('Preview'),
-        ])
+    case authorType.name:
+      return S.document().views([
+        S.view.form(),
+        S.view
+          .component(({ document }) => (
+            <AuthorAvatarPreviewPane
+              firstName={document.displayed.firstName as any}
+              picture={document.displayed.picture as any}
+            />
+          ))
+          .title('Preview'),
+      ]);
 
-      case postType.name:
-        return S.document().views([
-          S.view.form(),
-          S.view
-            .component(({ document }) => (
-              <PostPreviewPane
-                slug={document.displayed.slug?.current}
-                apiVersion={apiVersion}
-                previewSecretId={previewSecretId}
-              />
-            ))
-            .title('Preview'),
-        ])
+    case postType.name:
+      return S.document().views([
+        S.view.form(),
+        S.view
+          .component(({ document }) => (
+            <PostPreviewPane
+              slug={document.displayed.slug?.current}
+              apiVersion={apiVersion}
+              previewSecretId={previewSecretId}
+            />
+          ))
+          .title('Preview'),
+      ]);
 
-      default:
-        return null
+    default:
+      return null;
     }
-  }
-}
+  };
+};

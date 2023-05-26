@@ -1,8 +1,8 @@
 // updated within the hour, if it's older it'll create a new secret or return null
 const query = (ttl) =>
-  /* groq */ `*[_id == $id && dateTime(_updatedAt) > dateTime(now()) - ${ttl}][0].secret`
+  /* groq */ `*[_id == $id && dateTime(_updatedAt) > dateTime(now()) - ${ttl}][0].secret`;
 
-const tag = 'preview.secret'
+const tag = 'preview.secret';
 
 export async function getSecret(
   client: import('next-sanity').SanityClient | import('sanity').SanityClient,
@@ -15,28 +15,29 @@ export async function getSecret(
     // it's recent enough to be valid no matter if it's used in an iframe URL, or a "Open Preview" URL.
     query(createIfNotExists ? 60 * 30 : 60 * 60),
     { id }
-  )
+  );
   if (!secret && createIfNotExists) {
     const newSecret =
       createIfNotExists === true
         ? Math.random().toString(36).slice(2)
-        : createIfNotExists()
+        : createIfNotExists();
     try {
-      const patch = client.patch(id).set({ secret: newSecret })
+      const patch = client.patch(id).set({ secret: newSecret });
       await client
         .transaction()
         .createIfNotExists({ _id: id, _type: id })
         // @ts-expect-error - until `sanity` supports v6 of `@sanity/client`
         .patch(patch)
-        .commit({ tag })
-      return newSecret
+        .commit({ tag });
+      return newSecret;
     } catch (err) {
       console.error(
-        'Failed to create a new preview secret. Ensure the `client` has a `token` specified that has `write` permissions.',
+        'Failed to create a new preview secret. ' +
+          'Ensure the `client` has a `token` specified that has `write` permissions.',
         err
-      )
+      );
     }
   }
 
-  return secret
+  return secret;
 }

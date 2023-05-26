@@ -1,8 +1,8 @@
-import { CogIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { CogIcon } from '@sanity/icons';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
-import authorType from '../author'
-import OpenGraphInput from './OpenGraphInput'
+import authorType from '../author';
+import OpenGraphInput from './OpenGraphInput';
 
 export default defineType({
   name: 'settings',
@@ -83,4 +83,4 @@ export default defineType({
       ],
     }),
   ],
-})
+});

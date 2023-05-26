@@ -1,5 +1,5 @@
-import { UserIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { UserIcon } from '@sanity/icons';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export enum AuthorLinkedHandleWebsiteKeys {
   LINKEDIN = 'linkedin',
@@ -19,7 +19,7 @@ export const AuthorLinkedHandleWebsiteOptions = [
     title: 'HackerRank',
     value: AuthorLinkedHandleWebsiteKeys.HACKERRANK,
   },
-]
+];
 
 export default defineType({
   name: 'author',
@@ -79,4 +79,4 @@ export default defineType({
       initialValue: [],
     }),
   ],
-})
+});

@@ -9,9 +9,9 @@ import useSWR from 'swr/immutable'
 async function init(): Promise<SatoriOptions['fonts']> {
   if (!globalThis?.Intl?.Segmenter) {
     console.debug('Polyfilling Intl.Segmenter')
-    //@ts-expect-error
+    //@ts-expect-error WTF, adding this here to appease eslint; TODO: figure it out later.
     globalThis.Intl = globalThis.Intl || {}
-    //@ts-expect-error
+    //@ts-expect-error WTF, adding this here to appease eslint; TODO: figure it out later.
     globalThis.Intl.Segmenter = await createIntlSegmenterPolyfill(
       fetch(new URL('public/break_iterator.wasm', import.meta.url))
     )
@@ -25,7 +25,7 @@ async function init(): Promise<SatoriOptions['fonts']> {
 }
 
 // preload fonts and polyfill
-const fontsPromise = init()
+const fontsPromise = init();
 
 const OpenGraphSvg = styled(Card).attrs({
   radius: 3,
@@ -44,13 +44,13 @@ const OpenGraphSvg = styled(Card).attrs({
     height: 100%;
     width: 100%;
   }
-`
+`;
 
 export default function OpenGraphPreview(props: Settings['ogImage']) {
   // we wrap the segmenter setup and font loading in SWR to enable caching
   const { data: fonts } = useSWR('OpenGraphPreview.init', () => fontsPromise, {
     suspense: true,
-  })
+  });
 
   // Also handle the satori render call in SWR to enable caching and only re-render when the title changes or fonts hot reload
   const { data: __html } = useSWR(
@@ -60,10 +60,10 @@ export default function OpenGraphPreview(props: Settings['ogImage']) {
         width,
         height,
         fonts,
-      })
+      });
     },
     { suspense: true }
-  )
+  );
 
-  return <OpenGraphSvg dangerouslySetInnerHTML={{ __html }} />
+  return <OpenGraphSvg dangerouslySetInnerHTML={{ __html }} />;
 }

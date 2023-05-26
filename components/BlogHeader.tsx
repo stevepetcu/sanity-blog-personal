@@ -1,12 +1,12 @@
-import { PortableText } from '@portabletext/react'
-import cn from 'classnames'
-import Link from 'next/link'
+import { PortableText } from '@portabletext/react';
+import cn from 'classnames';
+import Link from 'next/link';
 
-import { Author } from '../lib/sanity.queries'
-import { POSTS_PAGE_PATH } from '../pages/posts'
-import AuthorLinks from './AuthorLinks'
-import styles from './BlogHeader.module.css'
-import SectionSeparator from './SectionSeparator'
+import { Author } from '../lib/sanity.queries';
+import { POSTS_PAGE_PATH } from '../pages/posts';
+import AuthorLinks from './AuthorLinks';
+import styles from './BlogHeader.module.css';
+import SectionSeparator from './SectionSeparator';
 
 export default function BlogHeader({
   title,
@@ -24,10 +24,10 @@ export default function BlogHeader({
       `Invalid level: ${
         JSON.stringify(level) || typeof level
       }, only 1 or 2 are allowed`
-    )
+    );
   }
-  const headerFontSize = 1 === level ? 'md:text-2xl' : 'md:text-xl'
-  const linksFontSize = 1 === level ? 'md:text-xl' : 'md:text-base'
+  const headerFontSize = 1 === level ? 'md:text-2xl' : 'md:text-xl';
+  const linksFontSize = 1 === level ? 'md:text-xl' : 'md:text-base';
 
   return (
     <>
@@ -59,5 +59,5 @@ export default function BlogHeader({
       </header>
       <SectionSeparator classNames={'mt-2 mb-8'} />
     </>
-  )
+  );
 }

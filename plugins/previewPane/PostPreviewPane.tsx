@@ -1,17 +1,17 @@
 /**
  * This component is responsible for rendering a preview of a post inside the Studio.
  */
-import { Card, Flex, Spinner, Text } from '@sanity/ui'
-import { getSecret } from 'plugins/productionUrl/utils'
+import { Card, Flex, Spinner, Text } from '@sanity/ui';
+import { getSecret } from 'plugins/productionUrl/utils';
 import React, {
   memo,
   startTransition,
   Suspense,
   useEffect,
   useState,
-} from 'react'
-import { useClient } from 'sanity'
-import { suspend } from 'suspend-react'
+} from 'react';
+import { useClient } from 'sanity';
+import { suspend } from 'suspend-react';
 
 type Props = {
   slug?: string
@@ -20,17 +20,17 @@ type Props = {
 }
 
 export default function PostPreviewPane(props: Props) {
-  const { previewSecretId, apiVersion } = props
+  const { previewSecretId, apiVersion } = props;
   // Whenever the slug changes, wait 3 seconds for GROQ to reach eventual consistency.
   // This helps to prevent displaying "Invalid slug" or returning 404 errors while editing the slug manually.
-  const [slug, setSlug] = useState(props.slug)
+  const [slug, setSlug] = useState(props.slug);
   useEffect(() => {
     const timeout = setTimeout(
       () => startTransition(() => setSlug(props.slug)),
       3000
-    )
-    return () => clearTimeout(timeout)
-  }, [props.slug])
+    );
+    return () => clearTimeout(timeout);
+  }, [props.slug]);
 
   // if the document has no slug for the preview iframe
   if (!slug) {
@@ -40,7 +40,7 @@ export default function PostPreviewPane(props: Props) {
           Please add a slug to the post to see the preview!
         </Text>
       </Card>
-    )
+    );
   }
 
   return (
@@ -76,28 +76,28 @@ export default function PostPreviewPane(props: Props) {
         <Spinner muted />
       </Flex>
     </Card>
-  )
+  );
 }
 
 // Used as a cache key that doesn't risk collision or getting affected by other components that might be using `suspend-react`
-const fetchSecret = Symbol('preview.secret')
+const fetchSecret = Symbol('preview.secret');
 const Iframe = memo(function Iframe(
   props: Omit<Props, 'slug'> & Required<Pick<Props, 'slug'>>
 ) {
-  const { apiVersion, previewSecretId, slug } = props
-  const client = useClient({ apiVersion })
+  const { apiVersion, previewSecretId, slug } = props;
+  const client = useClient({ apiVersion });
 
   const secret = suspend(
     () => getSecret(client, previewSecretId, true),
     ['getSecret', previewSecretId, fetchSecret],
     // The secret fetch has a TTL of 1 minute, just to check if it's necessary to recreate the secret which has a TTL of 60 minutes
     { lifespan: 60000 }
-  )
+  );
 
-  const url = new URL('/api/preview', location.origin)
-  url.searchParams.set('slug', slug)
+  const url = new URL('/api/preview', location.origin);
+  url.searchParams.set('slug', slug);
   if (secret) {
-    url.searchParams.set('secret', secret)
+    url.searchParams.set('secret', secret);
   }
 
   return (
@@ -105,5 +105,5 @@ const Iframe = memo(function Iframe(
       style={{ width: '100%', height: '100%', position: 'relative', zIndex: 1 }}
       src={url.toString()}
     />
-  )
-})
+  );
+});

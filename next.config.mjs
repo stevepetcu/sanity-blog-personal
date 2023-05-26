@@ -7,12 +7,13 @@ const config = {
     ],
   },
   typescript: {
-    // Set this to false if you want production builds to abort if there's type errors
+    // Set this to false if you want production builds to abort if there are type errors
     ignoreBuildErrors: process.env.VERCEL_ENV === 'production',
   },
   eslint: {
-    /// Set this to false if you want production builds to abort if there's lint errors
+    // Set this to false if you want production builds to abort if there are linting errors
     ignoreDuringBuilds: process.env.VERCEL_ENV === 'production',
+    dirs: ['.'],
   },
   async redirects() {
     return [
@@ -21,8 +22,8 @@ const config = {
         destination: '/posts',
         permanent: true,
       },
-    ]
+    ];
   },
-}
+};
 
-export default config
+export default config;
