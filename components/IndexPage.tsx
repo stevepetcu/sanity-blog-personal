@@ -93,9 +93,7 @@ export default function IndexPage(props: IndexPageProps) {
               className={'order-first col-span-1 lg:order-last lg:col-span-4'}
             >
               <IndexAside
-                tags={allPostTags.filter(
-                  (tag) => !tagsQuery.includes(tag as unknown as string)
-                )}
+                tags={allPostTags}
                 admin={admin}
               />
             </div>

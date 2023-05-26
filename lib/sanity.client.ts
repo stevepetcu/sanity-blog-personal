@@ -8,9 +8,9 @@ import {
   postSummariesListByTagQuery,
   postSummariesListQuery,
   PostSummary,
-  postTagsQuery,
   type Settings,
   settingsQuery,
+  tagsQuery,
 } from 'lib/sanity.queries';
 import { createClient } from 'next-sanity';
 
@@ -37,9 +37,20 @@ export async function getAllPostSlugs(): Promise<Pick<Post, 'slug'>[]> {
   return [];
 }
 
-export async function getAllPostTags(): Promise<Post['tags']> {
+export async function getAllTags(): Promise<Post['tags']> {
   if (client) {
-    return (await client.fetch<Post['tags']>(postTagsQuery)) || [];
+    return (await client.fetch<Post['tags']>(tagsQuery())) || [];
+  }
+
+  return [];
+}
+
+export async function getLatestTags(
+  resultsCount: number,
+  excludeTags: string[]
+): Promise<Post['tags']> {
+  if (client) {
+    return (await client.fetch<Post['tags']>(tagsQuery(resultsCount, excludeTags))) || [];
   }
 
   return [];

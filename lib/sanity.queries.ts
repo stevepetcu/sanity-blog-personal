@@ -15,7 +15,7 @@ const postViewFields = groq`
   coverImage,
   content,
   footnotes,
-  tags,
+  "tags": tags[]->name,
   "author": author->{firstName, picture},
   publishedAt,
   "updatedAt": _updatedAt,
@@ -26,7 +26,7 @@ const postPinFields = groq`
   title,
   "slug": slug.current,
   summary,
-  tags,
+  "tags": tags[]->name,
   publishedAt,
   "updatedAt": _updatedAt,
 `;
@@ -37,7 +37,7 @@ const postSummaryFields = groq`
   "slug": slug.current,
   summary,
   coverImage,
-  tags,
+  "tags": tags[]->name,
   "author": author->{firstName, picture},
   publishedAt,
   "updatedAt": _updatedAt,
@@ -60,9 +60,22 @@ export const postSlugsQuery = groq`
 `;
 
 // TODO: order by "popularity" (of the post)
-export const postTagsQuery = groq`
-array::unique(*[_type == "post" && defined(tags) && publishedAt <= now()] | order(_updatedAt desc)[].tags[])[0...8]
-`;
+export const tagsQuery = (resultsCount = 0, excludeTags = []) => {
+  if (!excludeTags.length) {
+    return groq`*[_type == "tag"] | order(_updatedAt desc)[0..${resultsCount - 1}].name`;
+  }
+
+  let tagsQuery = '';
+  excludeTags.map((tag, index) => {
+    if (index !== excludeTags.length - 1) {
+      tagsQuery += `"${tag}" != name || `;
+    } else {
+      tagsQuery += `"${tag}" != name`;
+    }
+  });
+
+  return groq`*[_type == "tag" && ${tagsQuery}] | order(_updatedAt desc)[0..${resultsCount - 1}].name`;
+};
 
 export const postPinsListQuery = groq`
 *[_type == "post" && publishedAt <= now()] | order(_updatedAt desc) {
@@ -80,17 +93,19 @@ export const postSummariesListByTagQuery = (tags: string[]) => {
   let tagsQuery = '';
   tags.map((tag, index) => {
     if (index !== tags.length - 1) {
-      tagsQuery += `"${tag}" in tags || `;
+      tagsQuery += `"${tag}" in tags[]->name || `;
     } else {
-      tagsQuery += `"${tag}" in tags`;
+      tagsQuery += `"${tag}" in tags[]->name`;
     }
   });
 
-  return groq`
-*[_type == "post" && publishedAt <= now() && ${tagsQuery}] | order(publishedAt desc) [0...10] {
+  return tagsQuery.length
+    ? groq`
+*[_type == "post" && publishedAt <= now() && ${tagsQuery}] | order(publishedAt desc) [0...50] {
   ${postSummaryFields}
 }
-`;
+`
+    : postSummariesListQuery;
 };
 
 export const postBySlugQuery = groq`

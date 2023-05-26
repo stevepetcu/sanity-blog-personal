@@ -3,6 +3,7 @@ import { format, parseISO } from 'date-fns';
 import { defineArrayMember, defineField, defineType, SlugValue } from 'sanity';
 
 import authorType from './author';
+import tagType from './tag';
 
 // TODO:
 //  1. Fix TS errors.
@@ -425,11 +426,12 @@ export default defineType({
       type: 'array',
       of: [
         defineArrayMember({
-          type: 'string',
-          validation: (rule) => rule.required().min(2).max(10),
+          type: 'reference',
+          to: [{ type: tagType.name }],
+          validation: (rule) => rule.required(),
         }),
       ],
-      validation: (rule) => rule.max(5),
+      validation: (rule) => rule.min(1).max(3).unique(),
     }),
     defineField({
       name: 'author',

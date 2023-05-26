@@ -1,27 +1,27 @@
-import { Card } from '@sanity/ui'
-import { height, OpenGraphImage, width } from 'components/OpenGraphImage'
-import { createIntlSegmenterPolyfill } from 'intl-segmenter-polyfill'
-import type { Settings } from 'lib/sanity.queries'
-import satori, { type SatoriOptions } from 'satori'
-import styled from 'styled-components'
-import useSWR from 'swr/immutable'
+import { Card } from '@sanity/ui';
+import { height, OpenGraphImage, width } from 'components/OpenGraphImage';
+import { createIntlSegmenterPolyfill } from 'intl-segmenter-polyfill';
+import type { Settings } from 'lib/sanity.queries';
+import satori, { type SatoriOptions } from 'satori';
+import styled from 'styled-components';
+import useSWR from 'swr/immutable';
 
 async function init(): Promise<SatoriOptions['fonts']> {
   if (!globalThis?.Intl?.Segmenter) {
-    console.debug('Polyfilling Intl.Segmenter')
+    console.debug('Polyfilling Intl.Segmenter');
     //@ts-expect-error WTF, adding this here to appease eslint; TODO: figure it out later.
-    globalThis.Intl = globalThis.Intl || {}
+    globalThis.Intl = globalThis.Intl || {};
     //@ts-expect-error WTF, adding this here to appease eslint; TODO: figure it out later.
     globalThis.Intl.Segmenter = await createIntlSegmenterPolyfill(
       fetch(new URL('public/break_iterator.wasm', import.meta.url))
-    )
+    );
   }
 
   const fontData = await fetch(
     new URL('public/Inter-Bold.woff', import.meta.url)
-  ).then((res) => res.arrayBuffer())
+  ).then((res) => res.arrayBuffer());
 
-  return [{ name: 'Inter', data: fontData, style: 'normal', weight: 700 }]
+  return [{ name: 'Inter', data: fontData, style: 'normal', weight: 700 }];
 }
 
 // preload fonts and polyfill
