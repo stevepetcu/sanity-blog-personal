@@ -42,8 +42,8 @@ export default function EmbeddedWebsite({
       screen.orientation.onchange =  () => {
         setWindowWidthAndHeight();
       };
-    } else if (window.screen) {
-      window.screen.orientation.onchange = () => {
+    } else if (ScreenOrientation) {
+      ScreenOrientation.onchange = () => {
         setWindowWidthAndHeight();
       };
     }
@@ -54,10 +54,8 @@ export default function EmbeddedWebsite({
       if (screen && screen.orientation) {
         screen.orientation.onchange = null;
       }
-      if (window.screen) {
-        window.screen.orientation.onchange = () => {
-          setWindowWidthAndHeight();
-        };
+      if (ScreenOrientation) {
+        ScreenOrientation.onchange = null;
       }
     };
   }, []);
