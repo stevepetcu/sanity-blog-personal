@@ -42,20 +42,15 @@ export default function EmbeddedWebsite({
       screen.orientation.onchange =  () => {
         setWindowWidthAndHeight();
       };
-    } else if (ScreenOrientation) {
-      ScreenOrientation.onchange = () => {
-        setWindowWidthAndHeight();
-      };
     }
+
+    console.log(screen);
 
     return () => {
       // Deregister event handlers:
       window.onresize = null;
       if (screen && screen.orientation) {
         screen.orientation.onchange = null;
-      }
-      if (ScreenOrientation) {
-        ScreenOrientation.onchange = null;
       }
     };
   }, []);
