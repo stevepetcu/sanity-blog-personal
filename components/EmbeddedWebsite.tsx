@@ -35,11 +35,16 @@ export default function EmbeddedWebsite({
       setWindowInnerWidth(window.innerWidth);
     };
 
-    window.onresize = () => {
-      setWindowWidthAndHeight();
-    };
     if (screen && screen.orientation) {
       screen.orientation.onchange =  () => {
+        setWindowWidthAndHeight();
+      };
+    } else if (screen) {
+      screen.onchange = () => {
+        setWindowWidthAndHeight();
+      };
+    } else {
+      window.onresize = () => {
         setWindowWidthAndHeight();
       };
     }
@@ -51,6 +56,8 @@ export default function EmbeddedWebsite({
       window.onresize = null;
       if (screen && screen.orientation) {
         screen.orientation.onchange = null;
+      } else if (screen) {
+        screen.onchange = null;
       }
     };
   }, []);
