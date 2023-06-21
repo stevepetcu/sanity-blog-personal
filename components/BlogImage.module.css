@@ -8,4 +8,5 @@
 .portableText p {
   @apply mt-0 !important;
   @apply mb-0 !important;
+  @apply truncate;
 }

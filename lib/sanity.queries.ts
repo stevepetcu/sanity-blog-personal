@@ -13,6 +13,7 @@ const postViewFields = groq`
   "slug": slug.current,
   summary,
   coverImage,
+  embeddedWebsiteUrl,
   content,
   footnotes,
   "tags": tags[]->name,
@@ -68,7 +69,7 @@ export const tagsQuery = (resultsCount = 0, excludeTags = []) => {
   let tagsQuery = '';
   excludeTags.map((tag, index) => {
     if (index !== excludeTags.length - 1) {
-      tagsQuery += `"${tag}" != name || `;
+      tagsQuery += `"${tag}" != name && `;
     } else {
       tagsQuery += `"${tag}" != name`;
     }
@@ -163,6 +164,7 @@ export interface Post {
   slug: string
   summary: string
   coverImage?: BlogImage
+  embeddedWebsiteUrl?: string
   content: PostSection[]
   footnotes: any // blocks
   tags: string[]

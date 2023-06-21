@@ -24,7 +24,7 @@
         "ignoreTrailingComments": true,
         "ignoreUrls": true,
         "ignoreTemplateLiterals": true,
-        "ignorePattern": "^\\s*d=\"" // igone svg path declarations
+        "ignorePattern": "^\\s*d=\"" // ignore svg path declarations
       }
     ],
     "function-paren-newline": ["error", "consistent"],

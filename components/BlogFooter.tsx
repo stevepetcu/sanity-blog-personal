@@ -21,7 +21,7 @@ export default function BlogFooter({ admin, classNames }: BlogFooterProps) {
         }
       >
         <span className="line-clamp-1 grow text-slate-600">
-          🧑‍💻 by {firstName} {lastName}
+          🧑‍💻 Author&apos;s links:
         </span>
         <AuthorLinks admin={admin} placement={'footer'} />
       </footer>

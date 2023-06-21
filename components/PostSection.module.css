@@ -3,11 +3,11 @@
 }
 
 .portableText h2 {
-  @apply mb-4 mt-12 cursor-pointer text-xl leading-snug md:text-3xl;
+  @apply mb-4 mt-1 cursor-pointer text-xl leading-snug md:text-3xl;
 }
 
 .portableText h3 {
-  @apply mb-4 mt-8 text-base leading-snug md:text-2xl;
+  @apply mb-4 mt-1 text-base leading-snug md:text-2xl;
 }
 
 .portableText a {

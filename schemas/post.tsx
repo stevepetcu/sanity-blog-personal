@@ -126,6 +126,12 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'embeddedWebsiteUrl',
+      title: 'Embedded website URL',
+      type: 'url',
+      validation: (rule) => rule.uri({ scheme: 'https' }),
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'array',

@@ -6,7 +6,7 @@ import type { NextRequest, NextResponse } from 'next/server';
 import type { PageConfig } from 'next/types';
 import { createClient } from 'next-sanity';
 
-export const config: PageConfig = { runtime: 'experimental-edge' };
+export const config: PageConfig = { runtime: 'edge' };
 
 export default async function og(req: NextRequest, _res: NextResponse) {
   const font = fetch(new URL('public/Inter-Bold.woff', import.meta.url)).then(

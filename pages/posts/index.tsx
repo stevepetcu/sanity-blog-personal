@@ -1,9 +1,9 @@
 import { PreviewSuspense } from '@sanity/preview-kit';
 import {
-  getAllTags, getLatestTags,
+  getLatestTags,
   getPostPinsList,
   getPostSummariesList,
-  getSettings
+  getSettings,
 } from 'lib/sanity.client';
 import { Post, PostPin, PostSummary, Settings } from 'lib/sanity.queries';
 import { GetServerSideProps } from 'next';
@@ -79,7 +79,6 @@ export const getServerSideProps: GetServerSideProps<
 > = async (ctx) => {
   const { preview = false, previewData = {}, query } = ctx;
 
-  // TODO: this ternary below isn't the most readable thing.
   const tagsQuery =
     typeof query.tag === undefined
       ? []
@@ -92,7 +91,7 @@ export const getServerSideProps: GetServerSideProps<
   const [settings, summaries, allPostTags = []] = await Promise.all([
     getSettings(),
     getPostSummariesList(tagsQuery),
-    getLatestTags(3, tagsQuery),
+    getLatestTags(9, tagsQuery),
   ]);
 
   const pins = tagsQuery.length === 0 ? await getPostPinsList() : [];

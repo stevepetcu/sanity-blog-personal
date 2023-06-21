@@ -11,19 +11,20 @@ import styles from './BlogImage.module.css';
 import SanePortableText from './SanePortableText';
 
 interface BlogImageProps {
-  title: string
-  slug?: string
-  image: BlogImage
-  priority?: boolean
-  width: number
-  height: number
-  imageClassNames?: string
+  title: string;
+  slug?: string;
+  image: BlogImage;
+  priority?: boolean;
+  width: number;
+  height: number;
+  imageClassNames?: string;
 }
 
 export default function BlogImage(props: BlogImageProps) {
   const pixelRatio = React.useContext(PixelRatioContext);
 
-  const { title, slug, image, width, height, priority, imageClassNames } = props;
+  const { title, slug, image, width, height, priority, imageClassNames } =
+    props;
   const scaledWidth = pixelRatio * width;
   const scaledHeight = pixelRatio * height;
 
@@ -49,12 +50,9 @@ export default function BlogImage(props: BlogImageProps) {
 
   return (
     <figure
-      className={cn(
-        'relative overflow-clip drop-shadow-sm @container/blogImage',
-        {
-          'transition-all duration-200 hover:drop-shadow-lg': slug,
-        }
-      )}
+      className={cn('relative drop-shadow-sm @container/blogImage', {
+        'transition-all duration-200 hover:drop-shadow-lg': slug,
+      })}
     >
       {slug ? (
         <Link href={`${POSTS_PAGE_PATH}/${slug}`} aria-label={title}>
@@ -65,13 +63,13 @@ export default function BlogImage(props: BlogImageProps) {
       )}
       <figcaption
         className={cn(`${styles.portableText} absolute
-        bottom-0 left-0 w-full 
-        whitespace-nowrap rounded-b bg-white/10
-        p-1 text-center
-        text-xs text-slate-700
-        backdrop-blur-sm
-        @[50px]/blogImage:text-[0.5rem] @[50px]/blogImage:leading-[0.5rem] 
-        @[350px]/blogImage:text-xs`)}
+        @[50px]/blogImage:invisible @[275px]/blogImage:visible
+        bottom-0 left-0 w-full whitespace-nowrap 
+        rounded-b bg-white/10 px-1 py-0.5 @[275px]/blogImage:py-2
+        text-center text-xs font-light text-slate-700 
+        mix-blend-hard-light backdrop-blur-sm
+        @[50px]/blogImage:text-[0.5rem] @[50px]/blogImage:leading-[1rem] 
+        @[275px]/blogImage:text-xs`)}
       >
         <SanePortableText content={image.caption} />
       </figcaption>

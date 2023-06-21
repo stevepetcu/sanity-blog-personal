@@ -74,7 +74,8 @@ export default function PostSection({
   // TODO: extract these 'top' and 'bottom' values as constants.
   case 'top':
     return (
-      <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
+      <section id={`post-section-${index}`}
+        className={cn(`mx-auto max-w-2xl mb-14 ${styles.portableText}`)}>
         {sectionHeading}
         <BlogImage
           title={sectionImage.alt}
@@ -88,7 +89,8 @@ export default function PostSection({
     );
   case 'bottom':
     return (
-      <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
+      <section id={`post-section-${index}`}
+        className={cn(`mx-auto max-w-2xl mb-14 ${styles.portableText}`)}>
         {sectionHeading}
         {sectionBody}
         <BlogImage
@@ -102,7 +104,8 @@ export default function PostSection({
     );
   default:
     return (
-      <section className={cn(`mx-auto max-w-2xl ${styles.portableText}`)}>
+      <section id={`post-section-${index}`}
+        className={cn(`mx-auto max-w-2xl mb-14 ${styles.portableText}`)}>
         {sectionHeading}
         {sectionBody}
       </section>
