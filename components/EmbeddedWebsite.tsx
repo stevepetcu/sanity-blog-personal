@@ -30,19 +30,35 @@ export default function EmbeddedWebsite({
     setWindowInnerWidth(window.innerWidth);
     setWebsiteContainer(document.getElementById('website-container'));
 
-    window.onresize = () => {
-      setWindowOuterHeight(window.outerHeight);
-      setWindowInnerWidth(window.innerWidth);
-    };
-    screen.orientation.onchange =  () => {
+    const setWindowWidthAndHeight = () => {
       setWindowOuterHeight(window.outerHeight);
       setWindowInnerWidth(window.innerWidth);
     };
 
+    window.onresize = () => {
+      setWindowWidthAndHeight();
+    };
+    if (screen && screen.orientation) {
+      screen.orientation.onchange =  () => {
+        setWindowWidthAndHeight();
+      };
+    } else if (window.screen) {
+      window.screen.orientation.onchange = () => {
+        setWindowWidthAndHeight();
+      };
+    }
+
     return () => {
       // Deregister event handlers:
       window.onresize = null;
-      screen.orientation.onchange = null;
+      if (screen && screen.orientation) {
+        screen.orientation.onchange = null;
+      }
+      if (window.screen) {
+        window.screen.orientation.onchange = () => {
+          setWindowWidthAndHeight();
+        };
+      }
     };
   }, []);
 
