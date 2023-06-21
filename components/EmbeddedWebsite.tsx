@@ -26,12 +26,12 @@ export default function EmbeddedWebsite({
   };
 
   useEffect(() => {
-    setWindowOuterHeight(screen.availHeight || window.outerHeight);
+    setWindowOuterHeight(window.outerHeight);
     setWindowInnerWidth(window.innerWidth);
     setWebsiteContainer(document.getElementById('website-container'));
 
     window.onresize = () => {
-      setWindowOuterHeight(screen.availHeight || window.outerHeight);
+      setWindowOuterHeight(window.outerHeight);
       setWindowInnerWidth(window.innerWidth);
     };
   }, []);
