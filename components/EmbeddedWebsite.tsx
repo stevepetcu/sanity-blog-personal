@@ -11,7 +11,7 @@ export default function EmbeddedWebsite({
 }: EmbeddedWebsiteProps) {
   const COVER_IMAGE_ASPECT_RATIO = 720/1280;
 
-  const [windowInnerHeight, setWindowInnerHeight] = useState(1000);
+  const [windowOuterHeight, setWindowOuterHeight] = useState(1000);
   const [windowInnerWidth, setWindowInnerWidth] = useState(1000);
   const [websiteContainer, setWebsiteContainer] = useState<HTMLElement>();
   const [websiteContainerHeight, setWebsiteContainerHeight] = useState(500);
@@ -26,12 +26,12 @@ export default function EmbeddedWebsite({
   };
 
   useEffect(() => {
-    setWindowInnerHeight(window.innerHeight);
+    setWindowOuterHeight(window.outerHeight);
     setWindowInnerWidth(window.innerWidth);
     setWebsiteContainer(document.getElementById('website-container'));
 
     window.onresize = () => {
-      setWindowInnerHeight(window.innerHeight);
+      setWindowOuterHeight(window.outerHeight);
       setWindowInnerWidth(window.innerWidth);
     };
   }, []);
@@ -39,15 +39,15 @@ export default function EmbeddedWebsite({
   useEffect(() => {
     const websiteDisplayHeight = windowInnerWidth <=
     getNumericValueOfTailwindBreakpointFor('sm', twConfig) ?
-      windowInnerHeight :
+      windowOuterHeight * 0.85 :
       windowInnerWidth <= getNumericValueOfTailwindBreakpointFor('lg', twConfig) ?
-        2*(windowInnerHeight/3) :
+        2 * (windowOuterHeight / 3) :
         websiteContainer ?
           websiteContainer.offsetWidth * COVER_IMAGE_ASPECT_RATIO :
-          windowInnerHeight/3;
+          2 * windowOuterHeight/3;
 
     setWebsiteContainerHeight(websiteDisplayHeight);
-  }, [windowInnerHeight, windowInnerWidth, websiteContainer, twConfig, COVER_IMAGE_ASPECT_RATIO]);
+  }, [windowOuterHeight, windowInnerWidth, websiteContainer, twConfig, COVER_IMAGE_ASPECT_RATIO]);
 
   return <div id='website-container'
     style={{
