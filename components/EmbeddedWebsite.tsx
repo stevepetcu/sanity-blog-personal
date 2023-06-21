@@ -34,17 +34,29 @@ export default function EmbeddedWebsite({
       setWindowOuterHeight(window.outerHeight);
       setWindowInnerWidth(window.innerWidth);
     };
+    screen.orientation.onchange =  () => {
+      setWindowOuterHeight(window.outerHeight);
+      setWindowInnerWidth(window.innerWidth);
+    };
+
+    return () => {
+      // Deregister event handlers:
+      window.onresize = null;
+      screen.orientation.onchange = null;
+    };
   }, []);
 
   useEffect(() => {
-    const websiteDisplayHeight = windowInnerWidth <=
-    getNumericValueOfTailwindBreakpointFor('sm', twConfig) ?
-      windowOuterHeight * 0.85 :
-      windowInnerWidth < getNumericValueOfTailwindBreakpointFor('lg', twConfig) ?
-        2 * (windowOuterHeight / 3) :
-        windowInnerWidth >= getNumericValueOfTailwindBreakpointFor('lg', twConfig) && websiteContainer ?
-          websiteContainer.offsetWidth * COVER_IMAGE_ASPECT_RATIO :
-          2 * windowOuterHeight/3;
+    const isWindowInnerWidthSmallerThan = (screenSizeName: string) => {
+      return windowInnerWidth < getNumericValueOfTailwindBreakpointFor(screenSizeName, twConfig);
+    };
+
+    let websiteDisplayHeight;
+    if (isWindowInnerWidthSmallerThan('md')) {
+      websiteDisplayHeight = windowOuterHeight * 0.75;
+    } else {
+      websiteDisplayHeight = websiteContainer?.offsetWidth * COVER_IMAGE_ASPECT_RATIO;
+    }
 
     setWebsiteContainerHeight(websiteDisplayHeight);
   }, [windowOuterHeight, windowInnerWidth, websiteContainer, twConfig, COVER_IMAGE_ASPECT_RATIO]);
@@ -53,6 +65,9 @@ export default function EmbeddedWebsite({
     style={{
       height: `${websiteContainerHeight}px`,
     }}>
-    <iframe src={src} className={'w-full h-full'} />
+    {
+      websiteContainer &&
+      <iframe src={src} className={'w-full h-full'} />
+    }
   </div>;
 }
