@@ -40,9 +40,9 @@ export default function EmbeddedWebsite({
     const websiteDisplayHeight = windowInnerWidth <=
     getNumericValueOfTailwindBreakpointFor('sm', twConfig) ?
       windowOuterHeight * 0.85 :
-      windowInnerWidth <= getNumericValueOfTailwindBreakpointFor('lg', twConfig) ?
+      windowInnerWidth < getNumericValueOfTailwindBreakpointFor('lg', twConfig) ?
         2 * (windowOuterHeight / 3) :
-        websiteContainer ?
+        windowInnerWidth >= getNumericValueOfTailwindBreakpointFor('lg', twConfig) && websiteContainer ?
           websiteContainer.offsetWidth * COVER_IMAGE_ASPECT_RATIO :
           2 * windowOuterHeight/3;
 
