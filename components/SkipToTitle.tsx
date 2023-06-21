@@ -13,8 +13,8 @@ export default function SkipToTitle() {
       </div>
       <FontAwesomeIcon
         icon={faChevronUp}
-        width={50}
-        height={50}
+        width={20}
+        height={20}
         className={cn('text-slate-500 my-2 group-hover:animate-bounce')}
       />
       <div className={'group-hover:flex-grow'}>
