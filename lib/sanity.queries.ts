@@ -79,7 +79,7 @@ export const tagsQuery = (resultsCount = 0, excludeTags = []) => {
 };
 
 export const postPinsListQuery = groq`
-*[_type == "post" && publishedAt <= now()] | order(_updatedAt desc) {
+*[_type == "post" && isPinned == true && publishedAt <= now()] | order(_updatedAt desc) {
   ${postPinFields}
 }
 `;
