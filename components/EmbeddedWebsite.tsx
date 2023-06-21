@@ -44,7 +44,7 @@ export default function EmbeddedWebsite({
       };
     }
 
-    console.log(screen);
+    console.log(screen.orientation);
 
     return () => {
       // Deregister event handlers:
