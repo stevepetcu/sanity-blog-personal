@@ -15,12 +15,17 @@ export default function IndexAside({ tags, admin }: IndexAsideProps) {
       <h2 className={cn('text-md mb-5 font-medium leading-snug')}>
         More topics you can explore
       </h2>
-      <div className={cn('mb-5 flex flex-wrap gap-x-2 gap-y-4')}>
+      <div className={cn('mb-8 flex flex-wrap gap-x-2 gap-y-4')}>
         <TagList tags={tags} />
       </div>
-      <Link className={'text-sm'} href={'#to-do-search-page'}>
-        See all the topics
-      </Link>
+      { false &&
+        <Link
+          className={'text-sm text-sky-500 hover:text-sky-700'}
+          href={'#to-do-search-page'}
+        >
+          See more topics
+        </Link> // TODO: Implement the search page
+      }
       <BlogFooter admin={admin} classNames={'hidden lg:flex'} />
     </aside>
   );
