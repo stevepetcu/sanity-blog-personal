@@ -2,7 +2,7 @@ import cn from 'classnames';
 import type { PostPin } from 'lib/sanity.queries';
 import Link from 'next/link';
 
-import { POSTS_PAGE_PATH } from '../pages/posts';
+import { PAGE_POSTS_PATH } from '../pages/posts';
 import PostMetadata from './PostMetadata';
 
 interface PostPinProps {
@@ -34,7 +34,7 @@ export default function PostPin({ postPin, index, total }: PostPinProps) {
               'line-clamp-2 text-slate-800'
           )}
         >
-          <Link href={`${POSTS_PAGE_PATH}/${slug}`} className="hover:underline">
+          <Link href={`${PAGE_POSTS_PATH}/${slug}`} className="hover:underline">
             {title}
           </Link>
         </h3>

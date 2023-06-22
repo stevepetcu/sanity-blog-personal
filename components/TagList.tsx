@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Post } from '../lib/sanity.queries';
-import { POSTS_PAGE_PATH } from '../pages/posts';
+import { PAGE_POSTS_PATH } from '../pages/posts';
 
 interface TagListProps {
   tags: Post['tags']
@@ -22,7 +22,7 @@ export default function TagList({ tags, itemClassNames }: TagListProps) {
       {tags.map((tag) => (
         <Link
           key={tag}
-          href={`${POSTS_PAGE_PATH}?tag=${tag}`}
+          href={`${PAGE_POSTS_PATH}?tag=${tag}`}
           aria-label={`List all posts tagged with "${tag}".`}
         >
           <small

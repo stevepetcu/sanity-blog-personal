@@ -5,7 +5,7 @@ import { Post, Settings } from 'lib/sanity.queries';
 import { GetStaticProps } from 'next';
 import { lazy } from 'react';
 
-import { POSTS_PAGE_PATH } from './index';
+import { PAGE_POSTS_PATH } from './index';
 
 const PreviewPostPage = lazy(() => import('components/PreviewPostPage'));
 
@@ -76,7 +76,7 @@ export const getStaticPaths = async () => {
   const slugs = await getAllPostSlugs();
 
   return {
-    paths: slugs?.map(({ slug }) => `${POSTS_PAGE_PATH}/${slug}`) || [],
+    paths: slugs?.map(({ slug }) => `${PAGE_POSTS_PATH}/${slug}`) || [],
     fallback: 'blocking',
   };
 };

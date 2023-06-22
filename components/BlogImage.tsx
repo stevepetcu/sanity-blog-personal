@@ -6,7 +6,7 @@ import React from 'react';
 
 import { PixelRatioContext } from '../contexts/PixelRatioContext';
 import { BlogImage } from '../lib/sanity.queries';
-import { POSTS_PAGE_PATH } from '../pages/posts';
+import { PAGE_POSTS_PATH } from '../pages/posts';
 import styles from './BlogImage.module.css';
 import SanePortableText from './SanePortableText';
 
@@ -55,7 +55,7 @@ export default function BlogImage(props: BlogImageProps) {
       })}
     >
       {slug ? (
-        <Link href={`${POSTS_PAGE_PATH}/${slug}`} aria-label={title}>
+        <Link href={`${PAGE_POSTS_PATH}/${slug}`} aria-label={title}>
           {imageComponent}
         </Link>
       ) : (

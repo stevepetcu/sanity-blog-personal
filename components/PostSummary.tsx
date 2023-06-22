@@ -2,7 +2,7 @@ import cn from 'classnames';
 import type { PostSummary } from 'lib/sanity.queries';
 import Link from 'next/link';
 
-import { POSTS_PAGE_PATH } from '../pages/posts';
+import { PAGE_POSTS_PATH } from '../pages/posts';
 import BlogImage from './BlogImage';
 import PostMetadata from './PostMetadata';
 
@@ -23,7 +23,7 @@ export default function PostSummary({ postSummary, index }: PostSummaryProps) {
             { 'line-clamp-2': !coverImage }
           )}
         >
-          <Link href={`${POSTS_PAGE_PATH}/${slug}`} className="hover:underline">
+          <Link href={`${PAGE_POSTS_PATH}/${slug}`} className="hover:underline">
             {title}
           </Link>
         </h2>

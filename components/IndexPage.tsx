@@ -11,7 +11,7 @@ import type { PostPin, PostSummary, Settings } from 'lib/sanity.queries';
 import { Post } from 'lib/sanity.queries';
 import Link from 'next/link';
 
-import { POSTS_PAGE_PATH } from '../pages/posts';
+import { PAGE_POSTS_PATH } from '../pages/posts';
 import BlogFooter from './BlogFooter';
 import IndexAside from './IndexAside';
 import PostSummaries from './PostSummaries';
@@ -56,7 +56,7 @@ export default function IndexPage(props: IndexPageProps) {
           {tagsQuery.length > 0 && (
             <>
               <Link
-                href={`${POSTS_PAGE_PATH}`}
+                href={`${PAGE_POSTS_PATH}`}
                 className="inline-flex items-center text-sm"
               >
                 <ArrowLeftIcon className={cn('text-xl')} />

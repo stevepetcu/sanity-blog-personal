@@ -25,7 +25,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient, groq, type SanityClient } from 'next-sanity';
 import { type ParseBody, parseBody } from 'next-sanity/webhook';
 
-import { POSTS_PAGE_PATH } from '../posts';
+import { PAGE_POSTS_PATH } from '../posts';
 
 export { config } from 'next-sanity/webhook';
 
@@ -74,9 +74,9 @@ async function queryStaleRoutes(
   if (body._type === 'post') {
     const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id });
     if (!exists) {
-      const staleRoutes: StaleRoute[] = [POSTS_PAGE_PATH];
+      const staleRoutes: StaleRoute[] = [PAGE_POSTS_PATH];
       if ((body.slug as any)?.current) {
-        staleRoutes.push(`${POSTS_PAGE_PATH}/${(body.slug as any).current}`);
+        staleRoutes.push(`${PAGE_POSTS_PATH}/${(body.slug as any).current}`);
       }
       // Assume that the post document was deleted. Query the datetime used to sort "More stories" to determine if the post was in the list.
       const moreStories = await client.fetch(
@@ -113,8 +113,8 @@ async function queryAllRoutes(client: SanityClient): Promise<StaleRoute[]> {
   const slugs = await _queryAllRoutes(client);
 
   return [
-    POSTS_PAGE_PATH,
-    ...slugs.map((slug) => `${POSTS_PAGE_PATH}/${slug}` as StaleRoute),
+    PAGE_POSTS_PATH,
+    ...slugs.map((slug) => `${PAGE_POSTS_PATH}/${slug}` as StaleRoute),
   ];
 }
 
@@ -147,8 +147,8 @@ async function queryStaleAuthorRoutes(
   if (slugs.length > 0) {
     slugs = await mergeWithMoreStories(client, slugs);
     return [
-      POSTS_PAGE_PATH,
-      ...slugs.map((slug) => `${POSTS_PAGE_PATH}/${slug}`),
+      PAGE_POSTS_PATH,
+      ...slugs.map((slug) => `${PAGE_POSTS_PATH}/${slug}`),
     ];
   }
 
@@ -166,5 +166,5 @@ async function queryStalePostRoutes(
 
   slugs = await mergeWithMoreStories(client, slugs);
 
-  return [POSTS_PAGE_PATH, ...slugs.map((slug) => `${POSTS_PAGE_PATH}/${slug}`)];
+  return [PAGE_POSTS_PATH, ...slugs.map((slug) => `${PAGE_POSTS_PATH}/${slug}`)];
 }

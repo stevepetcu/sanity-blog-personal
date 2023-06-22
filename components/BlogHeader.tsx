@@ -3,7 +3,7 @@ import cn from 'classnames';
 import Link from 'next/link';
 
 import { Author } from '../lib/sanity.queries';
-import { POSTS_PAGE_PATH } from '../pages/posts';
+import { PAGE_POSTS_PATH } from '../pages/posts';
 import AuthorLinks from './AuthorLinks';
 import styles from './BlogHeader.module.css';
 import SectionSeparator from './SectionSeparator';
@@ -37,7 +37,7 @@ export default function BlogHeader({
             `grow basis-1/3 text-sm ${headerFontSize} font-bold leading-tight tracking-tighter md:pr-8`
           )}
         >
-          <Link href={POSTS_PAGE_PATH} className="hover:underline">
+          <Link href={PAGE_POSTS_PATH} className="hover:underline">
             {title}
           </Link>
         </h1>

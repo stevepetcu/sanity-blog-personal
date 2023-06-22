@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { Author } from '../lib/sanity.queries';
 import { AuthorLinkedHandleWebsiteKeys } from '../schemas/author';
 import styles from './AuthorLinks.module.css';
-import { POSTS_PAGE_PATH } from '../pages/posts';
+import { PAGE_POSTS_PATH } from '../pages/posts';
+import { PAGE_ABOUT_PATH } from '../pages/about';
 
 interface AuthorLinksProps {
   admin: Author
@@ -35,7 +36,7 @@ export default function AuthorLinks({
   return (
     <>
       <Link
-        href="#"
+        href={PAGE_ABOUT_PATH}
         className={cn(
           `group shrink ${
             styles.rotate9
@@ -52,7 +53,7 @@ export default function AuthorLinks({
         />
       </Link>
       <Link
-        href={`${POSTS_PAGE_PATH}?tag=experiment&tag=showcase`}
+        href={`${PAGE_POSTS_PATH}?tag=experiment&tag=showcase`}
         className={cn(
           `ml-5 shrink -rotate-12 transition-all ease-in-out hover:rotate-0 ${linkTransformOriginRight} ${linkClassNames}`
         )}

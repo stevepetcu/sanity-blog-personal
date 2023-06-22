@@ -31,7 +31,7 @@ interface PreviewData {
   token?: string
 }
 
-export const POSTS_PAGE_PATH = '/posts';
+export const PAGE_POSTS_PATH = '/posts';
 
 export default function Page(props: PageProps) {
   const { pins, summaries, settings, allPostTags, preview, token, tagsQuery } =

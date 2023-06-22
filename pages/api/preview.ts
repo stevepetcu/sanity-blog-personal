@@ -11,7 +11,7 @@ import type { PageConfig } from 'next/types';
 import { createClient } from 'next-sanity';
 import { getSecret } from 'plugins/productionUrl/utils';
 
-import { POSTS_PAGE_PATH } from '../posts';
+import { PAGE_POSTS_PATH } from '../posts';
 
 // res.setPreviewData only exists in the nodejs runtime, setting the config here allows changing the global runtime
 // option in next.config.mjs without breaking preview mode
@@ -65,7 +65,7 @@ export default async function preview(
 
   // If no slug is provided open preview mode on the frontpage
   if (!req.query.slug) {
-    return redirectToPreview(res, previewData, POSTS_PAGE_PATH);
+    return redirectToPreview(res, previewData, PAGE_POSTS_PATH);
   }
 
   // Check if the post with the given `slug` exists
@@ -86,5 +86,5 @@ export default async function preview(
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  redirectToPreview(res, previewData, `${POSTS_PAGE_PATH}/${post.slug}`);
+  redirectToPreview(res, previewData, `${PAGE_POSTS_PATH}/${post.slug}`);
 }
