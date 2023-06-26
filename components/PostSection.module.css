@@ -18,8 +18,7 @@
   @apply text-sky-700 underline;
 }
 
-.sectionBody p,
-.sectionBody blockquote {
+.sectionBody p {
   @apply my-6 text-base md:text-xl;
 }
 

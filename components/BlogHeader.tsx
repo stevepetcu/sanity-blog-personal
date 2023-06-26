@@ -53,7 +53,7 @@ export default function BlogHeader({
           <AuthorLinks
             admin={admin}
             placement={'header'}
-            linkClassNames={`text-sm ${linksFontSize}`}
+            linkClassNames={`text-sm ml-3 ${linksFontSize}`}
           />
         </div>
       </header>

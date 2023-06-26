@@ -31,7 +31,6 @@ export default function PostPage(props: PostPageProps) {
   return (
     <>
       <PostPageHead settings={settings} post={post} />
-
       <Layout preview={preview} loading={loading}>
         <Container>
           <BlogHeader
@@ -57,7 +56,7 @@ export default function PostPage(props: PostPageProps) {
               </article>
             </>
           )}
-          <BlogFooter admin={settings.admin} classNames={'block'} />
+          <BlogFooter admin={settings.admin} />
         </Container>
       </Layout>
     </>

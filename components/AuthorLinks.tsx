@@ -38,7 +38,7 @@ export default function AuthorLinks({
       <Link
         href={PAGE_ABOUT_PATH}
         className={cn(
-          `group shrink ${
+          `text-slate-600 hover:text-slate-900 shrink ${
             styles.rotate9
           } transition-all ease-in-out hover:rotate-0 ${linkTransformOriginLeft} ${
             linkClassNames || ''
@@ -55,7 +55,8 @@ export default function AuthorLinks({
       <Link
         href={`${PAGE_POSTS_PATH}?tag=experiment&tag=showcase`}
         className={cn(
-          `ml-5 shrink -rotate-12 transition-all ease-in-out hover:rotate-0 ${linkTransformOriginRight} ${linkClassNames}`
+          `text-slate-600 hover:text-slate-900 shrink 
+          -rotate-12 transition-all ease-in-out hover:rotate-0 ${linkTransformOriginRight} ${linkClassNames}`
         )}
         title={`${firstName}'s live code experiments`}
         aria-label={`${firstName}'s live code experiments`}
@@ -71,7 +72,8 @@ export default function AuthorLinks({
           target="_blank"
           rel="noopener"
           className={cn(
-            `ml-5 shrink rotate-3 transition-all ease-in-out hover:rotate-0 ${linkTransformOriginLeft} ${linkClassNames}`
+            `text-slate-600 hover:text-slate-900 shrink 
+            rotate-3 transition-all ease-in-out hover:rotate-0 ${linkTransformOriginLeft} ${linkClassNames}`
           )}
           title={`${firstName}'s GitHub account`}
           aria-label={`${firstName}'s GitHub account`}
@@ -88,7 +90,8 @@ export default function AuthorLinks({
           target="_blank"
           rel="noopener"
           className={cn(
-            `ml-5 shrink ${styles.rotateMinus9} transition-all ease-in-out hover:rotate-0 ${linkTransformOriginRight} ${linkClassNames}`
+            `text-slate-600 hover:text-slate-900 shrink 
+            ${styles.rotateMinus9} transition-all ease-in-out hover:rotate-0 ${linkTransformOriginRight} ${linkClassNames}`
           )}
           title={`${firstName}'s LinkedIn account`}
           aria-label={`${firstName}'s LinkedIn account`}

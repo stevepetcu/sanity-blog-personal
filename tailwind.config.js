@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  important: true,
   content: [
     './components/**/*.{js,ts,jsx,tsx}',
     './intro-template/**/*.{js,ts,jsx,tsx}',
@@ -32,11 +33,13 @@ module.exports = {
       },
       letterSpacing: {
         tighter: '-.04em',
+        'tight-ma-only': '-.055em',
       },
       lineHeight: {
         tight: 1.2,
       },
       fontSize: {
+        'xxs': '0.45rem',
         '5xl': '2.5rem',
         '6xl': '2.75rem',
         '7xl': '4.5rem',
@@ -45,6 +48,9 @@ module.exports = {
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',
         medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
+        'inner-lg': 'inset 0px 0px 15px 7px rgba(0, 0, 0, 0.15)',
+        'sm-dark-below': '0px 5px 5px 5px rgba(0,0,0,0.16)',
+        'sm-dark-above': '0px -5px 5px 5px rgba(0,0,0,0.16)',
       },
     },
   },

@@ -7,7 +7,7 @@ export default function PostSummaries({
   summaries: PostSummary[]
 }) {
   return (
-    <section>
+    <div>
       {summaries.map((summary, index) => (
         <PostSummaryComponent
           key={summary._id}
@@ -15,6 +15,6 @@ export default function PostSummaries({
           index={index}
         />
       ))}
-    </section>
+    </div>
   );
 }

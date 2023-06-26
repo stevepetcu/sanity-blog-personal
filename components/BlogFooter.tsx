@@ -8,15 +8,13 @@ interface BlogFooterProps {
 }
 
 export default function BlogFooter({ admin, classNames }: BlogFooterProps) {
-  const { firstName, lastName } = admin;
-
   return (
     <>
       <SectionSeparator classNames={'mt-7 mb-7'} />
       <footer
         className={
           'mx-auto flex w-full max-w-screen-xl px-4 pb-5 ' +
-          'font-light text-slate-600 hover:text-slate-900 sm:items-center sm:justify-between ' +
+          'font-light gap-x-4 sm:items-center sm:justify-between ' +
           classNames
         }
       >
