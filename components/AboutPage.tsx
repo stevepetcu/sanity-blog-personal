@@ -208,12 +208,12 @@ export default function AboutPage(props: IndexPageProps) {
                 eos porro tenetur rem quod nobis est nulla voluptatem.
               </p>
             </section>
-            <SectionSeparator classNames={'mb-5'} />
+            <SectionSeparator />
             <section>
               <h1>Latest roles</h1>
               <div
                 className={
-                  cn('-mt-12 grid grid-cols-12 ' +
+                  cn('-mt-12 -mb-12 grid grid-cols-12 ' +
                     'gap-x-0.5 md:gap-x-3.5 lg:gap-x-5', {
                     'hidden': showDeviceOrientationCTA,
                   })
@@ -436,7 +436,7 @@ export default function AboutPage(props: IndexPageProps) {
                 </div>
               }
             </section>
-            <SectionSeparator classNames={'mb-5'} />
+            <SectionSeparator />
             <section>
               <h1>Outro section</h1>
               <p>
