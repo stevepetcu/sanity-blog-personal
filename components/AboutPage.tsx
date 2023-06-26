@@ -277,9 +277,15 @@ export default function AboutPage(props: IndexPageProps) {
                     data-company={'tg'}
                     className={`${styles.roleContainer} snap-center`}
                   >
-                    <h2>Tarabut Gateway</h2>
-                    <SectionSeparator classNames={'mt-0 mb-0'} />
-                    <p>
+                    <div>
+                      <h2>Tarabut Gateway</h2>
+                      <SectionSeparator classNames={'mb-[0rem] mt-[0rem]'} />
+                      <p className={'my-2 text-xs text-slate-400 md:text-sm'}>
+                        Jan 2022 - Present
+                      </p>
+                    </div>
+                    <div className={'grow'}>
+                      <p>
                         Lorem ipsum dolor sit amet. Qui rerum nisi in optio sunt
                         qui excepturi galisum ab eaque praesentium id accusamus
                         voluptatem ab voluptates libero. Ut pariatur placeat non
@@ -287,38 +293,45 @@ export default function AboutPage(props: IndexPageProps) {
                         laboriosam et enim Quis id nostrum omnis est quaerat iure
                         quo itaque exercitationem quo quaerat ipsam. Sit quia
                         delectus aut unde quia ea rerum maxime.
-                    </p>
-                    <p>
+                      </p>
+                      <p>
                         Et accusamus explicabo eos laborum tenetur qui modi dolore
                         eos blanditiis cumque sed velit minus. Est soluta maxime
                         et consequatur dignissimos et nulla eius sit voluptate
                         labore aut quia excepturi!
-                    </p>
-                    <p>
+                      </p>
+                      <p>
                         Eos labore sunt est galisum natus et odit saepe ab
                         doloremque facere id commodi eveniet sit nemo rerum ut
                         perspiciatis neque! Et ratione quod sit similique
                         voluptatem est dolorem laborum qui laborum quae! Et fuga
                         nemo ad voluptas facilis est molestias culpa in laudantium
                         quia sed incidunt accusantium sit temporibus ratione!
-                    </p>
-                    <hr className="mx-auto my-4 h-1 w-48 rounded border-0 bg-gray-500 md:my-10" />
+                      </p>
+                    </div>
+                    <hr className="mx-auto h-1 w-48 rounded border-0 bg-slate-500" />
                   </div>
                   <div
                     data-company={'tw'}
                     className={`${styles.roleContainer} snap-center`}
                   >
-                    <h2>/thoughtworks</h2>
-                    <SectionSeparator />
-                    <p>
+                    <div>
+                      <h2>/thoughtworks</h2>
+                      <SectionSeparator classNames={'mb-[0rem] mt-[0rem]'} />
+                      <p className={'my-2 text-xs text-slate-400 md:text-sm'}>
+                        Sep 2018 - Dec 2021
+                      </p>
+                    </div>
+                    <div className={'grow'}>
+                      <p>
                         Et ipsa debitis sit eveniet odit vel modi dignissimos vel
                         quibusdam sint est consectetur soluta non itaque
                         necessitatibus. Ea incidunt consequuntur et voluptatem
                         tempore et nisi magnam ab perspiciatis blanditiis qui
                         temporibus rerum ut nisi ipsum. Sit autem nulla qui omnis
                         pariatur ut perspiciatis nobis eum nisi voluptate.
-                    </p>
-                    <p>
+                      </p>
+                      <p>
                         Eos labore sunt est galisum natus et odit saepe ab
                         doloremque facere id commodi eveniet sit nemo rerum ut
                         perspiciatis neque! Et ratione quod sit similique
@@ -328,26 +341,29 @@ export default function AboutPage(props: IndexPageProps) {
                         dolore perferendis quo consequatur esse aut fugit facilis
                         et ipsam nesciunt ut officiis voluptatem sed excepturi
                         illum.
-                    </p>
-                    <p>
+                      </p>
+                      <p>
                         Eos labore sunt est galisum natus et odit saepe ab
                         doloremque facere id commodi eveniet sit nemo rerum ut
                         perspiciatis neque! Et ratione quod sit similique
-                        voluptatem est dolorem laborum qui laborum quae! Et fuga
-                        nemo ad voluptas facilis est molestias culpa in laudantium
-                        quia sed incidunt accusantium sit temporibus ratione! Sed
-                        dolore perferendis quo consequatur esse aut fugit facilis
-                        et ipsam nesciunt ut officiis voluptatem sed excepturi
-                        illum.
-                    </p>
+                        voluptatem est dolorem laborum qui laborum quae!
+                      </p>
+                    </div>
+                    <hr className="mx-auto h-1 w-48 rounded border-0 bg-slate-500" />
                   </div>
                   <div
                     data-company={'wf'}
                     className={`${styles.roleContainer} snap-center`}
                   >
-                    <h2>World First</h2>
-                    <SectionSeparator />
-                    <p>
+                    <div>
+                      <h2>World First</h2>
+                      <SectionSeparator classNames={'mb-[0rem] mt-[0rem]'} />
+                      <p className={'my-2 text-xs text-slate-400 md:text-sm'}>
+                        Dec 2017 - Aug 2018
+                      </p>
+                    </div>
+                    <div className={'grow'}>
+                      <p>
                         Sit dolor debitis et quam totam ea veniam quaerat aut
                         repudiandae harum quo nihil inventore. Qui galisum
                         repellendus sit internos consectetur qui iste incidunt id
@@ -355,23 +371,28 @@ export default function AboutPage(props: IndexPageProps) {
                         consequatur ratione et incidunt cumque. In asperiores
                         provident ab facilis quia ut corrupti consectetur cum
                         aspernatur soluta et minus corporis et voluptate ipsa.
-                    </p>
-                    <p>
+                      </p>
+                      <p>
                         Qui autem veritatis sed deleniti porro qui nihil eligendi.
                         Ut illum similique id quos itaque sed quos dolore in harum
                         voluptas et dolor ipsum ut quia laboriosam.
-                    </p>
+                      </p>
+                    </div>
+                    <hr className="mx-auto h-1 w-48 rounded border-0 bg-slate-500" />
                   </div>
                   <div
                     data-company={'older'}
                     className={`${styles.roleContainer} snap-center`}
                   >
-                    <h2>Older roles</h2>
-                    <SectionSeparator classNames={'mt-0 mb-0'} />
-                    <p className={'my-2 text-xs text-slate-400 md:text-sm'}>
+                    <div>
+                      <h2>Older roles</h2>
+                      <SectionSeparator classNames={'mb-[0rem] mt-[0rem]'} />
+                      <p className={'my-2 text-xs text-slate-400 md:text-sm'}>
                         5 - 10 years ago
-                    </p>
-                    <p>
+                      </p>
+                    </div>
+                    <div className={'grow'}>
+                      <p>
                         Sit dolor debitis et quam totam ea veniam quaerat aut
                         repudiandae harum quo nihil inventore. Qui galisum
                         repellendus sit internos consectetur qui iste incidunt id
@@ -379,12 +400,14 @@ export default function AboutPage(props: IndexPageProps) {
                         consequatur ratione et incidunt cumque. In asperiores
                         provident ab facilis quia ut corrupti consectetur cum
                         aspernatur soluta et minus corporis et voluptate ipsa.
-                    </p>
-                    <p>
+                      </p>
+                      <p>
                         Qui autem veritatis sed deleniti porro qui nihil eligendi.
                         Ut illum similique id quos itaque sed quos dolore in harum
                         voluptas et dolor ipsum ut quia laboriosam.
-                    </p>
+                      </p>
+                    </div>
+                    <hr className="mx-auto h-1 w-48 rounded border-0 bg-slate-500" />
                   </div>
                   <div className={styles.bottomShadow} />
                 </div>

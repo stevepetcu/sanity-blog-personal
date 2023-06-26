@@ -12,7 +12,7 @@
 }
 
 .aboutArticle .roleContainer {
-    @apply h-[610px] bg-white px-5 py-7 rounded overflow-clip
+    @apply flex flex-col h-[610px] bg-white px-5 py-7 rounded overflow-clip
 }
 
 .aboutArticle .topShadow {
