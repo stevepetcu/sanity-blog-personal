@@ -309,7 +309,7 @@ export default function AboutPage(props: IndexPageProps) {
                         quia sed incidunt accusantium sit temporibus ratione!
                       </p>
                     </div>
-                    <hr className="mx-auto h-1 w-48 rounded border-0 bg-slate-500" />
+                    <hr className={styles.gripLine} />
                   </div>
                   <div
                     data-company={'tw'}
@@ -349,7 +349,7 @@ export default function AboutPage(props: IndexPageProps) {
                         voluptatem est dolorem laborum qui laborum quae!
                       </p>
                     </div>
-                    <hr className="mx-auto h-1 w-48 rounded border-0 bg-slate-500" />
+                    <hr className={styles.gripLine} />
                   </div>
                   <div
                     data-company={'wf'}
@@ -378,7 +378,7 @@ export default function AboutPage(props: IndexPageProps) {
                         voluptas et dolor ipsum ut quia laboriosam.
                       </p>
                     </div>
-                    <hr className="mx-auto h-1 w-48 rounded border-0 bg-slate-500" />
+                    <hr className={styles.gripLine} />
                   </div>
                   <div
                     data-company={'older'}
@@ -407,7 +407,7 @@ export default function AboutPage(props: IndexPageProps) {
                         voluptas et dolor ipsum ut quia laboriosam.
                       </p>
                     </div>
-                    <hr className="mx-auto h-1 w-48 rounded border-0 bg-slate-500" />
+                    <hr className={styles.gripLine} />
                   </div>
                   <div className={styles.bottomShadow} />
                 </div>

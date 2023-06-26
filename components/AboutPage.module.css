@@ -15,6 +15,10 @@
     @apply flex flex-col h-[610px] bg-white px-5 py-7 rounded overflow-clip
 }
 
+.aboutArticle .roleContainer .gripLine {
+    @apply mx-auto h-1 w-40 rounded border-0 bg-slate-500;
+}
+
 .aboutArticle .topShadow {
     @apply sticky -top-2 left-0 w-full h-0 shadow-sm-dark-below z-10;
 }
