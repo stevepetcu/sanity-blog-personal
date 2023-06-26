@@ -35,6 +35,7 @@ export default function EmbeddedWebsite({
       setWindowInnerWidth(window.innerWidth);
     };
 
+    // TODO: align the approach used here and in the AboutPage component.
     if (screen && screen.orientation) {
       screen.orientation.onchange =  () => {
         setWindowWidthAndHeight();

@@ -42,10 +42,18 @@ export default function AboutPage(props: IndexPageProps) {
     };
     const landscapeOrientation = window.matchMedia('(orientation: landscape)');
 
+    // Chrome iOS does not fire layout change events; Safari iOS does not fire
+    // window resize events on layout changes; we need to bind event handlers
+    // for both to have everything covered:
     processDeviceViewportSize(landscapeOrientation);
     landscapeOrientation.onchange = (event) => {
       processDeviceViewportSize(event);
     };
+    window.onresize = () => {
+      processDeviceViewportSize(landscapeOrientation);
+    };
+
+
 
     const latestRolesTimeline = document.getElementById(
       'latest-roles-timeline'
@@ -144,7 +152,12 @@ export default function AboutPage(props: IndexPageProps) {
             olderCompanyLogo.classList.add(styles.active);
           }
         }
-      }, 300);
+      }, 200);
+    };
+
+    return () => {
+      landscapeOrientation.onchange = null;
+      window.onresize = null;
     };
   }, []);
 
