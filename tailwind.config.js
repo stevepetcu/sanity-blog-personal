@@ -52,6 +52,20 @@ module.exports = {
         'sm-dark-below': '0px 5px 5px 5px rgba(0,0,0,0.16)',
         'sm-dark-above': '0px -5px 5px 5px rgba(0,0,0,0.16)',
       },
+      animation: {
+        'spin-quarter': 'spin-quarter 2.5s ease-in-out infinite',
+        'reveal-bottom-up': 'reveal-bottom-up 2.5s ease-in-out infinite',
+      },
+      keyframes: {
+        'spin-quarter': {
+          '0%, 100%': { opacity: 1, transform: 'rotate(0deg)' },
+          '5%': { opacity: 0.25, transform: 'rotate(-90deg)' },
+        },
+        'reveal-bottom-up': {
+          '0%, 100%': { opacity: 1, height: '25px' },
+          '5%': { opacity: 0.25, height: '0' },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/container-queries')],

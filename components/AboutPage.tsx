@@ -1,5 +1,10 @@
-import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowTurnUp,
+  faFloppyDisk,
+  faMobileScreen,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import cn from 'classnames';
 import Container from 'components/BlogContainer';
 import BlogHeader from 'components/BlogHeader';
 import Layout from 'components/BlogLayout';
@@ -21,20 +26,26 @@ export default function AboutPage(props: IndexPageProps) {
   const { preview, loading, settings } = props;
   const { title, description, admin } = settings;
 
-  const [deviceOrientation, setDeviceOrientation] = useState();
+  const [
+    showDeviceOrientationCTA,
+    setShowDeviceOrientationCTA,
+  ] = useState(false);
 
   useEffect(() => {
-    const portrait = window.matchMedia('(orientation: portrait)');
-
-    portrait.addEventListener('change', function (e) {
-      if (e.matches) {
-        // Portrait mode
-        alert('Portrait mode!');
+    const processDeviceViewportSize = (orientation: Pick<MediaQueryList, 'matches'>) => {
+      if (orientation.matches && window.innerHeight < 640) {
+        // Landscape mode on a narrow device - prompt user to put the device in portrait mode.
+        setShowDeviceOrientationCTA(true);
       } else {
-        // Landscape
-        alert('Landscape mode or… not on a mobile?');
+        setShowDeviceOrientationCTA(false);
       }
-    });
+    };
+    const landscapeOrientation = window.matchMedia('(orientation: landscape)');
+
+    processDeviceViewportSize(landscapeOrientation);
+    landscapeOrientation.onchange = (event) => {
+      processDeviceViewportSize(event);
+    };
 
     const latestRolesTimeline = document.getElementById(
       'latest-roles-timeline'
@@ -189,7 +200,10 @@ export default function AboutPage(props: IndexPageProps) {
               <h1>Latest roles</h1>
               <div
                 className={
-                  '-mt-12 grid grid-cols-12 gap-x-0.5 md:gap-x-3.5 lg:gap-x-5'
+                  cn('-mt-12 grid grid-cols-12 ' +
+                    'gap-x-0.5 md:gap-x-3.5 lg:gap-x-5', {
+                    'hidden': showDeviceOrientationCTA,
+                  })
                 }
               >
                 <div className={'self-center'}>
@@ -197,13 +211,13 @@ export default function AboutPage(props: IndexPageProps) {
                     id={'latest-roles-timeline'}
                     className={
                       'col-span-1 grid grid-flow-col grid-cols-1 grid-rows-6 ' +
-                      `justify-items-center gap-y-28 ${styles.latestRolesTimeline}`
+                        `justify-items-center gap-y-28 ${styles.latestRolesTimeline}`
                     }
                   >
                     <div
                       className={
                         'relative -z-10 col-start-1 row-span-6 row-start-1 ' +
-                        'h-4/5 w-0.5 place-self-center bg-slate-200'
+                          'h-4/5 w-0.5 place-self-center bg-slate-200'
                       }
                     ></div>
                     <div
@@ -240,9 +254,9 @@ export default function AboutPage(props: IndexPageProps) {
                   id={'latest-roles-container'}
                   className={
                     'col-span-11 place-self-center ' +
-                    'h-[640px] gap-y-5 space-y-5 overflow-auto px-2 ' +
-                    'snap-y snap-mandatory scroll-smooth ' +
-                    'bg-stripes rounded shadow-inner'
+                      'h-[640px] gap-y-5 space-y-5 overflow-auto px-2 ' +
+                      'snap-y snap-mandatory scroll-smooth ' +
+                      'bg-stripes rounded shadow-inner'
                   }
                 >
                   <div className={styles.topShadow} />
@@ -253,27 +267,27 @@ export default function AboutPage(props: IndexPageProps) {
                     <h2>Tarabut Gateway</h2>
                     <SectionSeparator classNames={'mt-0 mb-0'} />
                     <p>
-                      Lorem ipsum dolor sit amet. Qui rerum nisi in optio sunt
-                      qui excepturi galisum ab eaque praesentium id accusamus
-                      voluptatem ab voluptates libero. Ut pariatur placeat non
-                      dolorem quas cum illo ipsum. Est dolorem velit ut pariatur
-                      laboriosam et enim Quis id nostrum omnis est quaerat iure
-                      quo itaque exercitationem quo quaerat ipsam. Sit quia
-                      delectus aut unde quia ea rerum maxime.
+                        Lorem ipsum dolor sit amet. Qui rerum nisi in optio sunt
+                        qui excepturi galisum ab eaque praesentium id accusamus
+                        voluptatem ab voluptates libero. Ut pariatur placeat non
+                        dolorem quas cum illo ipsum. Est dolorem velit ut pariatur
+                        laboriosam et enim Quis id nostrum omnis est quaerat iure
+                        quo itaque exercitationem quo quaerat ipsam. Sit quia
+                        delectus aut unde quia ea rerum maxime.
                     </p>
                     <p>
-                      Et accusamus explicabo eos laborum tenetur qui modi dolore
-                      eos blanditiis cumque sed velit minus. Est soluta maxime
-                      et consequatur dignissimos et nulla eius sit voluptate
-                      labore aut quia excepturi!
+                        Et accusamus explicabo eos laborum tenetur qui modi dolore
+                        eos blanditiis cumque sed velit minus. Est soluta maxime
+                        et consequatur dignissimos et nulla eius sit voluptate
+                        labore aut quia excepturi!
                     </p>
                     <p>
-                      Eos labore sunt est galisum natus et odit saepe ab
-                      doloremque facere id commodi eveniet sit nemo rerum ut
-                      perspiciatis neque! Et ratione quod sit similique
-                      voluptatem est dolorem laborum qui laborum quae! Et fuga
-                      nemo ad voluptas facilis est molestias culpa in laudantium
-                      quia sed incidunt accusantium sit temporibus ratione!
+                        Eos labore sunt est galisum natus et odit saepe ab
+                        doloremque facere id commodi eveniet sit nemo rerum ut
+                        perspiciatis neque! Et ratione quod sit similique
+                        voluptatem est dolorem laborum qui laborum quae! Et fuga
+                        nemo ad voluptas facilis est molestias culpa in laudantium
+                        quia sed incidunt accusantium sit temporibus ratione!
                     </p>
                     <hr className="mx-auto my-4 h-1 w-48 rounded border-0 bg-gray-500 md:my-10" />
                   </div>
@@ -284,34 +298,34 @@ export default function AboutPage(props: IndexPageProps) {
                     <h2>/thoughtworks</h2>
                     <SectionSeparator />
                     <p>
-                      Et ipsa debitis sit eveniet odit vel modi dignissimos vel
-                      quibusdam sint est consectetur soluta non itaque
-                      necessitatibus. Ea incidunt consequuntur et voluptatem
-                      tempore et nisi magnam ab perspiciatis blanditiis qui
-                      temporibus rerum ut nisi ipsum. Sit autem nulla qui omnis
-                      pariatur ut perspiciatis nobis eum nisi voluptate.
+                        Et ipsa debitis sit eveniet odit vel modi dignissimos vel
+                        quibusdam sint est consectetur soluta non itaque
+                        necessitatibus. Ea incidunt consequuntur et voluptatem
+                        tempore et nisi magnam ab perspiciatis blanditiis qui
+                        temporibus rerum ut nisi ipsum. Sit autem nulla qui omnis
+                        pariatur ut perspiciatis nobis eum nisi voluptate.
                     </p>
                     <p>
-                      Eos labore sunt est galisum natus et odit saepe ab
-                      doloremque facere id commodi eveniet sit nemo rerum ut
-                      perspiciatis neque! Et ratione quod sit similique
-                      voluptatem est dolorem laborum qui laborum quae! Et fuga
-                      nemo ad voluptas facilis est molestias culpa in laudantium
-                      quia sed incidunt accusantium sit temporibus ratione! Sed
-                      dolore perferendis quo consequatur esse aut fugit facilis
-                      et ipsam nesciunt ut officiis voluptatem sed excepturi
-                      illum.
+                        Eos labore sunt est galisum natus et odit saepe ab
+                        doloremque facere id commodi eveniet sit nemo rerum ut
+                        perspiciatis neque! Et ratione quod sit similique
+                        voluptatem est dolorem laborum qui laborum quae! Et fuga
+                        nemo ad voluptas facilis est molestias culpa in laudantium
+                        quia sed incidunt accusantium sit temporibus ratione! Sed
+                        dolore perferendis quo consequatur esse aut fugit facilis
+                        et ipsam nesciunt ut officiis voluptatem sed excepturi
+                        illum.
                     </p>
                     <p>
-                      Eos labore sunt est galisum natus et odit saepe ab
-                      doloremque facere id commodi eveniet sit nemo rerum ut
-                      perspiciatis neque! Et ratione quod sit similique
-                      voluptatem est dolorem laborum qui laborum quae! Et fuga
-                      nemo ad voluptas facilis est molestias culpa in laudantium
-                      quia sed incidunt accusantium sit temporibus ratione! Sed
-                      dolore perferendis quo consequatur esse aut fugit facilis
-                      et ipsam nesciunt ut officiis voluptatem sed excepturi
-                      illum.
+                        Eos labore sunt est galisum natus et odit saepe ab
+                        doloremque facere id commodi eveniet sit nemo rerum ut
+                        perspiciatis neque! Et ratione quod sit similique
+                        voluptatem est dolorem laborum qui laborum quae! Et fuga
+                        nemo ad voluptas facilis est molestias culpa in laudantium
+                        quia sed incidunt accusantium sit temporibus ratione! Sed
+                        dolore perferendis quo consequatur esse aut fugit facilis
+                        et ipsam nesciunt ut officiis voluptatem sed excepturi
+                        illum.
                     </p>
                   </div>
                   <div
@@ -321,18 +335,18 @@ export default function AboutPage(props: IndexPageProps) {
                     <h2>World First</h2>
                     <SectionSeparator />
                     <p>
-                      Sit dolor debitis et quam totam ea veniam quaerat aut
-                      repudiandae harum quo nihil inventore. Qui galisum
-                      repellendus sit internos consectetur qui iste incidunt id
-                      dolorem repellendus. Et maxime consequuntur eos
-                      consequatur ratione et incidunt cumque. In asperiores
-                      provident ab facilis quia ut corrupti consectetur cum
-                      aspernatur soluta et minus corporis et voluptate ipsa.
+                        Sit dolor debitis et quam totam ea veniam quaerat aut
+                        repudiandae harum quo nihil inventore. Qui galisum
+                        repellendus sit internos consectetur qui iste incidunt id
+                        dolorem repellendus. Et maxime consequuntur eos
+                        consequatur ratione et incidunt cumque. In asperiores
+                        provident ab facilis quia ut corrupti consectetur cum
+                        aspernatur soluta et minus corporis et voluptate ipsa.
                     </p>
                     <p>
-                      Qui autem veritatis sed deleniti porro qui nihil eligendi.
-                      Ut illum similique id quos itaque sed quos dolore in harum
-                      voluptas et dolor ipsum ut quia laboriosam.
+                        Qui autem veritatis sed deleniti porro qui nihil eligendi.
+                        Ut illum similique id quos itaque sed quos dolore in harum
+                        voluptas et dolor ipsum ut quia laboriosam.
                     </p>
                   </div>
                   <div
@@ -342,26 +356,49 @@ export default function AboutPage(props: IndexPageProps) {
                     <h2>Older roles</h2>
                     <SectionSeparator classNames={'mt-0 mb-0'} />
                     <p className={'my-2 text-xs text-slate-400 md:text-sm'}>
-                      5 - 10 years ago
+                        5 - 10 years ago
                     </p>
                     <p>
-                      Sit dolor debitis et quam totam ea veniam quaerat aut
-                      repudiandae harum quo nihil inventore. Qui galisum
-                      repellendus sit internos consectetur qui iste incidunt id
-                      dolorem repellendus. Et maxime consequuntur eos
-                      consequatur ratione et incidunt cumque. In asperiores
-                      provident ab facilis quia ut corrupti consectetur cum
-                      aspernatur soluta et minus corporis et voluptate ipsa.
+                        Sit dolor debitis et quam totam ea veniam quaerat aut
+                        repudiandae harum quo nihil inventore. Qui galisum
+                        repellendus sit internos consectetur qui iste incidunt id
+                        dolorem repellendus. Et maxime consequuntur eos
+                        consequatur ratione et incidunt cumque. In asperiores
+                        provident ab facilis quia ut corrupti consectetur cum
+                        aspernatur soluta et minus corporis et voluptate ipsa.
                     </p>
                     <p>
-                      Qui autem veritatis sed deleniti porro qui nihil eligendi.
-                      Ut illum similique id quos itaque sed quos dolore in harum
-                      voluptas et dolor ipsum ut quia laboriosam.
+                        Qui autem veritatis sed deleniti porro qui nihil eligendi.
+                        Ut illum similique id quos itaque sed quos dolore in harum
+                        voluptas et dolor ipsum ut quia laboriosam.
                     </p>
                   </div>
                   <div className={styles.bottomShadow} />
                 </div>
               </div>
+              {
+                showDeviceOrientationCTA &&
+                <div className={'h-64 grid grid-cols-1 place-items-center bg-slate-200 rounded'}>
+                  <div className={'relative h-10 w-10'}>
+                    <div className={'absolute left-0 bottom-3 overflow-hidden animate-reveal-bottom-up'}>
+                      <FontAwesomeIcon
+                        icon={faArrowTurnUp}
+                        width={15}
+                        height={15}
+                        flip={'horizontal'}
+                      />
+                    </div>
+                    <div className={'absolute right-0 bottom-0'}>
+                      <FontAwesomeIcon
+                        icon={faMobileScreen}
+                        width={25}
+                        height={25}
+                        className={'text-5xl animate-spin-quarter'}
+                      />
+                    </div>
+                  </div>
+                </div>
+              }
             </section>
             <SectionSeparator classNames={'mb-5'} />
             <section>
