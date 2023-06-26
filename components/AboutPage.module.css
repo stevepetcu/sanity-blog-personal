@@ -16,7 +16,7 @@
 }
 
 .aboutArticle .roleContainer .gripLine {
-    @apply mx-auto h-1 w-40 rounded border-0 bg-slate-500;
+    @apply mx-auto h-1 w-36 rounded border-0 bg-slate-500;
 }
 
 .aboutArticle .topShadow {
