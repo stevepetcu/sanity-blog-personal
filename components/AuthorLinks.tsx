@@ -1,12 +1,11 @@
 import { faGithubSquare, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faFlaskVial, faIdBadge } from '@fortawesome/free-solid-svg-icons';
+import { faFlaskVial, faIdBadge, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cn from 'classnames';
 import Link from 'next/link';
 
 import { Author } from '../lib/sanity.queries';
 import { AuthorLinkedHandleWebsiteKeys } from '../schemas/author';
-import styles from './AuthorLinks.module.css';
 import { PAGE_POSTS_PATH } from '../pages/posts';
 import { PAGE_ABOUT_PATH } from '../pages/about';
 
@@ -28,43 +27,77 @@ export default function AuthorLinks({
   const linkedInHandle = handles.find(
     (handle) => handle.website === AuthorLinkedHandleWebsiteKeys.LINKEDIN
   );
-  const linkTransformOriginLeft =
-    placement === 'footer' ? 'origin-bottom-left' : 'origin-top-right';
-  const linkTransformOriginRight =
-    placement === 'footer' ? 'origin-bottom-right' : 'origin-top-left';
 
   return (
     <>
       <Link
+        href={PAGE_POSTS_PATH}
+        className={cn(
+          `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
+        )}
+        title={'All blog posts'}
+        aria-label={'All blog posts'}
+      >
+        <div className={'flex flex-col items-center space-y-1'}>
+          <div>
+            <FontAwesomeIcon
+              icon={faNewspaper}
+              className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
+            />
+          </div>
+          <div className={cn({
+            'hidden': placement === 'header',
+            'sm:block': placement === 'header',
+          })}>
+            <p className={'text-xs'}>Posts</p>
+          </div>
+        </div>
+      </Link>
+      <Link
         href={PAGE_ABOUT_PATH}
         className={cn(
-          `text-slate-600 hover:text-slate-900 shrink ${
-            styles.rotate9
-          } transition-all ease-in-out hover:rotate-0 ${linkTransformOriginLeft} ${
-            linkClassNames || ''
-          }`
+          `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
         )}
         title={`${firstName}'s about page and resume`}
         aria-label={`${firstName}'s about page and resume`}
       >
-        <FontAwesomeIcon
-          icon={faIdBadge}
-          className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
-        />
+        <div className={'flex flex-col items-center space-y-1'}>
+          <div>
+            <FontAwesomeIcon
+              icon={faIdBadge}
+              className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
+            />
+          </div>
+          <div className={cn({
+            'hidden': placement === 'header',
+            'sm:block': placement === 'header',
+          })}>
+            <p className={'text-xs'}>About</p>
+          </div>
+        </div>
       </Link>
       <Link
         href={`${PAGE_POSTS_PATH}?tag=experiment&tag=showcase`}
         className={cn(
-          `text-slate-600 hover:text-slate-900 shrink 
-          -rotate-12 transition-all ease-in-out hover:rotate-0 ${linkTransformOriginRight} ${linkClassNames}`
+          `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
         )}
         title={`${firstName}'s live code experiments`}
         aria-label={`${firstName}'s live code experiments`}
       >
-        <FontAwesomeIcon
-          icon={faFlaskVial}
-          className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
-        />
+        <div className={'flex flex-col items-center space-y-1'}>
+          <div>
+            <FontAwesomeIcon
+              icon={faFlaskVial}
+              className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
+            />
+          </div>
+          <div className={cn({
+            'hidden': placement === 'header',
+            'sm:block': placement === 'header',
+          })}>
+            <p className={'text-xs'}>Code</p>
+          </div>
+        </div>
       </Link>
       {gitHubHandle && (
         <Link
@@ -72,16 +105,25 @@ export default function AuthorLinks({
           target="_blank"
           rel="noopener"
           className={cn(
-            `text-slate-600 hover:text-slate-900 shrink 
-            rotate-3 transition-all ease-in-out hover:rotate-0 ${linkTransformOriginLeft} ${linkClassNames}`
+            `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
           )}
           title={`${firstName}'s GitHub account`}
           aria-label={`${firstName}'s GitHub account`}
         >
-          <FontAwesomeIcon
-            icon={faGithubSquare}
-            className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
-          />
+          <div className={'flex flex-col items-center space-y-1'}>
+            <div>
+              <FontAwesomeIcon
+                icon={faGithubSquare}
+                className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
+              />
+            </div>
+            <div className={cn({
+              'hidden': placement === 'header',
+              'sm:block': placement === 'header',
+            })}>
+              <p className={'text-xs'}>GitHub</p>
+            </div>
+          </div>
         </Link>
       )}
       {linkedInHandle && (
@@ -90,16 +132,25 @@ export default function AuthorLinks({
           target="_blank"
           rel="noopener"
           className={cn(
-            `text-slate-600 hover:text-slate-900 shrink 
-            ${styles.rotateMinus9} transition-all ease-in-out hover:rotate-0 ${linkTransformOriginRight} ${linkClassNames}`
+            `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
           )}
           title={`${firstName}'s LinkedIn account`}
           aria-label={`${firstName}'s LinkedIn account`}
         >
-          <FontAwesomeIcon
-            icon={faLinkedin}
-            className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
-          />
+          <div className={'flex flex-col items-center space-y-1'}>
+            <div>
+              <FontAwesomeIcon
+                icon={faLinkedin}
+                className={cn('h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7')}
+              />
+            </div>
+            <div className={cn({
+              'hidden': placement === 'header',
+              'sm:block': placement === 'header',
+            })}>
+              <p className={'text-xs'}>LinkedIn</p>
+            </div>
+          </div>
         </Link>
       )}
     </>

@@ -57,7 +57,7 @@ export default function BlogHeader({
           />
         </div>
       </header>
-      <SectionSeparator classNames={'mt-2 mb-8'} />
+      <SectionSeparator classNames={'mt-4 mb-8'} />
     </>
   );
 }
