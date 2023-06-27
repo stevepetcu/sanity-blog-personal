@@ -14,6 +14,7 @@ import authorType from 'schemas/author';
 import postType from 'schemas/post';
 import settingsType from 'schemas/settings';
 import tagType from 'schemas/tag';
+import aboutIntroPhotoType from './schemas/about-intro-photo';
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io';
@@ -25,7 +26,7 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [authorType, postType, settingsType, tagType],
+    types: [authorType, postType, settingsType, tagType, aboutIntroPhotoType],
   },
   plugins: [
     deskTool({
