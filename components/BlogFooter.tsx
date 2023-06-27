@@ -1,13 +1,14 @@
 import { Author } from '../lib/sanity.queries';
-import AuthorLinks from './AuthorLinks';
+import AuthorLinks, { AuthorLinksProps } from './AuthorLinks';
 import SectionSeparator from './SectionSeparator';
 
 interface BlogFooterProps {
   admin: Author
   classNames?: string
+  activeLink?: AuthorLinksProps['activeLink']
 }
 
-export default function BlogFooter({ admin, classNames }: BlogFooterProps) {
+export default function BlogFooter({ admin, classNames, activeLink }: BlogFooterProps) {
   return (
     <>
       <SectionSeparator classNames={'mt-7 mb-7'} />
@@ -18,7 +19,7 @@ export default function BlogFooter({ admin, classNames }: BlogFooterProps) {
           classNames
         }
       >
-        <AuthorLinks admin={admin} placement={'footer'} />
+        <AuthorLinks admin={admin} placement={'footer'} activeLink={activeLink} />
       </footer>
     </>
   );

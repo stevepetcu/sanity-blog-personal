@@ -9,16 +9,18 @@ import { AuthorLinkedHandleWebsiteKeys } from '../schemas/author';
 import { PAGE_POSTS_PATH } from '../pages/posts';
 import { PAGE_ABOUT_PATH } from '../pages/about';
 
-interface AuthorLinksProps {
+export interface AuthorLinksProps {
   admin: Author
   placement: 'header' | 'footer'
   linkClassNames?: string
+  activeLink?: 'posts' | 'about' | 'experiments'
 }
 
 export default function AuthorLinks({
   admin,
   placement,
   linkClassNames,
+  activeLink,
 }: AuthorLinksProps) {
   const { firstName, handles } = admin;
   const gitHubHandle = handles.find(
@@ -33,7 +35,11 @@ export default function AuthorLinks({
       <Link
         href={PAGE_POSTS_PATH}
         className={cn(
-          `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
+          `shrink ${linkClassNames || ''} leading-none`,
+          {
+            'text-slate-600 hover:text-slate-900': activeLink !== 'posts',
+            'text-sky-500': activeLink === 'posts',
+          }
         )}
         title={'All blog posts'}
         aria-label={'All blog posts'}
@@ -56,7 +62,11 @@ export default function AuthorLinks({
       <Link
         href={PAGE_ABOUT_PATH}
         className={cn(
-          `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
+          `shrink ${linkClassNames || ''} leading-none`,
+          {
+            'text-slate-600 hover:text-slate-900': activeLink !== 'about',
+            'text-sky-500': activeLink === 'about',
+          }
         )}
         title={`${firstName}'s about page and resume`}
         aria-label={`${firstName}'s about page and resume`}
@@ -79,7 +89,11 @@ export default function AuthorLinks({
       <Link
         href={`${PAGE_POSTS_PATH}?tag=experiment&tag=showcase`}
         className={cn(
-          `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
+          `shrink ${linkClassNames || ''} leading-none`,
+          {
+            'text-slate-600 hover:text-slate-900': activeLink !== 'experiments',
+            'text-sky-500': activeLink === 'experiments',
+          }
         )}
         title={`${firstName}'s live code experiments`}
         aria-label={`${firstName}'s live code experiments`}
@@ -105,7 +119,7 @@ export default function AuthorLinks({
           target="_blank"
           rel="noopener"
           className={cn(
-            `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
+            `text-slate-600 hover:text-slate-900 shrink ${linkClassNames || ''} leading-none`
           )}
           title={`${firstName}'s GitHub account`}
           aria-label={`${firstName}'s GitHub account`}
@@ -132,7 +146,7 @@ export default function AuthorLinks({
           target="_blank"
           rel="noopener"
           className={cn(
-            `text-slate-600 hover:text-slate-900 shrink ${linkClassNames} leading-none`
+            `text-slate-600 hover:text-slate-900 shrink ${linkClassNames || ''} leading-none`
           )}
           title={`${firstName}'s LinkedIn account`}
           aria-label={`${firstName}'s LinkedIn account`}

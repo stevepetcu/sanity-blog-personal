@@ -49,6 +49,7 @@ export default function IndexPage(props: IndexPageProps) {
             description={description}
             admin={admin}
             level={1}
+            activeLink={tagsQuery.includes('experiment') ? 'experiments' : 'posts'}
           />
           {tagsQuery.length === 0 && postPins.length > 0 && (
             <PostPins pins={postPins} />
@@ -95,10 +96,15 @@ export default function IndexPage(props: IndexPageProps) {
               <IndexAside
                 tags={allPostTags}
                 admin={admin}
+                activeLink={tagsQuery.includes('experiment') ? 'experiments' : 'posts'}
               />
             </div>
           </div>
-          <BlogFooter admin={settings.admin} classNames={'flex lg:hidden'} />
+          <BlogFooter
+            admin={settings.admin}
+            classNames={'flex lg:hidden'}
+            activeLink={tagsQuery.includes('experiment') ? 'experiments' : 'posts'}
+          />
         </Container>
       </Layout>
     </>

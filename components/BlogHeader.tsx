@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Author } from '../lib/sanity.queries';
 import { PAGE_POSTS_PATH } from '../pages/posts';
-import AuthorLinks from './AuthorLinks';
+import AuthorLinks, { AuthorLinksProps } from './AuthorLinks';
 import styles from './BlogHeader.module.css';
 import SectionSeparator from './SectionSeparator';
 
@@ -13,11 +13,13 @@ export default function BlogHeader({
   description,
   admin,
   level,
+  activeLink,
 }: {
   title: string
   description?: any[]
   admin: Author
   level: 1 | 2
+  activeLink?: AuthorLinksProps['activeLink']
 }) {
   if (![1, 2].includes(level)) {
     throw new Error(
@@ -54,6 +56,7 @@ export default function BlogHeader({
             admin={admin}
             placement={'header'}
             linkClassNames={`text-sm ml-3 ${linksFontSize}`}
+            activeLink={activeLink}
           />
         </div>
       </header>

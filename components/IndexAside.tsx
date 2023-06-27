@@ -12,14 +12,16 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { Author, Post } from '../lib/sanity.queries';
+import { AuthorLinksProps } from './AuthorLinks';
 import BlogFooter from './BlogFooter';
 import TagList from './TagList';
 
 interface IndexAsideProps {
   tags: Post['tags']
   admin: Author
+  activeLink: AuthorLinksProps['activeLink']
 }
-export default function IndexAside({ tags, admin }: IndexAsideProps) {
+export default function IndexAside({ tags, admin, activeLink }: IndexAsideProps) {
   const [offsetTop, setOffsetTop] = useState(0);
   const [offsetHeight, setOffsetHeight] = useState(0);
 
@@ -158,7 +160,11 @@ export default function IndexAside({ tags, admin }: IndexAsideProps) {
           />
         </div>
       </div>
-      <BlogFooter admin={admin} classNames={'hidden lg:flex'} />
+      <BlogFooter
+        admin={admin}
+        classNames={'hidden lg:flex'}
+        activeLink={activeLink}
+      />
     </aside>
   );
 }

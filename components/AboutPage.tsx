@@ -171,6 +171,7 @@ export default function AboutPage(props: IndexPageProps) {
             description={description}
             admin={admin}
             level={1}
+            activeLink={'about'}
           />
           <article className={styles.aboutArticle}>
             <section>
@@ -452,7 +453,7 @@ export default function AboutPage(props: IndexPageProps) {
               </p>
             </section>
           </article>
-          <BlogFooter admin={settings.admin} />
+          <BlogFooter admin={settings.admin} activeLink={'about'} />
         </Container>
       </Layout>
     </>
