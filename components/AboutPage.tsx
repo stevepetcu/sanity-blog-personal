@@ -230,7 +230,7 @@ export default function AboutPage(props: IndexPageProps) {
                 architecto est eaque earumEos maiores et facere saepe et labore
                 porro et ratione fugiat.
               </p>
-              <div className={'grid grid-cols-1 gap-5 md:grid-cols-2'}>
+              <div className={'grid grid-cols-1 gap-5 lg:grid-cols-2'}>
                 <div
                   className={
                     'flex snap-x snap-mandatory gap-x-4 overflow-x-auto ' +
@@ -280,11 +280,11 @@ export default function AboutPage(props: IndexPageProps) {
                             iconWidth={32}
                             iconHeight={32}
                             iconClassNames={
-                              'text-2xl text-slate-300 group-hover:text-slate-200 ' +
+                              'text-xl md:text-2xl text-slate-300 group-hover:text-slate-200 ' +
                               'transition-all duration-300 ease-out'
                             }
                             hrClassNames={
-                              'w-8 bg-slate-300 group-hover:w-24 group-hover:bg-slate-200 ' +
+                              'w-6 md:w-8 bg-slate-300 group-hover:w-16 group-hover:md:w-24 group-hover:bg-slate-200 ' +
                               'transition-all duration-300 ease-out'
                             }
                           />
@@ -301,7 +301,7 @@ export default function AboutPage(props: IndexPageProps) {
                     );
                   })}
                 </div>
-                <div className={'order-first justify-self-end md:order-last'}>
+                <div className={'order-first justify-self-end lg:order-last'}>
                   <p>
                     Eos voluptas excepturi
                     <a href="https://www.loremipzum.com" target="_blank">
