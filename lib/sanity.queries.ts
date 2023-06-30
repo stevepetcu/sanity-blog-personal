@@ -4,6 +4,7 @@ import {
   Crop,
   Hotspot,
 } from 'sanity/src/core/form/inputs/files/ImageToolInput/imagetool';
+import { CropMode } from '@sanity/image-url/lib/types/types';
 
 // TODO: figure out how to type all the things and disallow "any"
 
@@ -50,6 +51,10 @@ const settingsFullDataFields = groq`
   description,
   ogImage,
   "admin": admin->{firstName, lastName, handles}
+`;
+
+const aboutIntroPhotoFields = groq`
+  "image": photoImage
 `;
 
 export const settingsQuery = groq`*[_type == "settings"][0] {
@@ -112,6 +117,12 @@ export const postSummariesListByTagQuery = (tags: string[]) => {
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug && publishedAt <= now()][0] {
   ${postViewFields}
+}
+`;
+
+export const aboutIntroPhotosListQuery = groq`
+*[_type == "aboutIntroPhoto" ] | order(publishedAt desc) | order(orderNumber asc) {
+  ${aboutIntroPhotoFields}
 }
 `;
 
@@ -201,5 +212,18 @@ export interface Settings {
   admin: Author
   ogImage?: {
     title?: string
+  }
+}
+
+export interface AboutIntroPhoto {
+  image: {
+    caption: any // blocks
+    alt: string
+    cropMode: CropMode
+    asset?: {
+      _ref: string
+    }
+    crop?: Crop
+    hotspot?: Hotspot
   }
 }

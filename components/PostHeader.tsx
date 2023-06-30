@@ -22,6 +22,8 @@ interface PostHeaderProps {
   >
 }
 
+export const COVER_IMAGE_ASPECT_RATIO = 16/9;
+
 export default function PostHeader({ post }: PostHeaderProps) {
   const { title, coverImage, embeddedWebsiteUrl } = post;
 
@@ -45,7 +47,7 @@ export default function PostHeader({ post }: PostHeaderProps) {
           <BlogImage
             title={title}
             image={coverImage}
-            width={1280}
+            width={Math.floor(720 * COVER_IMAGE_ASPECT_RATIO)}
             height={720}
             priority
           />
@@ -54,7 +56,10 @@ export default function PostHeader({ post }: PostHeaderProps) {
       {
         embeddedWebsiteUrl && (
           <div className="-mx-4 mb-5 rounded sm:mx-0 overflow-hidden">
-            <EmbeddedWebsite src={embeddedWebsiteUrl} />
+            <EmbeddedWebsite
+              src={embeddedWebsiteUrl}
+              aspectRatio={COVER_IMAGE_ASPECT_RATIO}
+            />
           </div>
         )}
       <div className={cn({

@@ -91,7 +91,7 @@ export default function IndexAside({ tags, admin, activeLink }: IndexAsideProps)
               Find more topics
             </Link>
           </div>
-          <div className={'grid grid-cols-1 grid-rows-3 justify-items-center ' +
+          <div className={'grid grid-cols-1 grid-rows-2 justify-items-center ' +
             'absolute bottom-0 right-[2.875rem] text-xxs h-full'}>
             <div className={'col-start-1 row-start-1 row-span-1 ' +
               '-mt-[2px] h-[5px] leading-[0px] self-start pr-[1px]'}>
@@ -102,11 +102,9 @@ export default function IndexAside({ tags, admin, activeLink }: IndexAsideProps)
                 className={cn('text-slate-300')}
               />
             </div>
-            <div className={'col-start-1 row-start-1 row-span-3 self-center ' +
+            <div className={'col-start-1 row-start-1 row-span-2 self-center ' +
               'w-0 h-[85%] border-l border-dotted border-slate-300 '}/>
-            {/*<div className={'col-start-1 row-start-1 row-span-3 self-center ' +*/}
-            {/*  'h-[85%] w-[1px] outline-dotted outline-1 outline-slate-300 '}/>*/}
-            <div className={'col-start-1 row-start-3 row-span-1 ' +
+            <div className={'col-start-1 row-start-2 row-span-1 ' +
               'h-[5px] leading-[0px] self-end pr-[1px]'}>
               <FontAwesomeIcon
                 icon={faAngleDown}
@@ -117,7 +115,7 @@ export default function IndexAside({ tags, admin, activeLink }: IndexAsideProps)
             </div>
           </div>
         </div>
-        <div className={'grid grid-cols-3 grid-rows-1 items-center ' +
+        <div className={'grid grid-cols-2 grid-rows-1 items-center ' +
           'absolute bottom-3 left-0 text-xxs w-full'}>
           <div className={'col-start-1 row-start-1 col-span-1 justify-self-start leading-[0px]'}>
             <FontAwesomeIcon
@@ -127,9 +125,9 @@ export default function IndexAside({ tags, admin, activeLink }: IndexAsideProps)
               className={cn('text-slate-300')}
             />
           </div>
-          <div className={'col-start-1 row-start-1 col-span-3 justify-self-center ' +
+          <div className={'col-start-1 row-start-1 col-span-2 justify-self-center ' +
             'w-[95%] h-0 border-b border-dotted border-slate-300'}/>
-          <div className={'col-start-3 row-start-1 col-span-1 justify-self-end leading-[0px]'}>
+          <div className={'col-start-2 row-start-1 col-span-1 justify-self-end leading-[0px]'}>
             <FontAwesomeIcon
               icon={faAngleRight}
               width={5}

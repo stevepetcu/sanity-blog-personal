@@ -1,7 +1,9 @@
 import {
   faArrowTurnUp,
+  faCircleInfo,
   faFloppyDisk,
   faMobileScreen,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cn from 'classnames';
@@ -9,30 +11,72 @@ import Container from 'components/BlogContainer';
 import BlogHeader from 'components/BlogHeader';
 import Layout from 'components/BlogLayout';
 import IndexPageHead from 'components/IndexPageHead';
-import type { Settings } from 'lib/sanity.queries';
-import { useEffect, useState } from 'react';
+import type { AboutIntroPhoto, Settings } from 'lib/sanity.queries';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 
+import { PixelRatioContext } from '../contexts/PixelRatioContext';
+import { urlForImage } from '../lib/sanity.image';
 import styles from './AboutPage.module.css';
 import BlogFooter from './BlogFooter';
+import { IconHr } from './IconHr';
+import SanePortableText from './SanePortableText';
 import SectionSeparator from './SectionSeparator';
 
 export interface IndexPageProps {
   preview?: boolean;
   loading?: boolean;
   settings: Settings;
+  aboutIntroPhotos: AboutIntroPhoto[];
 }
 
 export default function AboutPage(props: IndexPageProps) {
+  const INTRO_PHOTO_ASPECT_RATIO = 2/3;
+  const INTRO_PHOTO_HEIGHT = 900;
+  const INTRO_PHOTO_WIDTH = Math.ceil(
+    INTRO_PHOTO_HEIGHT * INTRO_PHOTO_ASPECT_RATIO
+  );
+
+  const pixelRatio = React.useContext(PixelRatioContext);
+
   const { preview, loading, settings } = props;
   const { title, description, admin } = settings;
 
-  const [
-    showDeviceOrientationCTA,
-    setShowDeviceOrientationCTA,
-  ] = useState(false);
+  const [activeModalPhoto] = useState<AboutIntroPhoto>();
+
+  const [showPhotoCaptionAtIndex, setShowPhotoCaptionAtIndex] = useState(-1);
+  const [showPhotoCaptionTimeout, setShowPhotoCaptionTimeout] = useState();
+  const showFigCaptionAtIndex = (index: number) => {
+    clearTimeout(showPhotoCaptionTimeout);
+    setShowPhotoCaptionTimeout(
+      setTimeout(() => {
+        setShowPhotoCaptionAtIndex(-1);
+        clearTimeout(showPhotoCaptionTimeout);
+      }, 12000)
+    );
+
+    if (showPhotoCaptionAtIndex === index) {
+      setShowPhotoCaptionAtIndex(-1);
+    } else {
+      setShowPhotoCaptionAtIndex(index);
+    }
+  };
+
+  const hideFigCaptionAtIndex = (index: number) => {
+    clearTimeout(showPhotoCaptionTimeout);
+
+    if (showPhotoCaptionAtIndex === index) {
+      setShowPhotoCaptionAtIndex(-1);
+    }
+  };
+
+  const [showDeviceOrientationCTA, setShowDeviceOrientationCTA] =
+    useState(false);
 
   useEffect(() => {
-    const processDeviceViewportSize = (orientation: Pick<MediaQueryList, 'matches'>) => {
+    const processDeviceViewportSize = (
+      orientation: Pick<MediaQueryList, 'matches'>
+    ) => {
       if (orientation.matches && window.innerHeight < 640) {
         // Landscape mode on a narrow device - prompt user to put the device in portrait mode.
         setShowDeviceOrientationCTA(true);
@@ -52,8 +96,6 @@ export default function AboutPage(props: IndexPageProps) {
     window.onresize = () => {
       processDeviceViewportSize(landscapeOrientation);
     };
-
-
 
     const latestRolesTimeline = document.getElementById(
       'latest-roles-timeline'
@@ -170,7 +212,7 @@ export default function AboutPage(props: IndexPageProps) {
             title={title}
             description={description}
             admin={admin}
-            level={1}
+            level={2}
             activeLink={'about'}
           />
           <article className={styles.aboutArticle}>
@@ -188,18 +230,93 @@ export default function AboutPage(props: IndexPageProps) {
                 architecto est eaque earumEos maiores et facere saepe et labore
                 porro et ratione fugiat.
               </p>
-              <p>
-                Eos voluptas excepturi
-                <a href="https://www.loremipzum.com" target="_blank">
-                  Est quae a unde veniam vel temporibus similique
-                </a>
-                ut aliquam laudantium qui labore magnam aut quidem minima. Aut
-                nulla atqueUt iste aut quisquam eveniet et perspiciatis dicta.
-                Qui officiis harum aut omnis quamEum vero qui nisi dolorem sed
-                illum voluptatem ex dolor officia ut omnis veritatis. Qui
-                quaerat doloremVel iure At quasi natus in consequatur voluptas
-                33 dolores laborum ut accusantium atque.
-              </p>
+              <div className={'grid grid-cols-1 gap-5 md:grid-cols-2'}>
+                <div
+                  className={
+                    'flex snap-x snap-mandatory gap-x-4 overflow-x-auto ' +
+                    'bg-stripes-dark rounded p-3.5 shadow-inner'
+                  }
+                >
+                  {props.aboutIntroPhotos.map((photo, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className={cn(
+                          'relative grid grid-cols-1 grid-rows-2 justify-items-center ' +
+                            'h-[400px] w-[267px] sm:h-[450px] sm:w-[300px] md:h-[500px] md:w-[333px] ' +
+                            'lg:h-[550px] lg:w-[367px] xl:h-[600px] xl:w-[400px] ' +
+                            'shrink-0 snap-center rounded overflow-hidden drop-shadow'
+                        )}
+                      >
+                        <Image
+                          src={urlForImage(photo.image)
+                            .height(INTRO_PHOTO_HEIGHT)
+                            .width(INTRO_PHOTO_WIDTH)
+                            .fit('crop')
+                            .crop(photo.image.cropMode)
+                            .dpr(pixelRatio)
+                            .url()}
+                          className={cn(
+                            'z-0 col-start-1 row-span-2 row-start-1 rounded'
+                          )}
+                          height={INTRO_PHOTO_HEIGHT}
+                          width={INTRO_PHOTO_WIDTH}
+                          alt={photo.image.alt}
+                          title={photo.image.alt}
+                          priority={index < 4}
+                          onClick={() => hideFigCaptionAtIndex(index)}
+                        />
+                        <div
+                          className={cn(
+                            'group z-20 w-full ' +
+                              'col-start-1 row-span-1 row-start-2 self-end ' +
+                              'mix-blend-overlay hover:mix-blend-hard-light ' +
+                              'cursor-pointer'
+                          )}
+                          onClick={() => showFigCaptionAtIndex(index)}
+                        >
+                          <IconHr
+                            icon={faCircleInfo}
+                            iconWidth={32}
+                            iconHeight={32}
+                            iconClassNames={
+                              'text-2xl text-slate-300 group-hover:text-slate-200 ' +
+                              'transition-all duration-300 ease-out'
+                            }
+                            hrClassNames={
+                              'w-8 bg-slate-300 group-hover:w-24 group-hover:bg-slate-200 ' +
+                              'transition-all duration-300 ease-out'
+                            }
+                          />
+                        </div>
+                        <figcaption
+                          data-photo-index={index}
+                          className={cn(styles.portableText, {
+                            'h-2/3': showPhotoCaptionAtIndex === index,
+                          })}
+                        >
+                          <SanePortableText content={photo.image.caption} />
+                        </figcaption>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={'order-first justify-self-end md:order-last'}>
+                  <p>
+                    Eos voluptas excepturi
+                    <a href="https://www.loremipzum.com" target="_blank">
+                      Est quae a unde veniam vel temporibus similique
+                    </a>
+                    ut aliquam laudantium qui labore magnam aut quidem minima.
+                    Aut nulla atqueUt iste aut quisquam eveniet et perspiciatis
+                    dicta. Qui officiis harum aut omnis quamEum vero qui nisi
+                    dolorem sed illum voluptatem ex dolor officia ut omnis
+                    veritatis. Qui quaerat doloremVel iure At quasi natus in
+                    consequatur voluptas 33 dolores laborum ut accusantium
+                    atque.
+                  </p>
+                </div>
+              </div>
               <p>
                 Et esse earum
                 <a href="https://www.loremipzum.com" target="_blank">
@@ -208,30 +325,84 @@ export default function AboutPage(props: IndexPageProps) {
                 aut ullam veritatis. Ut velit maxime non natus minimaAd fugit
                 eos porro tenetur rem quod nobis est nulla voluptatem.
               </p>
+              {activeModalPhoto && (
+                <div
+                  className={
+                    'z-10 grid h-full w-full grid-cols-1 place-items-center bg-slate-500/25'
+                  }
+                >
+                  <div
+                    id="defaultModal"
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    className="z-50 overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+                  >
+                    {/* Modal content */}
+                    <div className="relative rounded-lg bg-white shadow">
+                      {/* Modal header */}
+                      <div className="flex items-start justify-between rounded-t border-b p-4">
+                        <h3 className="text-xl font-semibold text-gray-900">
+                          {activeModalPhoto.image.alt}
+                        </h3>
+                        <button
+                          type="button"
+                          className="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5
+                          text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
+                          data-modal-hide="defaultModal"
+                        >
+                          <FontAwesomeIcon
+                            icon={faXmark}
+                            width={5}
+                            height={5}
+                            inverse
+                          />
+                          <span className="sr-only">Close modal</span>
+                        </button>
+                      </div>
+                      <div className="space-y-6 p-6">
+                        <Image
+                          src={urlForImage(activeModalPhoto.image)
+                            .width(1200)
+                            .fit('max')
+                            .dpr(pixelRatio)
+                            .auto('format')
+                            .url()}
+                          className={cn('rounded')}
+                          width={1200}
+                          height={1200}
+                          alt={activeModalPhoto.image.alt}
+                          title={activeModalPhoto.image.alt}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </section>
             <SectionSeparator />
             <section>
               <h1>Latest roles</h1>
               <div
-                className={
-                  cn('-mt-12 -mb-12 grid grid-cols-12 ' +
-                    'gap-x-0.5 md:gap-x-3.5 lg:gap-x-5', {
-                    'hidden': showDeviceOrientationCTA,
-                  })
-                }
+                className={cn(
+                  '-mb-12 -mt-12 grid grid-cols-12 ' +
+                    'gap-x-0.5 md:gap-x-3.5 lg:gap-x-5',
+                  {
+                    hidden: showDeviceOrientationCTA,
+                  }
+                )}
               >
                 <div className={'self-center'}>
                   <div
                     id={'latest-roles-timeline'}
                     className={
                       'col-span-1 grid grid-flow-col grid-cols-1 grid-rows-6 ' +
-                        `justify-items-center gap-y-28 ${styles.latestRolesTimeline}`
+                      `justify-items-center gap-y-28 ${styles.latestRolesTimeline}`
                     }
                   >
                     <div
                       className={
                         'relative -z-10 col-start-1 row-span-6 row-start-1 ' +
-                          'h-4/5 w-0.5 place-self-center bg-slate-200'
+                        'h-4/5 w-0.5 place-self-center bg-slate-200'
                       }
                     ></div>
                     <div
@@ -268,15 +439,15 @@ export default function AboutPage(props: IndexPageProps) {
                   id={'latest-roles-container'}
                   className={
                     'col-span-11 place-self-center ' +
-                      'h-[640px] gap-y-5 space-y-5 overflow-auto px-2 ' +
-                      'snap-y snap-mandatory scroll-smooth ' +
-                      'bg-stripes rounded shadow-inner'
+                    'h-[640px] gap-y-5 space-y-5 overflow-auto px-2 ' +
+                    'snap-y snap-mandatory scroll-smooth ' +
+                    'bg-stripes rounded shadow-inner'
                   }
                 >
                   <div className={styles.topShadow} />
                   <div
                     data-company={'tg'}
-                    className={`${styles.roleContainer} snap-center`}
+                    className={`${styles.roleContainer} snap-center snap-always`}
                   >
                     <div>
                       <h2>Tarabut Gateway</h2>
@@ -290,31 +461,32 @@ export default function AboutPage(props: IndexPageProps) {
                         Lorem ipsum dolor sit amet. Qui rerum nisi in optio sunt
                         qui excepturi galisum ab eaque praesentium id accusamus
                         voluptatem ab voluptates libero. Ut pariatur placeat non
-                        dolorem quas cum illo ipsum. Est dolorem velit ut pariatur
-                        laboriosam et enim Quis id nostrum omnis est quaerat iure
-                        quo itaque exercitationem quo quaerat ipsam. Sit quia
-                        delectus aut unde quia ea rerum maxime.
+                        dolorem quas cum illo ipsum. Est dolorem velit ut
+                        pariatur laboriosam et enim Quis id nostrum omnis est
+                        quaerat iure quo itaque exercitationem quo quaerat
+                        ipsam. Sit quia delectus aut unde quia ea rerum maxime.
                       </p>
                       <p>
-                        Et accusamus explicabo eos laborum tenetur qui modi dolore
-                        eos blanditiis cumque sed velit minus. Est soluta maxime
-                        et consequatur dignissimos et nulla eius sit voluptate
-                        labore aut quia excepturi!
+                        Et accusamus explicabo eos laborum tenetur qui modi
+                        dolore eos blanditiis cumque sed velit minus. Est soluta
+                        maxime et consequatur dignissimos et nulla eius sit
+                        voluptate labore aut quia excepturi!
                       </p>
                       <p>
                         Eos labore sunt est galisum natus et odit saepe ab
                         doloremque facere id commodi eveniet sit nemo rerum ut
                         perspiciatis neque! Et ratione quod sit similique
                         voluptatem est dolorem laborum qui laborum quae! Et fuga
-                        nemo ad voluptas facilis est molestias culpa in laudantium
-                        quia sed incidunt accusantium sit temporibus ratione!
+                        nemo ad voluptas facilis est molestias culpa in
+                        laudantium quia sed incidunt accusantium sit temporibus
+                        ratione!
                       </p>
                     </div>
                     <hr className={styles.gripLine} />
                   </div>
                   <div
                     data-company={'tw'}
-                    className={`${styles.roleContainer} snap-center`}
+                    className={`${styles.roleContainer} snap-center snap-always`}
                   >
                     <div>
                       <h2>/thoughtworks</h2>
@@ -325,23 +497,23 @@ export default function AboutPage(props: IndexPageProps) {
                     </div>
                     <div className={'grow'}>
                       <p>
-                        Et ipsa debitis sit eveniet odit vel modi dignissimos vel
-                        quibusdam sint est consectetur soluta non itaque
+                        Et ipsa debitis sit eveniet odit vel modi dignissimos
+                        vel quibusdam sint est consectetur soluta non itaque
                         necessitatibus. Ea incidunt consequuntur et voluptatem
                         tempore et nisi magnam ab perspiciatis blanditiis qui
-                        temporibus rerum ut nisi ipsum. Sit autem nulla qui omnis
-                        pariatur ut perspiciatis nobis eum nisi voluptate.
+                        temporibus rerum ut nisi ipsum. Sit autem nulla qui
+                        omnis pariatur ut perspiciatis nobis eum nisi voluptate.
                       </p>
                       <p>
                         Eos labore sunt est galisum natus et odit saepe ab
                         doloremque facere id commodi eveniet sit nemo rerum ut
                         perspiciatis neque! Et ratione quod sit similique
                         voluptatem est dolorem laborum qui laborum quae! Et fuga
-                        nemo ad voluptas facilis est molestias culpa in laudantium
-                        quia sed incidunt accusantium sit temporibus ratione! Sed
-                        dolore perferendis quo consequatur esse aut fugit facilis
-                        et ipsam nesciunt ut officiis voluptatem sed excepturi
-                        illum.
+                        nemo ad voluptas facilis est molestias culpa in
+                        laudantium quia sed incidunt accusantium sit temporibus
+                        ratione! Sed dolore perferendis quo consequatur esse aut
+                        fugit facilis et ipsam nesciunt ut officiis voluptatem
+                        sed excepturi illum.
                       </p>
                       <p>
                         Eos labore sunt est galisum natus et odit saepe ab
@@ -354,7 +526,7 @@ export default function AboutPage(props: IndexPageProps) {
                   </div>
                   <div
                     data-company={'wf'}
-                    className={`${styles.roleContainer} snap-center`}
+                    className={`${styles.roleContainer} snap-center snap-always`}
                   >
                     <div>
                       <h2>World First</h2>
@@ -367,23 +539,24 @@ export default function AboutPage(props: IndexPageProps) {
                       <p>
                         Sit dolor debitis et quam totam ea veniam quaerat aut
                         repudiandae harum quo nihil inventore. Qui galisum
-                        repellendus sit internos consectetur qui iste incidunt id
-                        dolorem repellendus. Et maxime consequuntur eos
+                        repellendus sit internos consectetur qui iste incidunt
+                        id dolorem repellendus. Et maxime consequuntur eos
                         consequatur ratione et incidunt cumque. In asperiores
                         provident ab facilis quia ut corrupti consectetur cum
                         aspernatur soluta et minus corporis et voluptate ipsa.
                       </p>
                       <p>
-                        Qui autem veritatis sed deleniti porro qui nihil eligendi.
-                        Ut illum similique id quos itaque sed quos dolore in harum
-                        voluptas et dolor ipsum ut quia laboriosam.
+                        Qui autem veritatis sed deleniti porro qui nihil
+                        eligendi. Ut illum similique id quos itaque sed quos
+                        dolore in harum voluptas et dolor ipsum ut quia
+                        laboriosam.
                       </p>
                     </div>
                     <hr className={styles.gripLine} />
                   </div>
                   <div
                     data-company={'older'}
-                    className={`${styles.roleContainer} snap-center`}
+                    className={`${styles.roleContainer} snap-center snap-always`}
                   >
                     <div>
                       <h2>Older roles</h2>
@@ -396,16 +569,17 @@ export default function AboutPage(props: IndexPageProps) {
                       <p>
                         Sit dolor debitis et quam totam ea veniam quaerat aut
                         repudiandae harum quo nihil inventore. Qui galisum
-                        repellendus sit internos consectetur qui iste incidunt id
-                        dolorem repellendus. Et maxime consequuntur eos
+                        repellendus sit internos consectetur qui iste incidunt
+                        id dolorem repellendus. Et maxime consequuntur eos
                         consequatur ratione et incidunt cumque. In asperiores
                         provident ab facilis quia ut corrupti consectetur cum
                         aspernatur soluta et minus corporis et voluptate ipsa.
                       </p>
                       <p>
-                        Qui autem veritatis sed deleniti porro qui nihil eligendi.
-                        Ut illum similique id quos itaque sed quos dolore in harum
-                        voluptas et dolor ipsum ut quia laboriosam.
+                        Qui autem veritatis sed deleniti porro qui nihil
+                        eligendi. Ut illum similique id quos itaque sed quos
+                        dolore in harum voluptas et dolor ipsum ut quia
+                        laboriosam.
                       </p>
                     </div>
                     <hr className={styles.gripLine} />
@@ -413,11 +587,18 @@ export default function AboutPage(props: IndexPageProps) {
                   <div className={styles.bottomShadow} />
                 </div>
               </div>
-              {
-                showDeviceOrientationCTA &&
-                <div className={'h-64 grid grid-cols-1 place-items-center bg-slate-200 rounded'}>
+              {showDeviceOrientationCTA && (
+                <div
+                  className={
+                    'grid h-64 grid-cols-1 place-items-center rounded bg-slate-200'
+                  }
+                >
                   <div className={'relative h-10 w-10'}>
-                    <div className={'absolute left-0 bottom-3 overflow-hidden animate-reveal-bottom-up'}>
+                    <div
+                      className={
+                        'absolute bottom-3 left-0 animate-reveal-bottom-up overflow-hidden'
+                      }
+                    >
                       <FontAwesomeIcon
                         icon={faArrowTurnUp}
                         width={15}
@@ -425,17 +606,17 @@ export default function AboutPage(props: IndexPageProps) {
                         flip={'horizontal'}
                       />
                     </div>
-                    <div className={'absolute right-0 bottom-0'}>
+                    <div className={'absolute bottom-0 right-0'}>
                       <FontAwesomeIcon
                         icon={faMobileScreen}
                         width={25}
                         height={25}
-                        className={'text-5xl animate-spin-quarter'}
+                        className={'animate-spin-quarter text-5xl'}
                       />
                     </div>
                   </div>
                 </div>
-              }
+              )}
             </section>
             <SectionSeparator />
             <section>

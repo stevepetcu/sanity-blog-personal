@@ -5,9 +5,11 @@
 // https://www.sanity.io/docs/structure-builder-reference
 
 import { DefaultDocumentNodeResolver } from 'sanity/desk';
+import aboutIntroPhotoType from 'schemas/about-intro-photo';
 import authorType from 'schemas/author';
 import postType from 'schemas/post';
 
+import AboutIntroPhotoPreviewPane from './AboutIntroPhotoPreviewPane';
 import AuthorAvatarPreviewPane from './AuthorAvatarPreviewPane';
 import PostPreviewPane from './PostPreviewPane';
 
@@ -42,6 +44,18 @@ export const previewDocumentNode = ({
               slug={document.displayed.slug?.current}
               apiVersion={apiVersion}
               previewSecretId={previewSecretId}
+            />
+          ))
+          .title('Preview'),
+      ]);
+
+    case aboutIntroPhotoType.name:
+      return S.document().views([
+        S.view.form(),
+        S.view
+          .component(({ document }) => (
+            <AboutIntroPhotoPreviewPane
+              photo={document.displayed.photoImage}
             />
           ))
           .title('Preview'),

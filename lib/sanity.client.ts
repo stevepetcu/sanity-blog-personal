@@ -1,5 +1,6 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api';
 import {
+  AboutIntroPhoto, aboutIntroPhotosListQuery,
   type Post,
   postBySlugQuery,
   PostPin,
@@ -101,6 +102,14 @@ export async function getPostPinsList(
       token: token || undefined,
     });
     return await client.fetch<PostPin[]>(postPinsListQuery);
+  }
+
+  return [];
+}
+
+export async function getAllAboutIntroPhotos(): Promise<AboutIntroPhoto[]> {
+  if (client) {
+    return (await client.fetch<AboutIntroPhoto[]>(aboutIntroPhotosListQuery)) || [];
   }
 
   return [];

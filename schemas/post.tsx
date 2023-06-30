@@ -390,7 +390,7 @@ export default defineType({
 
                       if (
                         context.parent.asset &&
-                        !['top', 'right', 'bottom', 'left'].includes(value)
+                        !['top', 'bottom'].includes(value)
                       ) {
                         return 'Please place the image.';
                       }

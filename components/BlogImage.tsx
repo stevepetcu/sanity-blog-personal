@@ -25,8 +25,6 @@ export default function BlogImage(props: BlogImageProps) {
 
   const { title, slug, image, width, height, priority, imageClassNames } =
     props;
-  const scaledWidth = pixelRatio * width;
-  const scaledHeight = pixelRatio * height;
 
   const imageComponent = (
     <div
@@ -37,12 +35,18 @@ export default function BlogImage(props: BlogImageProps) {
     >
       <Image
         className={cn(`h-auto w-full rounded ${imageClassNames || ''}`)}
-        width={scaledWidth}
-        height={scaledHeight}
+        width={width}
+        height={height}
         alt={image.alt}
         title={image.alt}
-        src={urlForImage(image).height(scaledHeight).width(scaledWidth).url()}
-        sizes="100vw"
+        src={urlForImage(image)
+          .width(width)
+          .height(height)
+          .dpr(pixelRatio)
+          .fit('crop')
+          .crop('focalpoint')
+          .url()}
+        sizes="(max-width 600px) 600px, (max-width: 728px) 728px, (max-width: 905px) 905px, (max-width: 1200px) 1200px"
         priority={priority}
       />
     </div>

@@ -4,13 +4,12 @@ import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../tailwind.config.js';
 interface EmbeddedWebsiteProps {
   src: string;
+  aspectRatio: number;
 }
 
 export default function EmbeddedWebsite({
-  src,
+  src, aspectRatio,
 }: EmbeddedWebsiteProps) {
-  const COVER_IMAGE_ASPECT_RATIO = 720/1280;
-
   const [windowOuterHeight, setWindowOuterHeight] = useState(1000);
   const [windowInnerWidth, setWindowInnerWidth] = useState(1000);
   const [websiteContainer, setWebsiteContainer] = useState<HTMLElement>();
@@ -64,11 +63,11 @@ export default function EmbeddedWebsite({
     if (isWindowInnerWidthSmallerThan('md')) {
       websiteDisplayHeight = windowOuterHeight * 0.75;
     } else {
-      websiteDisplayHeight = websiteContainer?.offsetWidth * COVER_IMAGE_ASPECT_RATIO;
+      websiteDisplayHeight = Math.floor(websiteContainer?.offsetWidth * 1/aspectRatio);
     }
 
     setWebsiteContainerHeight(websiteDisplayHeight);
-  }, [windowOuterHeight, windowInnerWidth, websiteContainer, twConfig, COVER_IMAGE_ASPECT_RATIO]);
+  }, [windowOuterHeight, windowInnerWidth, websiteContainer, twConfig, aspectRatio]);
 
   return <div id='website-container'
     style={{

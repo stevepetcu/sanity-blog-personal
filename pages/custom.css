@@ -17,6 +17,21 @@
     background-size: 7px 7px;
 }
 
+.bg-stripes-dark {
+    @apply bg-slate-800;
+    background-image: linear-gradient(
+            135deg,
+            rgb(2 6 23) 10%,
+            transparent 0,
+            transparent 50%,
+            rgb(2 6 23) 0,
+            rgb(2 6 23) 60%,
+            transparent 0,
+            transparent
+    );
+    background-size: 7px 7px;
+}
+
 .font-inspect {
     @apply font-mono tabular-nums tracking-tight-ma-only text-xs text-slate-300;
     word-spacing: -0.45em;

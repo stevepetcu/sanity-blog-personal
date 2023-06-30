@@ -8,7 +8,11 @@
 }
 
 .aboutArticle p {
-    @apply my-6 text-xs md:text-base lg:text-xl;
+    @apply mt-6 mb-6 text-xs md:text-base;
+}
+
+.aboutArticle p:first-child {
+    @apply mt-0;
 }
 
 .aboutArticle .roleContainer {
@@ -98,3 +102,34 @@
     @apply text-3xl;
 }
 
+.aboutArticle figcaption {
+    /*We need to give this a height of 1px to tell dumb Safari to backdrop-blur it.*/
+    @apply z-10 grid auto-rows-min grid-flow-row-dense gap-y-4
+    justify-items-center content-start
+    col-start-1 row-start-2 row-span-1 self-end
+    w-full h-[1px] -mb-[2px]
+    overflow-hidden rounded-b px-10
+    bg-slate-700/50 backdrop-blur -backdrop-hue-rotate-15 backdrop-saturate-150
+    text-center transition-all ease-out;
+}
+
+.portableText a {
+    cursor: pointer;
+    @apply text-sky-500;
+}
+
+.portableText a:hover {
+    @apply text-sky-700 underline underline-offset-2;
+}
+
+.portableText p {
+    @apply text-slate-50 leading-relaxed font-extralight mb-0 mt-0;
+}
+
+.portableText p:first-of-type {
+    @apply mt-10;
+}
+
+.portableText em {
+    @apply text-xs font-semibold;
+}

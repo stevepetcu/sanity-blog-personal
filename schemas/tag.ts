@@ -27,4 +27,12 @@ export default defineType({
               })),
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+    },
+    prepare({ title }) {
+      return { title };
+    },
+  },
 });
