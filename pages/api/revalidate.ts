@@ -25,8 +25,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient, groq, type SanityClient } from 'next-sanity';
 import { type ParseBody, parseBody } from 'next-sanity/webhook';
 
-import { PAGE_POSTS_PATH } from '../posts';
 import { PAGE_ABOUT_PATH } from '../about';
+import { PAGE_POSTS_PATH } from '../posts';
 
 export { config } from 'next-sanity/webhook';
 
@@ -92,6 +92,9 @@ async function queryStaleRoutes(
   switch (body._type) {
   case 'post':
     return await queryStalePostRoutes(client, body._id);
+  case 'aboutIntroPhoto':
+    // This should also handle deletions of photos.
+    return [PAGE_ABOUT_PATH];
   case 'settings':
     return await queryAllRoutes(client);
   default:
@@ -109,7 +112,6 @@ async function queryAllRoutes(client: SanityClient): Promise<StaleRoute[]> {
   return [
     PAGE_POSTS_PATH,
     ...slugs.map((slug) => `${PAGE_POSTS_PATH}/${slug}` as StaleRoute),
-    PAGE_ABOUT_PATH,
   ];
 }
 
