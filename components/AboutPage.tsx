@@ -31,7 +31,7 @@ export interface IndexPageProps {
 }
 
 export default function AboutPage(props: IndexPageProps) {
-  const INTRO_PHOTO_ASPECT_RATIO = 2/3;
+  const INTRO_PHOTO_ASPECT_RATIO = 2 / 3;
   const INTRO_PHOTO_HEIGHT = 900;
   const INTRO_PHOTO_WIDTH = Math.ceil(
     INTRO_PHOTO_HEIGHT * INTRO_PHOTO_ASPECT_RATIO
@@ -45,14 +45,16 @@ export default function AboutPage(props: IndexPageProps) {
   const [activeModalPhoto] = useState<AboutIntroPhoto>();
 
   const [showPhotoCaptionAtIndex, setShowPhotoCaptionAtIndex] = useState(-1);
-  const [showPhotoCaptionTimeout, setShowPhotoCaptionTimeout] = useState();
+  const [showPhotoCaptionTimeout, setShowPhotoCaptionTimeout] = useState<
+    undefined | ReturnType<typeof setTimeout>
+  >();
   const showFigCaptionAtIndex = (index: number) => {
     clearTimeout(showPhotoCaptionTimeout);
     setShowPhotoCaptionTimeout(
       setTimeout(() => {
         setShowPhotoCaptionAtIndex(-1);
         clearTimeout(showPhotoCaptionTimeout);
-      }, 120000)
+      }, 12000)
     );
 
     if (showPhotoCaptionAtIndex === index) {
@@ -102,7 +104,7 @@ export default function AboutPage(props: IndexPageProps) {
     );
     const companyLogos = [
       ...latestRolesTimeline.querySelectorAll('[data-company]'),
-    ];
+    ] as HTMLElement[];
     const tgCompanyLogo = companyLogos.find(
       (logo) => logo.dataset.company === 'tg'
     );
@@ -121,7 +123,7 @@ export default function AboutPage(props: IndexPageProps) {
     );
     const roleItems = [
       ...latestRolesContainer.querySelectorAll('[data-company]'),
-    ];
+    ] as HTMLElement[];
 
     let scrollTimeout;
 
@@ -134,7 +136,7 @@ export default function AboutPage(props: IndexPageProps) {
         const containerBottom =
           containerScrollTop + latestRolesContainer.offsetHeight;
 
-        const visibleRole = roleItems.find((item) => {
+        const visibleRole = roleItems.find((item: HTMLElement) => {
           const roleContainerTop = item.offsetTop - containerTop;
           const roleContainerBottom = roleContainerTop + item.offsetHeight;
 
@@ -245,7 +247,7 @@ export default function AboutPage(props: IndexPageProps) {
                           'relative grid grid-cols-1 grid-rows-2 justify-items-center ' +
                             'h-[400px] w-[267px] sm:h-[450px] sm:w-[300px] md:h-[500px] md:w-[333px] ' +
                             'lg:h-[550px] lg:w-[367px] xl:h-[600px] xl:w-[400px] ' +
-                            'shrink-0 snap-center rounded overflow-hidden drop-shadow'
+                            'shrink-0 snap-center overflow-hidden rounded drop-shadow'
                         )}
                       >
                         <Image
@@ -268,7 +270,7 @@ export default function AboutPage(props: IndexPageProps) {
                         />
                         <div
                           className={cn(
-                            'group z-20 w-full mb-1 lg:mb-2 ' +
+                            'group z-20 mb-1 w-full lg:mb-2 ' +
                               'col-start-1 row-span-1 row-start-2 self-end ' +
                               'mix-blend-overlay hover:mix-blend-hard-light ' +
                               'cursor-pointer'
@@ -292,7 +294,7 @@ export default function AboutPage(props: IndexPageProps) {
                         <figcaption
                           data-photo-index={index}
                           className={cn(styles.portableText, {
-                            'h-full': showPhotoCaptionAtIndex === index,
+                            'mb-0 h-full': showPhotoCaptionAtIndex === index,
                           })}
                         >
                           <div>
@@ -305,10 +307,10 @@ export default function AboutPage(props: IndexPageProps) {
                 </div>
                 <div className={'order-first justify-self-end lg:order-last'}>
                   <p>
-                    Eos voluptas excepturi
+                    Eos voluptas excepturi{' '}
                     <a href="https://www.loremipzum.com" target="_blank">
                       Est quae a unde veniam vel temporibus similique
-                    </a>
+                    </a>{' '}
                     ut aliquam laudantium qui labore magnam aut quidem minima.
                     Aut nulla atqueUt iste aut quisquam eveniet et perspiciatis
                     dicta. Qui officiis harum aut omnis quamEum vero qui nisi
@@ -320,10 +322,10 @@ export default function AboutPage(props: IndexPageProps) {
                 </div>
               </div>
               <p>
-                Et esse earum
+                Et esse earum{' '}
                 <a href="https://www.loremipzum.com" target="_blank">
                   Id aliquid eos ipsa numquam quo doloremque necessitatibus
-                </a>
+                </a>{' '}
                 aut ullam veritatis. Ut velit maxime non natus minimaAd fugit
                 eos porro tenetur rem quod nobis est nulla voluptatem.
               </p>

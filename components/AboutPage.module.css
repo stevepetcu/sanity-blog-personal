@@ -11,6 +11,15 @@
     @apply mt-6 mb-6 text-base lg:text-xl;
 }
 
+.aboutArticle a {
+    cursor: pointer;
+    @apply text-sky-500;
+}
+
+.aboutArticle a:hover {
+    @apply text-sky-700 underline underline-offset-2;
+}
+
 .aboutArticle p:first-child {
     @apply mt-0;
 }
