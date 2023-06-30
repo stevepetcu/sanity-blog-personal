@@ -109,7 +109,7 @@ export default function AuthorLinks({
             'hidden': placement === 'header',
             'sm:block': placement === 'header',
           })}>
-            <p className={'text-xs'}>Code</p>
+            <p className={'text-xs'}>Expts</p>
           </div>
         </div>
       </Link>

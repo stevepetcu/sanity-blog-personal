@@ -38,7 +38,7 @@ export default function PostHeader({ post }: PostHeaderProps) {
       </div>
       {
         (coverImage || embeddedWebsiteUrl) && (
-          <div className={'-mt-3 mb-5'}>
+          <div className={'-mt-2 mb-5'}>
             <SkipToMainContent/>
           </div>
         )}

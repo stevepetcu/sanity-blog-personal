@@ -52,7 +52,7 @@ export default function AboutPage(props: IndexPageProps) {
       setTimeout(() => {
         setShowPhotoCaptionAtIndex(-1);
         clearTimeout(showPhotoCaptionTimeout);
-      }, 12000)
+      }, 120000)
     );
 
     if (showPhotoCaptionAtIndex === index) {
@@ -268,7 +268,7 @@ export default function AboutPage(props: IndexPageProps) {
                         />
                         <div
                           className={cn(
-                            'group z-20 w-full ' +
+                            'group z-20 w-full mb-1 lg:mb-2 ' +
                               'col-start-1 row-span-1 row-start-2 self-end ' +
                               'mix-blend-overlay hover:mix-blend-hard-light ' +
                               'cursor-pointer'
@@ -280,7 +280,7 @@ export default function AboutPage(props: IndexPageProps) {
                             iconWidth={32}
                             iconHeight={32}
                             iconClassNames={
-                              'text-xl md:text-2xl text-slate-300 group-hover:text-slate-200 ' +
+                              'text-2xl md:text-2xl text-slate-300 group-hover:text-slate-200 ' +
                               'transition-all duration-300 ease-out'
                             }
                             hrClassNames={
@@ -292,10 +292,12 @@ export default function AboutPage(props: IndexPageProps) {
                         <figcaption
                           data-photo-index={index}
                           className={cn(styles.portableText, {
-                            'h-2/3': showPhotoCaptionAtIndex === index,
+                            'h-full': showPhotoCaptionAtIndex === index,
                           })}
                         >
-                          <SanePortableText content={photo.image.caption} />
+                          <div>
+                            <SanePortableText content={photo.image.caption} />
+                          </div>
                         </figcaption>
                       </div>
                     );
@@ -510,10 +512,7 @@ export default function AboutPage(props: IndexPageProps) {
                         perspiciatis neque! Et ratione quod sit similique
                         voluptatem est dolorem laborum qui laborum quae! Et fuga
                         nemo ad voluptas facilis est molestias culpa in
-                        laudantium quia sed incidunt accusantium sit temporibus
-                        ratione! Sed dolore perferendis quo consequatur esse aut
-                        fugit facilis et ipsam nesciunt ut officiis voluptatem
-                        sed excepturi illum.
+                        laudantium quia sed incidunt accusantium sit.
                       </p>
                       <p>
                         Eos labore sunt est galisum natus et odit saepe ab

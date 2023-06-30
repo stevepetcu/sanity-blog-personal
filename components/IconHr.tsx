@@ -12,10 +12,11 @@ interface IconHrProps {
 
 export function IconHr(props: IconHrProps) {
   return (
-    <div className={'flex w-full items-center space-x-2.5 px-8'}>
+    <div className={'flex w-full items-center space-x-1.5 lg:space-x-2.5 px-8'}>
       <div className={'flex-grow text-right'}>
         <hr
-          className={`my-1 h-1 w-28 rounded border-0 bg-slate-200 inline-block ${props.hrClassNames}`}
+          className={`my-1 h-0.5 lg:h-1 w-28 rounded 
+          border-0 bg-slate-200 inline-block ${props.hrClassNames}`}
         />
       </div>
       <div className={'text-center'}>
@@ -23,12 +24,13 @@ export function IconHr(props: IconHrProps) {
           icon={props.icon}
           width={props.iconWidth}
           height={props.iconHeight}
-          className={cn(`my-2 text-slate-300 ${props.iconClassNames || ''}`)}
+          className={cn(`text-slate-300 ${props.iconClassNames || ''}`)}
         />
       </div>
       <div className={'flex-grow text-left'}>
         <hr
-          className={`my-1 h-1 w-28 rounded border-0 bg-slate-200 inline-block ${props.hrClassNames || ''}`}
+          className={`my-1 h-0.5 lg:h-1 w-28 rounded 
+          border-0 bg-slate-200 inline-block ${props.hrClassNames}`}
         />
       </div>
     </div>
