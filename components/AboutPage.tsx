@@ -30,6 +30,26 @@ export interface IndexPageProps {
   aboutIntroPhotos: AboutIntroPhoto[];
 }
 
+// TODO: extract the imgPlaceholder and toBase64
+const imgPlaceholder = (w: number, h: number) => `
+<svg width='${w}' 
+  height='${h}' 
+  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <defs>
+    <linearGradient id='g'>
+      <stop stop-color='#6366f1' offset='10%' stop-opacity='0.4' />
+      <stop stop-color='#0ea4e9' offset='40%' stop-opacity='0.5' />
+      <stop stop-color='#10b981' offset='90%' stop-opacity='0.4' />
+    </linearGradient>
+  </defs>
+  <rect id='r' width='${w}' height='${h}' fill='url(#g)' />
+</svg>`;
+
+const toBase64 = (str: string) =>
+  typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str);
+
 export default function AboutPage(props: IndexPageProps) {
   const INTRO_PHOTO_ASPECT_RATIO = 2 / 3;
   const INTRO_PHOTO_HEIGHT = 900;
@@ -261,8 +281,12 @@ export default function AboutPage(props: IndexPageProps) {
                           className={cn(
                             'z-0 col-start-1 row-span-2 row-start-1 rounded'
                           )}
+                          quality={100}
+                          placeholder={'blur'}
+                          blurDataURL={`data:image/svg+xml;base64,${toBase64(imgPlaceholder(INTRO_PHOTO_WIDTH, INTRO_PHOTO_HEIGHT))}`}
                           height={INTRO_PHOTO_HEIGHT}
                           width={INTRO_PHOTO_WIDTH}
+                          sizes="33vw"
                           alt={photo.image.alt}
                           title={photo.image.alt}
                           priority={index < 4}

@@ -5,6 +5,7 @@ const config = {
       { hostname: 'cdn.sanity.io' },
       { hostname: 'source.unsplash.com' },
     ],
+    formats: ['image/avif', 'image/webp'],
   },
   typescript: {
     // Set this to false if you want production builds to abort if there are type errors

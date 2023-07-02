@@ -46,7 +46,7 @@ export default function BlogImage(props: BlogImageProps) {
           .fit('crop')
           .crop('focalpoint')
           .url()}
-        sizes="(max-width 600px) 600px, (max-width: 728px) 728px, (max-width: 905px) 905px, (max-width: 1200px) 1200px"
+        sizes="100vw"
         priority={priority}
       />
     </div>
