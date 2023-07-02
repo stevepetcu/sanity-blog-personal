@@ -37,7 +37,7 @@ export default defineType({
       },
       validation: (rule) =>
         rule.required().custom((value: SlugValue) => {
-          return /^[a-z]+(?:-[a-z]+)*$/.test(value.current)
+          return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current)
             ? true
             : 'Slug value must match the RegExp "^[a-z]+(?:-[a-z]+)*$".';
         }),
