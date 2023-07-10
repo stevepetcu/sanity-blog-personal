@@ -366,8 +366,8 @@ export default function AboutPage(props: IndexPageProps) {
                                 'transition-all duration-300 ease-out'
                               }
                               hrClassNames={
-                                'w-6 md:w-8 bg-slate-300 group-hover:w-16 ' +
-                                'group-hover:md:w-24 group-hover:bg-slate-200 ' +
+                                'w-6 md:w-8 bg-slate-300 group-hover:w-14 ' +
+                                'group-hover:lg:w-20 group-hover:xl:w-24 group-hover:bg-slate-200 ' +
                                 'transition-all duration-300 ease-out'
                               }
                             />

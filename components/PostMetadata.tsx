@@ -64,11 +64,11 @@ export default function PostMetadata({
             <p>{author.firstName}</p>
             <span
               className={cn(
-                'mb-2 inline-flex shrink ' +
+                'inline-flex shrink ' +
                   '@[50px]/metadata:font-light @[350px]/metadata:font-bold'
               )}
             >
-              .
+              •
             </span>
           </>
         )}
@@ -93,17 +93,19 @@ export default function PostMetadata({
               </p>
               <Date dateString={post.publishedAt} />
             </div>
-            <span
-              className={cn(
-                'mb-2 inline-flex shrink ' +
-                  '@[50px]/metadata:font-light @[350px]/metadata:font-bold'
-              )}
-            >
-              .
-            </span>
+            { (showUpdatedDate && post.updatedAt || post.tags && post.tags.length > 0 && nrOfTagsToShow > 0) && (
+              <span
+                className={cn(
+                  'inline-flex shrink ' +
+                    '@[50px]/metadata:font-light @[350px]/metadata:font-bold'
+                )}
+              >
+                •
+              </span>
+            )}
           </>
         )}
-        {showUpdatedDate && (
+        {showUpdatedDate && post.updatedAt && (
           <>
             <div className={cn('flex whitespace-nowrap')}>
               <p
@@ -124,14 +126,16 @@ export default function PostMetadata({
               </p>
               <Date dateString={post.updatedAt} />
             </div>
-            <span
-              className={cn(
-                'mb-2 inline-flex shrink ' +
+            {post.tags && post.tags.length > 0 && nrOfTagsToShow > 0 && (
+              <span
+                className={cn(
+                  'mb-2 inline-flex shrink ' +
                   '@[50px]/metadata:font-light @[350px]/metadata:font-bold'
-              )}
-            >
-              .
-            </span>
+                )}
+              >
+              •
+              </span>
+            )}
           </>
         )}
         {post.tags && post.tags.length > 0 && nrOfTagsToShow > 0 && (
