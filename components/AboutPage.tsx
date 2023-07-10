@@ -243,7 +243,7 @@ export default function AboutPage(props: IndexPageProps) {
           <article className={styles.aboutPage}>
             <section>
               <h1>Intro</h1>
-              <div className={'block sm:flex mt-5 md:mt-3 text-justify hyphens-auto'}>
+              <div className={'block sm:flex mt-5 md:mt-3 md:text-justify hyphens-auto'}>
                 <div className={'basis-[49%] flex-none sm:pr-5'}>
                   <p>
                     Hey, I'm Stefan.
@@ -565,7 +565,7 @@ export default function AboutPage(props: IndexPageProps) {
                         </li>
                         <li>
                           Better DevX by removing <LinkExternal
-                            href={'https://articles.uie.com/experience_rot/'}> experience rot</LinkExternal> to
+                            href={'https://articles.uie.com/experience_rot/'}>experience rot</LinkExternal> to
                           reduce cognitive load for integrating with our API:
                           <ul>
                             <li>Condensed the payment initiation API from 20 request body parameters
@@ -696,9 +696,9 @@ export default function AboutPage(props: IndexPageProps) {
                         alignment of critical business areas with small teams.
                       </p>
                       <p>
-                        Because I had a keen interest in <LinkExternal
+                        I had a keen interest in <LinkExternal
                           href={'https://martinfowler.com/bliki/DomainDrivenDesign.html'}>domain-driven
-                        design</LinkExternal>, I took the initiative to create a <LinkExternal
+                        design</LinkExternal> so I took the initiative to create a <LinkExternal
                           href={'https://martinfowler.com/bliki/BoundedContext.html'}>context map</LinkExternal> of
                         the existing system. Collaborating with the systems architect for
                         the Forex platform API, I contributed to shaping the engineering vision for the next platform

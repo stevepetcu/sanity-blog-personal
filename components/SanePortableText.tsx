@@ -19,7 +19,7 @@ const components = {
         <Link
           href={href}
           className={cn('text-sky-500')}
-          aria-label={`Visit link "${children}". Link opens in the same tab.`}
+          aria-label={`Link opens in the same tab.`}
         >
           {children}
         </Link>

@@ -34,7 +34,10 @@
 }
 
 .aboutPage .roleContainer {
-    @apply flex flex-col max-h-min bg-white px-5 py-3 md:py-5 xl:py-7 rounded overflow-clip shadow-md
+    @apply flex flex-col max-h-min bg-white
+    px-5 py-3 md:py-5 xl:py-7 rounded overflow-clip
+    shadow-md
+    hyphens-auto;
 }
 
 .aboutPage .roleContainer h2 {
