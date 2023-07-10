@@ -49,8 +49,8 @@ module.exports = {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',
         medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
         'inner-lg': 'inset 0px 0px 15px 7px rgba(0, 0, 0, 0.1)',
-        'sm-dark-below': '0px 5px 5px 5px rgba(0,0,0,0.12)',
-        'sm-dark-above': '0px -5px 5px 5px rgba(0,0,0,0.12)',
+        'sm-dark-below': '0px -4px 5px 13px rgba(0,0,0,0.07)',
+        'sm-dark-above': '0px 4px 5px 13px rgba(0,0,0,0.03)',
       },
       animation: {
         'spin-quarter': 'spin-quarter 2.5s ease-in-out infinite',

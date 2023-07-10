@@ -536,11 +536,12 @@ export default function AboutPage(props: IndexPageProps) {
                           Extensibility from Bahrain to the entire MENA region – an increase of over
                           3600% in market size
                           <div className={'group cursor-pointer inline'}>
-                            <sup className={'text-xs md:text-sm xl:text-base'}><FontAwesomeIcon
-                              icon={faCircleInfo}
-                              width={20}
-                              height={20}
-                            /></sup>
+                            <sup className={'text-xs md:text-sm xl:text-base'}>
+                              <FontAwesomeIcon
+                                icon={faCircleInfo}
+                                className={'ml-0.5 w-2 md:w-3 xl:w-3.5'}
+                              />
+                            </sup>
                             <div className={'group-hover:block hidden ' +
                               'absolute top-5 left-0 right-0 mx-auto ' +
                               'w-[75%] p-5 rounded ' +
@@ -735,7 +736,7 @@ export default function AboutPage(props: IndexPageProps) {
                       <p>
                         In early 2016, I embarked on a new chapter by joining my first large, international company, in
                         Luxembourg: <LinkExternal href={'https://www.doclerholding.com/'}>Docler
-                        Holding.</LinkExternal> In this role, for the first time, I focused primarily on backend
+                        Holding</LinkExternal>. In this role, for the first time, I focused primarily on backend
                         development, working with dedicated frontend specialists database teams.
                       </p>
                       <p>

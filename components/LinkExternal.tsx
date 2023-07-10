@@ -11,10 +11,10 @@ export default function LinkExternal(props: LinkProps & PropsWithChildren) {
     aria-label={'Link opens in a new tab.'}
   >
     {props.children}
-    <sup>
+    <sup className={'text-xs md:text-sm'}>
       <FontAwesomeIcon
         icon={faArrowUpRightFromSquare}
-        className={'ml-1 w-2'}
+        className={'ml-0.5 w-1.5 md:w-2 xl:w-2.5'}
       />
     </sup>
   </Link>;

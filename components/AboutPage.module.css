@@ -59,11 +59,11 @@
 }
 
 .aboutPage .topShadow {
-    @apply sticky -top-2 left-0 w-full h-0 shadow-sm-dark-below z-10;
+    @apply sticky -top-2 left-0 right-0 mx-auto w-[98%] h-0 shadow-sm-dark-below z-10;
 }
 
 .aboutPage .bottomShadow {
-    @apply sticky -bottom-2 left-0 w-full h-0 shadow-sm-dark-above z-10;
+    @apply sticky -bottom-2 left-0 right-0 mx-auto w-[98%] h-0 shadow-sm-dark-above z-10;
 }
 
 .aboutPage .latestRolesTimeline .company {
