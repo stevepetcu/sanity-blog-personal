@@ -36,3 +36,35 @@
     @apply font-mono tabular-nums tracking-tight-ma-only text-xs text-slate-300;
     word-spacing: -0.45em;
 }
+
+ul {
+    @apply list-outside list-disc text-base md:text-xl pl-6;
+}
+
+ul ul {
+    list-style: circle;
+}
+
+ul ul ul {
+    list-style: square;
+}
+
+ul ul ul ul {
+    list-style: initial;
+}
+
+ol {
+    @apply my-6 list-decimal text-base md:text-xl;;
+}
+
+ol ol {
+    list-style: lower-alpha;
+}
+
+ol ol ol {
+    list-style: lower-roman;
+}
+
+ol ol ol ol {
+    @apply ml-5 list-decimal;
+}

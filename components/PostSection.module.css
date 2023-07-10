@@ -19,52 +19,7 @@
 }
 
 .sectionBody p {
-  @apply my-6 text-base md:text-xl;
-}
-
-.sectionBody ul {
-  @apply list-inside list-disc text-base md:text-xl;
-}
-
-.sectionBody > ul {
-  @apply my-6;
-}
-
-.sectionBody ul ul {
-  list-style: circle;
-  @apply ml-5 list-inside;
-}
-
-.sectionBody ul ul ul {
-  list-style: square;
-  @apply ml-5 list-inside;
-}
-
-.sectionBody ul ul ul ul {
-  list-style: initial;
-  @apply ml-5 list-inside;
-}
-
-.sectionBody > ol {
-  @apply my-6;
-}
-
-.sectionBody ol {
-  @apply list-inside list-decimal text-base md:text-xl;
-}
-
-.sectionBody ol ol {
-  list-style: lower-alpha;
-  @apply ml-5 list-inside;
-}
-
-.sectionBody ol ol ol {
-  list-style: lower-roman;
-  @apply ml-5 list-inside;
-}
-
-.sectionBody ol ol ol ol {
-  @apply ml-5 list-inside list-decimal;
+  @apply my-6 text-base md:text-xl font-light;
 }
 
 .sectionHeadingAnchorCopyIcon {

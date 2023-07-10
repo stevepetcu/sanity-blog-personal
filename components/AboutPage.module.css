@@ -1,119 +1,145 @@
-.aboutArticle h1 {
-    @apply text-2xl md:text-3xl lg:text-4xl font-normal
-    leading-tight tracking-tighter text-slate-800 mb-5;
+.aboutPage h1 {
+    @apply font-normal tracking-tighter text-slate-800 mb-5
+    text-3xl sm:text-4xl md:text-6xl xl:text-7xl
+    leading-[1.5rem] sm:leading-[2.25rem] md:leading-[3.15rem] lg:leading-[4.75rem] xl:leading-[5.25rem]
 }
 
-.aboutArticle h2 {
-    @apply text-xl md:text-2xl lg:text-3xl font-normal leading-snug mb-4 mt-1;
+.aboutPage h2 {
+    @apply font-normal tracking-tighter text-slate-800
+    my-4
+    text-2xl sm:text-3xl md:text-4xl xl:text-5xl
+    leading-[1.5rem] sm:leading-[2.5rem] md:leading-[3.85rem] lg:leading-[4.25rem] xl:leading-[4.85rem];
 }
 
-.aboutArticle p {
-    @apply mt-6 mb-6 text-base lg:text-xl;
+.aboutPage p {
+    @apply mt-4 mb-4 md:mt-6 md:mb-6 text-base sm:text-sm lg:text-base xl:text-xl font-light
+    leading-normal sm:leading-normal md:leading-normal lg:leading-normal xl:leading-normal;
 }
 
-.aboutArticle a {
+.aboutPage p:first-child {
+    @apply mt-0;
+}
+
+.aboutPage a {
     cursor: pointer;
     @apply text-sky-500;
 }
 
-.aboutArticle a:hover {
+.aboutPage a:hover {
     @apply text-sky-700 underline underline-offset-2;
 }
 
-.aboutArticle p:first-child {
-    @apply mt-0;
+.aboutPage a:has(h2):hover {
+    @apply no-underline;
 }
 
-.aboutArticle .roleContainer {
-    @apply flex flex-col h-[610px] bg-white px-5 py-7 rounded overflow-clip
+.aboutPage .roleContainer {
+    @apply flex flex-col max-h-min bg-white px-5 py-3 md:py-5 xl:py-7 rounded overflow-clip shadow-md
 }
 
-.aboutArticle .roleContainer .gripLine {
+.aboutPage .roleContainer h2 {
+    @apply my-0
+}
+
+.aboutPage .roleContainer p {
+    @apply text-xs md:text-sm lg:text-base
+    mt-1 mb-1 sm:mt-2 sm:mb-2 md:mt-3 md:mb-3
+}
+
+.aboutPage ul {
+    @apply text-xs md:text-sm lg:text-base font-light my-0 pl-3.5 md:pl-6
+}
+
+.aboutPage ul ul {
+    @apply my-0
+}
+
+.aboutPage .roleContainer .gripLine {
     @apply mx-auto h-1 w-20 md:w-24 lg:w-36 rounded border-0 bg-slate-500;
 }
 
-.aboutArticle .topShadow {
+.aboutPage .topShadow {
     @apply sticky -top-2 left-0 w-full h-0 shadow-sm-dark-below z-10;
 }
 
-.aboutArticle .bottomShadow {
+.aboutPage .bottomShadow {
     @apply sticky -bottom-2 left-0 w-full h-0 shadow-sm-dark-above z-10;
 }
 
-.aboutArticle .latestRolesTimeline .company {
+.aboutPage .latestRolesTimeline .company {
     @apply w-8 h-8 rounded-full bg-slate-800 transition-all border-2
     border-slate-200 bg-cover bg-origin-border;
 }
 
-.aboutArticle .latestRolesTimeline .company.inactive {
+.aboutPage .latestRolesTimeline .company.inactive {
     @apply saturate-0;
 }
 
-.aboutArticle .latestRolesTimeline .company.active {
+.aboutPage .latestRolesTimeline .company.active {
     @apply saturate-100 border-4 border-double w-14 h-14 -m-4;
 }
 
-.aboutArticle .latestRolesTimeline .company.postActive {
+.aboutPage .latestRolesTimeline .company.postActive {
     @apply saturate-[0.75];
 }
 
-.aboutArticle .latestRolesTimeline .firstCompany {
+.aboutPage .latestRolesTimeline .firstCompany {
     background-image: url("/logos/tg.jpeg");
 }
 
-.aboutArticle .latestRolesTimeline .secondCompany {
+.aboutPage .latestRolesTimeline .secondCompany {
     background-image: url("/logos/tw.jpeg");
 }
 
-.aboutArticle .latestRolesTimeline .thirdCompany {
+.aboutPage .latestRolesTimeline .thirdCompany {
     background-image: url("/logos/wf.jpeg");
 }
 
-.aboutArticle .latestRolesTimeline .firstCompany.active {
+.aboutPage .latestRolesTimeline .firstCompany.active {
     transform: translateY(1rem);
 }
 
-.aboutArticle .latestRolesTimeline .firstCompany.postActive {
+.aboutPage .latestRolesTimeline .firstCompany.postActive {
     transform: translateY(-3.5rem);
 }
 
-.aboutArticle .latestRolesTimeline .secondCompany.inactive {
+.aboutPage .latestRolesTimeline .secondCompany.inactive {
     @apply z-20;
     transform: translateY(19rem);
 }
 
-.aboutArticle .latestRolesTimeline .secondCompany.active {
+.aboutPage .latestRolesTimeline .secondCompany.active {
     transform: translateY(-8rem);
 }
 
-.aboutArticle .latestRolesTimeline .secondCompany.postActive {
+.aboutPage .latestRolesTimeline .secondCompany.postActive {
     transform: translateY(-12rem);
 }
 
-.aboutArticle .latestRolesTimeline .thirdCompany.inactive {
+.aboutPage .latestRolesTimeline .thirdCompany.inactive {
     @apply z-10;
     transform: translateY(11rem);
 }
 
-.aboutArticle .latestRolesTimeline .thirdCompany.active {
+.aboutPage .latestRolesTimeline .thirdCompany.active {
     transform: translateY(-17rem);
 }
 
-.aboutArticle .latestRolesTimeline .thirdCompany.postActive {
+.aboutPage .latestRolesTimeline .thirdCompany.postActive {
     transform: translateY(-20.5rem);
 }
 
-.aboutArticle .latestRolesTimeline .fourthCompany.inactive {
+.aboutPage .latestRolesTimeline .fourthCompany.inactive {
     transform: translateY(3rem);
     @apply text-base;
 }
 
-.aboutArticle .latestRolesTimeline .fourthCompany.active {
+.aboutPage .latestRolesTimeline .fourthCompany.active {
     transform: translateY(-26rem);
     @apply text-3xl;
 }
 
-.aboutArticle figcaption {
+.aboutPage figcaption {
     /*We need to give this a height of 1px to make Safari backdrop-blur it.*/
     @apply z-10 grid grid-cols-1 grid-rows-1 items-center
     col-start-1 row-start-2 row-span-1 self-end
@@ -132,17 +158,17 @@
     @apply text-sky-700 underline underline-offset-2;
 }
 
-.aboutArticle figcaption.portableText p {
+.aboutPage figcaption.portableText p {
     @apply text-slate-50 leading-relaxed font-extralight tracking-wide
     text-sm lg:text-base line-clamp-3 mt-6 mb-6;
 }
 
-.aboutArticle figcaption.portableText p:first-of-type {
+.aboutPage figcaption.portableText p:first-of-type {
     @apply text-slate-50 leading-relaxed font-extralight tracking-wide
     line-clamp-3 lg:line-clamp-4 mt-0;
 }
 
-.aboutArticle figcaption.portableText em {
+.aboutPage figcaption.portableText em {
     @apply text-xs font-normal md:font-semibold tracking-normal
     line-clamp-2;
 }

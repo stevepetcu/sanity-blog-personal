@@ -68,8 +68,8 @@ export default function AuthorLinks({
             'text-sky-500': activeLink === 'about',
           }
         )}
-        title={`${firstName}'s about page and resume`}
-        aria-label={`${firstName}'s about page and resume`}
+        title={`${firstName}'s about page and CV`}
+        aria-label={`${firstName}'s about page and CV`}
       >
         <div className={'flex flex-col items-center space-y-1'}>
           <div>
