@@ -129,7 +129,7 @@ export default function PostMetadata({
             {post.tags && post.tags.length > 0 && nrOfTagsToShow > 0 && (
               <span
                 className={cn(
-                  'mb-2 inline-flex shrink ' +
+                  'inline-flex shrink ' +
                   '@[50px]/metadata:font-light @[350px]/metadata:font-bold'
                 )}
               >
