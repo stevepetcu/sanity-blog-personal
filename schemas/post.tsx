@@ -398,6 +398,42 @@ export default defineType({
                       return true;
                     }),
                 },
+                {
+                  name: 'cropMode',
+                  type: 'string',
+                  options: {
+                    list: [
+                      { title: 'Top', value: 'top' },
+                      { title: 'Bottom', value: 'bottom' },
+                      { title: 'Left', value: 'left' },
+                      { title: 'Right', value: 'right' },
+                      { title: 'Center', value: 'center' },
+                      { title: 'Focal point', value: 'focalpoint' },
+                      { title: 'Entropy', value: 'entropy' },
+                    ],
+                    layout: 'radio',
+                    direction: 'horizontal',
+                  },
+                  initialValue: 'focalpoint',
+                  hidden: (document) => {
+                    return document?.parent?.asset === undefined;
+                  },
+                  validation: (rule) =>
+                    rule.custom((value: string, context) => {
+                      if (value && value.length > 0 && !context.parent.asset) {
+                        return 'An image must be added for this value to be accepted.';
+                      }
+
+                      if (
+                        context.parent.asset &&
+                        !['top', 'bottom', 'left', 'right', 'center', 'focalpoint', 'entropy'].includes(value)
+                      ) {
+                        return 'Please specify the crop mode.';
+                      }
+
+                      return true;
+                    }),
+                },
               ],
             },
           ],

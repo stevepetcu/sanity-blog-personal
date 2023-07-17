@@ -142,6 +142,7 @@ export interface BlogImage {
   }
   crop?: Crop
   hotspot?: Hotspot
+  cropMode: CropMode
 }
 
 export interface Author {

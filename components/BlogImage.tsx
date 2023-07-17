@@ -44,7 +44,7 @@ export default function BlogImage(props: BlogImageProps) {
           .height(height)
           .dpr(pixelRatio)
           .fit('crop')
-          .crop('focalpoint')
+          .crop(image.cropMode ?? 'focalpoint')
           .url()}
         sizes="100vw"
         priority={priority}
