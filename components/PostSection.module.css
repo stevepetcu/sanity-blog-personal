@@ -18,7 +18,7 @@
   @apply text-sky-700 underline;
 }
 
-.sectionBody p ul ol {
+.sectionBody p, .sectionBody ul, .sectionBody ol {
   @apply my-6 text-base md:text-xl font-light;
 }
 
