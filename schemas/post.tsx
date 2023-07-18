@@ -384,10 +384,6 @@ export default defineType({
                   },
                   validation: (rule) =>
                     rule.custom((value: string, context) => {
-                      if (value && value.length > 0 && !context.parent.asset) {
-                        return 'An image must be added for this value to be accepted.';
-                      }
-
                       if (
                         context.parent.asset &&
                         !['top', 'bottom'].includes(value)
