@@ -15,7 +15,7 @@ import { differenceInMonths } from 'date-fns';
 import type { AboutIntroPhoto, Settings } from 'lib/sanity.queries';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { PixelRatioContext } from '../contexts/PixelRatioContext';
 import { urlForImage } from '../lib/sanity.image';
@@ -98,6 +98,9 @@ export default function AboutPage(props: IndexPageProps) {
   const [showDeviceOrientationCTA, setShowDeviceOrientationCTA] =
     useState(false);
 
+  const latestRolesContainerRef = useRef<HTMLDivElement>(null);
+  const latestRolesTimelineRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const processDeviceViewportSize = (
       orientation: Pick<MediaQueryList, 'matches'>
@@ -122,12 +125,9 @@ export default function AboutPage(props: IndexPageProps) {
       processDeviceViewportSize(landscapeOrientation);
     };
 
-    const latestRolesTimeline = document.getElementById(
-      'latest-roles-timeline'
-    );
-    const companyLogos = [
-      ...latestRolesTimeline.querySelectorAll('[data-company]'),
-    ] as HTMLElement[];
+    const companyLogos = latestRolesTimelineRef ? [
+      ...latestRolesTimelineRef.current.querySelectorAll('[data-company]'),
+    ] as HTMLElement[] : [];
     const tgCompanyLogo = companyLogos.find(
       (logo) => logo.dataset.company === 'tg'
     );
@@ -141,23 +141,20 @@ export default function AboutPage(props: IndexPageProps) {
       (logo) => logo.dataset.company === 'older'
     );
 
-    const latestRolesContainer = document.getElementById(
-      'latest-roles-container'
-    );
-    const roleItems = [
-      ...latestRolesContainer.querySelectorAll('[data-company]'),
-    ] as HTMLElement[];
+    const roleItems = latestRolesContainerRef ? [
+      ...latestRolesContainerRef.current.querySelectorAll('[data-company]'),
+    ] as HTMLElement[] : [];
 
     let scrollTimeout;
 
-    latestRolesContainer.onscroll = () => {
+    latestRolesContainerRef.current.onscroll = () => {
       clearTimeout(scrollTimeout);
 
       scrollTimeout = setTimeout(() => {
-        const containerTop = latestRolesContainer.offsetTop;
-        const containerScrollTop = latestRolesContainer.scrollTop;
+        const containerTop = latestRolesContainerRef.current.offsetTop;
+        const containerScrollTop = latestRolesContainerRef.current.scrollTop;
         const containerBottom =
-          containerScrollTop + latestRolesContainer.offsetHeight;
+          containerScrollTop + latestRolesContainerRef.current.offsetHeight;
 
         const visibleRole = roleItems.find((item: HTMLElement) => {
           const roleContainerTop = item.offsetTop - containerTop;
@@ -447,7 +444,7 @@ export default function AboutPage(props: IndexPageProps) {
               >
                 <div className={'self-center'}>
                   <div
-                    id={'latest-roles-timeline'}
+                    ref={latestRolesTimelineRef}
                     className={
                       'col-span-1 grid grid-flow-col grid-cols-1 grid-rows-6 ' +
                       `justify-items-center gap-y-28 ${styles.latestRolesTimeline}`
@@ -490,7 +487,7 @@ export default function AboutPage(props: IndexPageProps) {
                   </div>
                 </div>
                 <div
-                  id={'latest-roles-container'}
+                  ref={latestRolesContainerRef}
                   className={
                     'col-span-11 place-self-center ' +
                     'h-[700px] gap-y-5 space-y-5 overflow-auto px-2 ' +
